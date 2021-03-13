@@ -1,9 +1,10 @@
 import axios from "axios";
 import { START_LOADING, STOP_LOADING } from "./types";
 import store from "../store";
+import { toast } from "react-toastify";
 
 let axiosIntance = axios.create({
-  baseURL: process.env.REACT_APP_LOCAL_URL,
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 export const setAuthHeader = (clientId, token) => {
@@ -37,9 +38,9 @@ axiosIntance.interceptors.response.use(
       error.response.data.status >= 400 &&
       error.response.data.status < 500;
     if (expectedError) {
-      alert(error.response.data.message);
+      toast.error(error.response.data.message);
     } else {
-      alert("Unexpected error");
+      toast.error("Unexpected error");
     }
     store.dispatch({ type: STOP_LOADING });
     return Promise.reject(error);
