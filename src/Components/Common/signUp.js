@@ -13,7 +13,6 @@ export default function SignUp({ onHide }) {
       dispatch(customerSignUp(data));
       setTimeout(() => {
         onHide();
-        toast.success("Customer has been created successfully!");
       }, 900);
     } catch (error) {
       console.log({ errors });
@@ -112,6 +111,7 @@ export default function SignUp({ onHide }) {
           placeholder="Password"
           aria-label="Password"
           aria-describedby="basic-addon1"
+          type="password"
           id="password"
           name="password"
           ref={register({
