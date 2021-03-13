@@ -10,12 +10,10 @@ export default function SignIn({ onHide }) {
   const { loading } = useSelector((state) => state.loadingReducer);
   const { register, handleSubmit, errors } = useForm();
   const signIn = async (data) => {
-    toast.success("Customer");
     try {
       dispatch(customerSignIn(data));
       setTimeout(() => {
         onHide();
-        toast.success("You have been signed in successfully");
       }, 900);
     } catch (error) {
       console.log({ errors });
@@ -51,6 +49,7 @@ export default function SignIn({ onHide }) {
           aria-label="Password"
           aria-describedby="basic-addon1"
           id="password"
+          type="password"
           name="password"
           ref={register({
             required: "Password required",
