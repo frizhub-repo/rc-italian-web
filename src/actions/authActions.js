@@ -2,7 +2,7 @@ import axiosIntance from "../utils/axios-configured";
 
 export const customerSignUp = (payload) => (dispatch) => {
   axiosIntance.post("/api/v1/customers/auth/signUp", payload).then((res) => {
-    authConfig(res.data.token);
+    authConfig(res.data.data.token);
   });
 };
 
