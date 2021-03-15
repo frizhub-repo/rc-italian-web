@@ -1,5 +1,5 @@
 import React from "react";
-import AuthModal from "../Common/authModal";
+import AuthModal from "../Auth/authModal";
 import { useUserContext } from "../../Context/userContext";
 
 function Navbar() {
