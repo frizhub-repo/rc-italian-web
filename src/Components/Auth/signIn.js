@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { Button, FormControl, InputGroup, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { customerSignIn } from "../../actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,7 +64,16 @@ export default function SignIn({ onHide }) {
       </InputGroup>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button onClick={onHide}>Cancel</Button>
-        <Button type="submit">Sign In</Button>
+        <Button type="submit">
+          {loading && (
+            <Spinner
+              animation="border"
+              size="sm"
+              style={{ marginRight: "10px" }}
+            />
+          )}
+          Sign In
+        </Button>
       </div>
     </form>
   );
