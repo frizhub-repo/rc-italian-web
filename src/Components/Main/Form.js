@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
-import axiosIntance from "../../utils/axios-configured";
 import { useUserContext } from "../../Context/userContext";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { reserveTable } from "../../actions/reserveTableActions";
 
 function Form() {
   const [name, setName] = useState("");
@@ -11,20 +12,19 @@ function Form() {
   const [services, setService] = useState("lunch");
   const [res, setRes] = useState("Tomorrow");
   const [time, setTime] = useState("2021-03-12T18:00");
+  const { handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const { reserveTableData } = useSelector((state) => state.reservationReducer);
   let { token } = useUserContext();
 
-  const reserveTable = (event) => {
-    event.preventDefault();
-    axiosIntance
-      .post("/api/v1/reservations/create/customers", {
+  const tableReserve = () => {
+    dispatch(
+      reserveTable({
         startTime: time,
         numberOfPeople: number,
         services: services,
       })
-      .then((res) => {
-        toast.success(res.data.message);
-      })
-      .catch((err) => console.log(err));
+    );
   };
   return (
     <section className="text-gray-700 body-font overflow-hidden ">
@@ -96,7 +96,7 @@ function Form() {
             <h6 className="text-gray-700 font-weight-bold mb-4">
               Table reservation
             </h6>
-            <form>
+            <form onSubmit={handleSubmit(tableReserve)}>
               {/* <div className="d-flex flew-wrap w-full mb-4 justify-content-center">
                 <input
                   className="rounded-pill py-1 px-3 mr-2 bg-grey-lighter border border-grey-lighter test-xs w-1/2 border-1 font font-weight-light border-gray-500 shadow-sm"
@@ -274,7 +274,7 @@ function Form() {
                   <button
                     className="rounded-pill b   g-white px-12 py-3 text-black text-center text-sm mb-12"
                     style={{ backgroundColor: "#000000", color: "#fff" }}
-                    onClick={reserveTable}
+                    type="submit"
                   >
                     Submit
                   </button>
