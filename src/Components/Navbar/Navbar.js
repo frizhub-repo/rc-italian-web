@@ -5,7 +5,10 @@ import { useUserContext } from "../../Context/userContext";
 function Navbar() {
   const [modalShow, setModalShow] = React.useState(false);
   let { token, setToken } = useUserContext();
-
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    window.location.reload();
+  };
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
   });
@@ -28,7 +31,14 @@ function Navbar() {
           <a href="contact" className="text-white text-xs mr-5">
             CONTACT US
           </a>
-          {!token && (
+          {token ? (
+            <button
+              onClick={logout}
+              className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
+            >
+              LOG OUT
+            </button>
+          ) : (
             <button
               className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
               onClick={() => setModalShow(true)}
