@@ -29,7 +29,7 @@ function Product({ product }) {
           <img
             alt="ecommerce"
             className="lg:w-1/3 w-full h-24 object-cover object-center rounded"
-            src={process.env.REACT_APP_LOCAL_URL + "/" + product.images[0]}
+            src={process.env.REACT_APP_API_BASE_URL + "/" + product.images[0]}
           />
           <div className="lg:w-1/2 w-full px-3   flex-grow-1">
             <div className="d-flex w-full justify-content-between ">
