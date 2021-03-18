@@ -12,7 +12,7 @@ export const setAuthHeader = (clientId, token) => {
   axiosIntance.defaults.headers.common["Authorization"] = token;
 };
 
-setAuthHeader(process.envs.clientId, window.localStorage.getItem("token"));
+setAuthHeader(process.env.clientId, window.localStorage.getItem("token"));
 
 axiosIntance.interceptors.request.use(
   (config) => {
