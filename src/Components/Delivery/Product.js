@@ -37,7 +37,7 @@ function Product({ product }) {
                 {product.title}
               </h1>
               <span className=" font-medium text-sm  text-gold">
-                {product.price}
+                {product.price} €
               </span>
             </div>
             <OverlayTrigger
