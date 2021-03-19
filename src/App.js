@@ -20,7 +20,7 @@ function App() {
           <Route path="/tableReservation" exact component={Home} />
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu/:id" exact component={Menu} />
-          <Route path="/delivery" exact component={Delivery} />
+          <Route path="/order" exact component={Delivery} />
         </Switch>
       </Router>
     </div>
