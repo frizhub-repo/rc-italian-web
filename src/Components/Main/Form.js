@@ -4,6 +4,7 @@ import { useUserContext } from "../../Context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { reserveTable } from "../../actions/reserveTableActions";
+import { Spinner } from "react-bootstrap";
 
 function Form() {
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ function Form() {
   const { handleSubmit } = useForm();
   const dispatch = useDispatch();
   const { reserveTableData } = useSelector((state) => state.reservationReducer);
+  const { loading } = useSelector((state) => state.loadingReducer);
   let { token } = useUserContext();
 
   const tableReserve = () => {
@@ -276,6 +278,13 @@ function Form() {
                     style={{ backgroundColor: "#000000", color: "#fff" }}
                     type="submit"
                   >
+                    {loading && (
+                      <Spinner
+                        animation="border"
+                        size="sm"
+                        style={{ marginRight: "10px" }}
+                      />
+                    )}
                     Submit
                   </button>
                 )}
