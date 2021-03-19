@@ -25,8 +25,7 @@ function App() {
             path="*"
             render={() => (
               <div>
-                <h1>The page you are looking for does not exist.</h1>
-                <h2>It looks like one of the developers fell asleep</h2>
+                <h1>Page not found.</h1>
                 <a href="/">Go Back</a>
               </div>
             )}
