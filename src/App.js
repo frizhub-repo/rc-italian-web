@@ -21,6 +21,16 @@ function App() {
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu/:id" exact component={Menu} />
           <Route path="/order" exact component={Delivery} />
+          <Route
+            path="*"
+            render={() => (
+              <div>
+                <h1>The page you are looking for does not exist.</h1>
+                <h2>It looks like one of the developers fell asleep</h2>
+                <a href="/">Go Back</a>
+              </div>
+            )}
+          />
         </Switch>
       </Router>
     </div>
