@@ -22,8 +22,8 @@ function Navbar() {
           <a href="/menu/1" className="mr-5 text-white text-xs">
             MENU
           </a>
-          <a href="/delivery" className="mr-5 text-white text-xs">
-            DELIVERY
+          <a href="/order" className="mr-5 text-white text-xs">
+            Order
           </a>
           <a href="/tableReservation" className="mr-5 text-white text-xs">
             TABLE RESERVATION
