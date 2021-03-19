@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import { removeOrderItems } from "../actions";
+import { Spinner } from "react-bootstrap";
 
 function Control() {
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
+  const { loading } = useSelector((state) => state.loadingReducer);
   const disp = useDispatch();
 
   const orderNow = () => {
@@ -101,6 +103,13 @@ function Control() {
         className="w-full rounded-pill bg-black text-white text-center text-xs py-2 font-weight-light"
         onClick={orderNow}
       >
+        {loading && (
+          <Spinner
+            animation="border"
+            size="sm"
+            style={{ marginRight: "10px" }}
+          />
+        )}
         ORDER NOW
       </button>
     </section>
