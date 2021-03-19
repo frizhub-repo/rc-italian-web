@@ -31,7 +31,7 @@ function Control() {
         <p className="text-xs text-left text-gray-500 mb-1">Total</p>
         <div className="flex justify-content-between">
           <h2 className="text-lg text-gold text-left flex-grow-1 font-weight-bold">
-            ${total}
+            €{total}
           </h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ function Control() {
       <div>
         {minimum - total > 0 && (
           <p className="text-xs text-left text-gray-500 mt-1 mb-3">
-            ${minimum - total} to reach the minimum order
+            €{minimum - total} to reach the minimum order
           </p>
         )}
         <p className="text-black text-left text-sm mt-1">Home delivery</p>
@@ -74,7 +74,7 @@ function Control() {
                     </div>
                     <div className="flex-grow-1 ml-4">
                       <p className="text-black mb-0  text-xs text-right">
-                        ${item.price}
+                        €{item.price}
                       </p>
                       <p className="text-gold text-xs text-right">
                         Ingredients
@@ -89,27 +89,21 @@ function Control() {
       </div>
       <div className="flex justify-content-between mt-2">
         <p className="flex-grow-1 text-left text-xs text-black">Subtotal</p>
-        <p className="text-left text-xs text-black">{total}$</p>
+        <p className="text-left text-xs text-black">{total} €</p>
       </div>
       <div className="flex justify-content-between">
         <p className="flex-grow-1 text-left text-xs text-black">Delivery</p>
-        <p className="text-left text-xs text-black">{delivery}$</p>
+        <p className="text-left text-xs text-black">{delivery} €</p>
       </div>
       <div className="flex justify-content-between ">
         <p className="flex-grow-1 text-left text-xs text-black">Total</p>
-        <p className="text-left text-xs text-black">{total + delivery}$</p>
+        <p className="text-left text-xs text-black">{total + delivery} €</p>
       </div>
       <button
         className="w-full rounded-pill bg-black text-white text-center text-xs py-2 font-weight-light"
         onClick={orderNow}
+        disabled={loading}
       >
-        {loading && (
-          <Spinner
-            animation="border"
-            size="sm"
-            style={{ marginRight: "10px" }}
-          />
-        )}
         ORDER NOW
       </button>
     </section>
