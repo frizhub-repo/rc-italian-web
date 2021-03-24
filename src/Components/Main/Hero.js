@@ -22,7 +22,10 @@ function Hero() {
           "url('https://images.unsplash.com/photo-1555234557-062e321607cf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center center",
       }}
     >
-      <div className="container mx-auto flex px-3 py-24 items-center justify-center flex-col">
+      <div
+        className="container mx-auto flex px-3 py-24 items-center justify-center flex-col"
+        style={{ maxWidth: "1400px" }}
+      >
         {loading ? (
           "Loading..."
         ) : (
