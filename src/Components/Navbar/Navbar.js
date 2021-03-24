@@ -1,6 +1,7 @@
 import React from "react";
 import AuthModal from "../Auth/authModal";
 import { useUserContext } from "../../Context/userContext";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -16,21 +17,21 @@ function Navbar() {
     <header className="text-gray-700 body-font w-full ">
       <div className=" mx-auto flex   justify-content-center w-full">
         <div className="md:ml-auto md:mr-auto flex w-full    justify-center">
-          <a href="/" className="mr-5 text-white text-xs">
+          <Link to="/" className="mr-5 text-white text-xs">
             HOME
-          </a>
-          <a href="/menu/1" className="mr-5 text-white text-xs">
+          </Link>
+          <Link to="/menu/1" className="mr-5 text-white text-xs">
             MENU
-          </a>
-          <a href="/order" className="mr-5 text-white text-xs">
+          </Link>
+          <Link to="/order" className="mr-5 text-white text-xs">
             Order
-          </a>
-          <a href="/tableReservation" className="mr-5 text-white text-xs">
+          </Link>
+          <Link to="/tableReservation" className="mr-5 text-white text-xs">
             TABLE RESERVATION
-          </a>
-          <a href="contact" className="text-white text-xs mr-5">
+          </Link>
+          <Link to="contact" className="text-white text-xs mr-5">
             CONTACT US
-          </a>
+          </Link>
           {token ? (
             <button
               onClick={logout}
