@@ -7,3 +7,6 @@ export const STOP_LOADING = "STOP LOADING";
 
 // Table reservation types
 export const RESERVE_TABLE = "RESERVE TABLE";
+
+// Product types
+export const GET_PRODUCT_BY_CATEGORY = "GET PRODUCT BY CATEGORY"
