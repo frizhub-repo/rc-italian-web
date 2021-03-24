@@ -6,6 +6,7 @@ import Main from "./Components/Main";
 import Contact from "./Components/Contact";
 import Menu from "./Components/Menu";
 import Delivery from "./Components/Delivery/index";
+import Reservation from "./Components/Lists/Reservations";
 import { useUserContext } from "./Context/userContext";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu/:id" exact component={Menu} />
           <Route path="/order" exact component={Delivery} />
+          <Route path="/reservation" exact component={Reservation} />
           <Route
             path="*"
             render={() => (
