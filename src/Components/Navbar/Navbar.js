@@ -32,7 +32,7 @@ function Navbar() {
           <Link to="contact" className="text-white text-xs mr-5">
             CONTACT US
           </Link>
-          <Link to="contact" className="text-white text-xs mr-5">
+          <Link to="/reservation" className="text-white text-xs mr-5">
             MY RESERVATION's
           </Link>
           <Link to="contact" className="text-white text-xs mr-5">
