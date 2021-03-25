@@ -7,6 +7,7 @@ import Contact from "./Components/Contact";
 import Menu from "./Components/Menu";
 import Delivery from "./Components/Delivery/index";
 import Reservation from "./Components/Lists/Reservations";
+import Order from "./Components/Lists/Order";
 import { useUserContext } from "./Context/userContext";
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu/:id" exact component={Menu} />
           <Route path="/order" exact component={Delivery} />
-          <Route path="/reservation" exact component={Reservation} />
+          <Route path="/customer/reservation" exact component={Reservation} />
+          <Route path="/customer/order" exact component={Order} />
           <Route
             path="*"
             render={() => (
