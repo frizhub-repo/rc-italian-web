@@ -61,9 +61,9 @@ function Reservation() {
                             borderRadius: "50rem",
                             backgroundColor:
                               reservation?.status === "pending"
-                                ? "limegreen"
+                                ? "red"
                                 : reservation?.status === "accepted"
-                                ? "#4BB543"
+                                ? "#008000"
                                 : "#F32013",
                             padding: "6px",
                           }}
