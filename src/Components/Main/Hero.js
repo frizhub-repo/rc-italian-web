@@ -8,11 +8,7 @@ function Hero() {
   const { restaurant } = useSelector((state) => state.appReducer);
   const { loading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
-    dispatch(
-      fetchAllResInfo(
-        "4e829f505a4fd3bded8b1acbb4f1248d7dede7c988cd8586a78f2aa0458ea810"
-      )
-    );
+    dispatch(fetchAllResInfo());
   }, [dispatch]);
   return (
     <section
