@@ -16,7 +16,10 @@ function Navbar() {
   return (
     <header className="text-gray-700 body-font w-full ">
       <div className=" mx-auto flex   justify-content-center w-full">
-        <div className="md:ml-auto md:mr-auto flex w-full    justify-center">
+        <div
+          className="md:ml-auto md:mr-auto flex w-full    justify-center"
+          style={{ textShadow: "2px 4px 6px #000132" }}
+        >
           <Link to="/" className="mr-5 text-white text-xs">
             HOME
           </Link>
@@ -29,14 +32,14 @@ function Navbar() {
           <Link to="/tableReservation" className="mr-5 text-white text-xs">
             TABLE RESERVATION
           </Link>
-          <Link to="contact" className="text-white text-xs mr-5">
-            CONTACT US
-          </Link>
-          <Link to="/reservation" className="text-white text-xs mr-5">
+          <Link to="/customer/reservation" className="text-white text-xs mr-5">
             MY RESERVATION's
           </Link>
-          <Link to="contact" className="text-white text-xs mr-5">
+          <Link to="/customer/order" className="text-white text-xs mr-5">
             MY ORDER's
+          </Link>
+          <Link to="contact" className="text-white text-xs mr-5">
+            CONTACT US
           </Link>
           {token ? (
             <button
