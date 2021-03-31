@@ -55,9 +55,24 @@ export default function Header() {
           horizontal: "center",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem dense={true} onClick={handleClose}>
+          My Account
+        </MenuItem>
+        <MenuItem dense={true} onClick={handleClose}>
+          Delivery Address
+        </MenuItem>
+        <MenuItem dense={true} onClick={handleClose}>
+          Orders
+        </MenuItem>
+        <MenuItem dense={true} onClick={handleClose}>
+          Payment Method
+        </MenuItem>
+        <MenuItem dense={true} onClick={handleClose}>
+          Contact Method
+        </MenuItem>
+        <MenuItem dense={true} onClick={handleClose}>
+          Logout
+        </MenuItem>
       </Menu>
     </header>
   );
