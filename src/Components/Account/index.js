@@ -37,8 +37,12 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   content: {
-    paddingLeft: "25px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
     height: "fit-content",
+    [theme.breakpoints.down("sm")]: {
+      padding: "20px 0px 0px 0px",
+    },
   },
   nestedContent: {
     backgroundColor: "#F2F2F2",
