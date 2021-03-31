@@ -53,7 +53,7 @@ export default function Profile() {
 
   return (
     <div className="OverRide">
-      <Header />
+      <Header setActiveTab={setActiveTab} />
       <div className={`container ${classes.root}`}>
         <Grid container>
           <Grid

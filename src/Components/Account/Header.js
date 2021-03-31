@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useUserContext } from "../../Context/userContext";
 
-export default function Header() {
+export default function Header({ setActiveTab }) {
   const { restaurant, customer } = useUserContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -62,19 +62,49 @@ export default function Header() {
           horizontal: "center",
         }}
       >
-        <MenuItem dense={true} onClick={handleClose}>
+        <MenuItem
+          dense={true}
+          onClick={() => {
+            handleClose();
+            setActiveTab(0);
+          }}
+        >
           My Account
         </MenuItem>
-        <MenuItem dense={true} onClick={handleClose}>
+        <MenuItem
+          dense={true}
+          onClick={() => {
+            handleClose();
+            setActiveTab(1);
+          }}
+        >
           Delivery Address
         </MenuItem>
-        <MenuItem dense={true} onClick={handleClose}>
+        <MenuItem
+          dense={true}
+          onClick={() => {
+            handleClose();
+            setActiveTab(2);
+          }}
+        >
           Orders
         </MenuItem>
-        <MenuItem dense={true} onClick={handleClose}>
+        <MenuItem
+          dense={true}
+          onClick={() => {
+            handleClose();
+            setActiveTab(3);
+          }}
+        >
           Payment Method
         </MenuItem>
-        <MenuItem dense={true} onClick={handleClose}>
+        <MenuItem
+          dense={true}
+          onClick={() => {
+            handleClose();
+            setActiveTab(4);
+          }}
+        >
           Contact Method
         </MenuItem>
         <MenuItem dense={true} onClick={handleClose}>
