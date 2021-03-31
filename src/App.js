@@ -8,6 +8,7 @@ import Menu from "./Components/Menu";
 import Delivery from "./Components/Delivery/index";
 import Reservation from "./Components/Lists/Reservations";
 import Order from "./Components/Lists/Order";
+import Profile from "./Components/Account/index";
 import { useUserContext } from "./Context/userContext";
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={Main} />
-
+          <Route path="/profile" exact component={Profile} />
           <Route path="/tableReservation" exact component={Home} />
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu/:id" exact component={Menu} />
