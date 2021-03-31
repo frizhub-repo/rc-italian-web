@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -15,76 +15,113 @@ import DeliveryAddress from "./DeliveryAddress";
 import PaymentMethod from "./PaymentMethod";
 import ContactMethod from "./ContactMethod";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "40px",
+    padding: "30px 35px 0px",
+  },
+  leftSideBar: {
+    backgroundColor: "#1D1D1D",
+    color: "white",
+  },
+  spacing: {
+    margin: "25px 0px 0px 25px",
+    cursor: "pointer",
+  },
+  activeColor: {
+    color: "#B39872",
+  },
+  logout: {
+    margin: "25px 0px 25px 20px",
+    cursor: "pointer",
+  },
+  content: {
+    paddingLeft: "25px",
+    height: "fit-content",
+  },
+  nestedContent: {
+    backgroundColor: "#F2F2F2",
+    padding: "25px",
+  },
+}));
+
 export default function Profile() {
+  const classes = useStyles();
+
   const [activeTab, setActiveTab] = React.useState(0);
 
   return (
     <div className="OverRide">
       <Header />
-      <div
-        className="container"
-        style={{ marginTop: "40px", padding: "30px 35px 0px" }}
-      >
+      <div className={`container ${classes.root}`}>
         <Grid container>
           <Grid
             container
             direction="column"
             justify="flex-start"
-            // spacing={4}
-            style={{
-              backgroundColor: "black",
-              color: "white",
-            }}
+            className={classes.leftSideBar}
             md={3}
           >
             <Grid
               item
-              style={{ margin: "25px 0px 0px 20px" }}
+              className={`${classes.spacing} ${
+                activeTab === 0 && classes.activeColor
+              }`}
               onClick={() => setActiveTab(0)}
             >
               <AccountCircleIcon /> My Account
             </Grid>
             <Grid
               item
-              style={{ margin: "25px 0px 0px 20px" }}
+              className={`${classes.spacing} ${
+                activeTab === 1 && classes.activeColor
+              }`}
               onClick={() => setActiveTab(1)}
             >
               <AirportShuttleIcon /> Delivery Address
             </Grid>
             <Grid
               item
-              style={{ margin: "25px 0px 0px 20px" }}
+              className={`${classes.spacing} ${
+                activeTab === 2 && classes.activeColor
+              }`}
               onClick={() => setActiveTab(2)}
             >
               <ShoppingCartIcon /> Orders
             </Grid>
             <Grid
               item
-              style={{ margin: "25px 0px 0px 20px" }}
+              className={`${classes.spacing} ${
+                activeTab === 3 && classes.activeColor
+              }`}
               onClick={() => setActiveTab(3)}
             >
               <PaymentIcon /> Payment Method
             </Grid>
             <Grid
               item
-              style={{ margin: "25px 0px 0px 20px" }}
+              className={`${classes.spacing} ${
+                activeTab === 4 && classes.activeColor
+              }`}
               onClick={() => setActiveTab(4)}
             >
               <HeadsetIcon /> Contact Method
             </Grid>
             <Grid
               item
-              style={{ margin: "25px 0px 25px 20px" }}
+              className={`${classes.logout} ${
+                activeTab === 5 && classes.activeColor
+              }`}
               onClick={() => setActiveTab(5)}
             >
               <ExitToAppIcon /> Logout
             </Grid>
           </Grid>
-          <Grid container md={9} style={{ paddingLeft: "25px" }}>
+          <Grid container md={9} className={classes.content}>
             <Grid
               container
               direction="column"
-              style={{ backgroundColor: "#F2F2F2", padding: "25px" }}
+              className={classes.nestedContent}
             >
               {activeTab === 0 && (
                 <Grid item>
@@ -111,7 +148,6 @@ export default function Profile() {
                   <ContactMethod />
                 </Grid>
               )}
-              <Grid item>asdas</Grid>
             </Grid>
           </Grid>
         </Grid>
