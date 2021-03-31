@@ -6,12 +6,25 @@ const UserContext = React.createContext();
 
 export function UserProvider({ children }) {
   const [restaurant, setRestaurant] = React.useState({});
+  const [customer, setCustomer] = React.useState({});
   const [token, setToken] = React.useState(
     window?.localStorage?.getItem("token")
   );
   React.useEffect(() => {
     if (token) {
       try {
+        async function fetchCustomerinfo() {
+          try {
+            axiosIntance.defaults.headers.common[
+              "Authorization"
+            ] = window.localStorage.getItem("token");
+            const res = await axiosIntance.get("/api/v1/customers");
+            setCustomer(res?.data?.data);
+          } catch (error) {
+            console.log({ error });
+          }
+        }
+        fetchCustomerinfo();
         let decoded = jwtDecode(token);
         if (Date.now() >= decoded.exp * 1000) {
           throw Error("token expired");
@@ -36,7 +49,7 @@ export function UserProvider({ children }) {
     fetchRestaurantInfo();
   }, []);
   return (
-    <UserContext.Provider value={{ token, setToken, restaurant }}>
+    <UserContext.Provider value={{ token, setToken, restaurant, customer }}>
       {children}
     </UserContext.Provider>
   );
