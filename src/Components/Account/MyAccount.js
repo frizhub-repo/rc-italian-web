@@ -33,7 +33,7 @@ export default function MyAccount() {
             size="small"
             fullWidth
             className={classes.bgColor}
-            id="outlined-basic"
+            id="outlined-basic1"
             placeholder="Name"
             variant="outlined"
           />
@@ -43,7 +43,7 @@ export default function MyAccount() {
             size="small"
             fullWidth
             className={classes.bgColor}
-            id="outlined-basic"
+            id="outlined-basic2"
             placeholder="Username"
             variant="outlined"
           />
@@ -56,7 +56,7 @@ export default function MyAccount() {
             size="small"
             fullWidth
             className={classes.bgColor}
-            id="outlined-basic"
+            id="outlined-basic3"
             placeholder="Email"
             type="email"
             variant="outlined"
@@ -67,7 +67,7 @@ export default function MyAccount() {
             size="small"
             fullWidth
             className={classes.bgColor}
-            id="outlined-basic"
+            id="outlined-basic4"
             placeholder="Phone Number"
             variant="outlined"
           />
@@ -79,7 +79,7 @@ export default function MyAccount() {
             size="small"
             fullWidth
             className={classes.bgColor}
-            id="outlined-basic"
+            id="outlined-basic5"
             placeholder="Password"
             type="password"
             variant="outlined"
