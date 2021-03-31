@@ -1,9 +1,11 @@
 import jwtDecode from "jwt-decode";
 import React from "react";
+import axiosIntance from "../utils/axios-configured";
 
 const UserContext = React.createContext();
 
 export function UserProvider({ children }) {
+  const [restaurant, setRestaurant] = React.useState({});
   const [token, setToken] = React.useState(
     window?.localStorage?.getItem("token")
   );
@@ -21,8 +23,20 @@ export function UserProvider({ children }) {
       }
     }
   }, [token]);
+
+  React.useEffect(() => {
+    async function fetchRestaurantInfo() {
+      try {
+        const res = await axiosIntance.get("/api/v1/app/public/restaurant");
+        setRestaurant(res?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchRestaurantInfo();
+  }, []);
   return (
-    <UserContext.Provider value={{ token, setToken }}>
+    <UserContext.Provider value={{ token, setToken, restaurant }}>
       {children}
     </UserContext.Provider>
   );
