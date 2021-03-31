@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axiosIntance from "../../utils/axios-configured";
@@ -43,7 +44,15 @@ export default function Order() {
       <h4>Orders</h4>
       <Divider />
       <Grid container direction="row" spacing={2} style={{ marginTop: "10px" }}>
-        {loading && "Loading"}
+        {loading &&
+          [1, 2, 3, 4].map((item) => (
+            <Skeleton
+              variant="rect"
+              width={700}
+              height={140}
+              style={{ marginTop: "10px" }}
+            />
+          ))}
         {orders.length > 0 &&
           orders.map((order, index) => (
             <Grid item style={{ width: "100%" }} key={index}>
