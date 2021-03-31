@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   leftSideBar: {
     backgroundColor: "#1D1D1D",
     color: "white",
+    height: "fit-content",
   },
   spacing: {
     margin: "25px 0px 0px 25px",
