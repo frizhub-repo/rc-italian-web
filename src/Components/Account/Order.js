@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     width: 200,
-    height: 120,
+    height: 112,
   },
   img: {
     margin: "auto",
