@@ -1,7 +1,9 @@
 import React from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
+import { useUserContext } from "../../Context/userContext";
 
 export default function Header() {
+  const { restaurant } = useUserContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -26,7 +28,7 @@ export default function Header() {
         <div className="w-25">
           <img
             style={{ height: "50px" }}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjtYqae1-TmkCUBgvcnb_w1yS1RQgvx27DLg&usqp=CAU"
+            src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
             className="object-cover"
           />
         </div>
