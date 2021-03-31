@@ -3,7 +3,7 @@ import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useUserContext } from "../../Context/userContext";
 
 export default function Header() {
-  const { restaurant } = useUserContext();
+  const { restaurant, customer } = useUserContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -28,15 +28,20 @@ export default function Header() {
         <div className="w-25">
           <img
             style={{ height: "50px" }}
+            alt="restaurant logo"
             src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
             className="object-cover"
           />
         </div>
-        <div className="d-flex align-items-center justify-content-end">
-          <p style={{ margin: "0px 9px 5px 0px", color: "white" }}>Muhammad </p>
+        <div
+          className="d-flex align-items-center justify-content-end cursor-pointer"
+          onClick={handleClick}
+        >
+          <p style={{ margin: "0px 9px 5px 0px", color: "white" }}>
+            {customer?.firstName} {customer?.lastName}{" "}
+          </p>
           <Avatar
             alt="Cindy Baker"
-            onClick={handleClick}
             src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
           />
         </div>
