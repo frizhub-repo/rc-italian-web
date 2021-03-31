@@ -35,9 +35,6 @@ function Navbar() {
           <Link to="/customer/reservation" className="text-white text-xs mr-5">
             MY RESERVATION's
           </Link>
-          <Link to="/customer/order" className="text-white text-xs mr-5">
-            MY ORDER's
-          </Link>
           <Link to="contact" className="text-white text-xs mr-5">
             CONTACT US
           </Link>
