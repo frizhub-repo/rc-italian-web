@@ -64,7 +64,9 @@ export default function Order() {
                         <Typography gutterBottom variant="subtitle1">
                           {order?.products?.map((odr) => (
                             <span>
-                              {odr?.quantity}x {odr?.product?.title}{" "}
+                              <b>
+                                {odr?.quantity}x {odr?.product?.title}{" "}
+                              </b>
                             </span>
                           ))}
                         </Typography>
@@ -84,7 +86,7 @@ export default function Order() {
                     </Grid>
                     <Grid item>
                       <Typography variant="subtitle1">
-                        ${order?.total}
+                        <b>${order?.total}</b>
                       </Typography>
                     </Grid>
                   </Grid>

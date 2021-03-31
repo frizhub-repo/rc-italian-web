@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#B39872",
   },
   logout: {
-    margin: "25px 0px 25px 20px",
+    margin: "25px 0px 25px 25px",
     cursor: "pointer",
   },
   content: {
