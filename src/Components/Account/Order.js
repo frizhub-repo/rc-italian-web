@@ -10,6 +10,7 @@ import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axiosIntance from "../../utils/axios-configured";
+import DateRangeIcon from "@material-ui/icons/DateRange";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -80,7 +81,8 @@ export default function Order() {
                           ))}
                         </Typography>
                         <Typography variant="body2" gutterBottom>
-                          Full resolution 1920x1080 • JPEG
+                          <DateRangeIcon />{" "}
+                          {new Date(order?.createdAt).toLocaleDateString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
                           ID: 1030114
