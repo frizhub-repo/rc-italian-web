@@ -9,9 +9,12 @@ import Gallery from "../Gallery";
 import Footer from "../Footer";
 import axiosIntance from "../../utils/axios-configured";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { Skeleton } from "@material-ui/lab";
 
 function Delivery() {
   const [products, setProducts] = useState([]);
+  const { loading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
     axiosIntance
       .get("/api/v1/products/customers")
@@ -90,7 +93,16 @@ function Delivery() {
               </div>
             </Carousel>
             <div className="w-full divide-y divide-gray-300 divide-dashed ">
-              {products.length &&
+              {loading &&
+                [1, 2, 3].map(() => (
+                  <Skeleton
+                    style={{ marginLeft: "28px", marginTop: "10px" }}
+                    variant="rect"
+                    width={500}
+                    height={100}
+                  />
+                ))}
+              {products.length > 0 &&
                 products.map((product) => <Product product={product} />)}
             </div>
           </div>
