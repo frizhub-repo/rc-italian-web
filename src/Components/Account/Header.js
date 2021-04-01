@@ -1,13 +1,19 @@
 import React from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useUserContext } from "../../Context/userContext";
+import { useHistory } from "react-router";
 
 export default function Header({ setActiveTab }) {
   const { restaurant, customer } = useUserContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (window.location.pathname === "/complete/purchase") {
+      history.push("/profile");
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
   const handleClose = () => {
