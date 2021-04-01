@@ -1,6 +1,7 @@
 import { Button, Grid, Typography } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import Header from "../Account/Header";
@@ -9,6 +10,7 @@ import { removeOrderItems } from "../actions";
 export default function CompletePurchase() {
   const paypal = useRef();
   const disp = useDispatch();
+  const history = useHistory();
   const [status, setStatus] = useState(null);
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
@@ -23,6 +25,7 @@ export default function CompletePurchase() {
         .then((res) => {
           toast.success("Order created successfully");
           disp(removeOrderItems());
+          history.push("/");
           console.log(res);
         })
         .catch((err) => console.log(err));
