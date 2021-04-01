@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { fetchAllResInfo } from "../../actions/appActions";
 import { useSelector, useDispatch } from "react-redux";
+import { Skeleton } from "@material-ui/lab";
 
 function Hero() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function Hero() {
         style={{ maxWidth: "1400px" }}
       >
         {loading ? (
-          "Loading..."
+          <Skeleton variant="rect" width={180} height={120} />
         ) : (
           <img
             className="lg:w-1/12 max-w-xs text-light	  md:w-1/12 w-1/12 mb-10 object-cover object-center rounded"
