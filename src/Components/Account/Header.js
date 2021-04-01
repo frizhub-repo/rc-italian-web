@@ -35,8 +35,9 @@ export default function Header({ setActiveTab }) {
           <img
             style={{ height: "50px" }}
             alt="restaurant logo"
+            onClick={() => history.push("/")}
             src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-            className="object-cover"
+            className="object-cover cursor-pointer"
           />
         </div>
         <div
