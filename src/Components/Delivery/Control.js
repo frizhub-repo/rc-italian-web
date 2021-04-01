@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import { removeOrderItems } from "../actions";
 import { Spinner } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 function Control() {
   const total = useSelector((state) => state.orders).total;
@@ -12,17 +13,19 @@ function Control() {
   const delivery = useSelector((state) => state.orders).delivery;
   const { loading } = useSelector((state) => state.loadingReducer);
   const disp = useDispatch();
+  const history = useHistory();
 
   const orderNow = () => {
-    items.length > 0 &&
-      axiosIntance
-        .post("/api/v1/orders/customers", { products: items })
-        .then((res) => {
-          toast.success("Order created successfully");
-          disp(removeOrderItems());
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
+    items.length > 0 && history.push("/complete/purchase");
+    // items.length > 0 &&
+    //   axiosIntance
+    //     .post("/api/v1/orders/customers", { products: items })
+    //     .then((res) => {
+    //       toast.success("Order created successfully");
+    //       disp(removeOrderItems());
+    //       console.log(res);
+    //     })
+    //     .catch((err) => console.log(err));
   };
 
   return (
