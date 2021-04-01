@@ -1,10 +1,12 @@
 import React from "react";
 import AuthModal from "../Auth/authModal";
 import { useUserContext } from "../../Context/userContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Avatar } from "@material-ui/core";
 
 function Navbar() {
   const [modalShow, setModalShow] = React.useState(false);
+  const history = useHistory();
   let { token, setToken } = useUserContext();
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -18,7 +20,7 @@ function Navbar() {
       <div className=" mx-auto flex   justify-content-center w-full">
         <div
           className="md:ml-auto md:mr-auto flex w-full    justify-center"
-          style={{ textShadow: "2px 4px 6px #000132" }}
+          style={{ textShadow: "2px 4px 6px #000132", alignItems: "center" }}
         >
           <Link to="/" className="mr-5 text-white text-xs">
             HOME
@@ -39,13 +41,19 @@ function Navbar() {
             CONTACT US
           </Link>
           {token ? (
-            <button
-              onClick={logout}
-              className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
-            >
-              LOG OUT
-            </button>
+            <Avatar
+              alt="Cindy Baker"
+              className="cursor-pointer"
+              onClick={() => history.push("/profile")}
+              src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+            />
           ) : (
+            // <button
+            //   onClick={logout}
+            //   className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
+            // >
+            //   LOG OUT
+            // </button>
             <button
               className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
               onClick={() => setModalShow(true)}
