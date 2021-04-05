@@ -7,6 +7,7 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import AirportShuttleIcon from "@material-ui/icons/AirportShuttle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HeadsetIcon from "@material-ui/icons/Headset";
+import TodayIcon from '@material-ui/icons/Today';
 import Header from "./Header";
 import Divider from "@material-ui/core/Divider";
 import Order from "./Order";
@@ -14,6 +15,7 @@ import MyAccount from "./MyAccount";
 import DeliveryAddress from "./DeliveryAddress";
 import PaymentMethod from "./PaymentMethod";
 import ContactMethod from "./ContactMethod";
+import MyReservation from "./MyReservations";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,7 +103,7 @@ export default function Profile() {
               }`}
               onClick={() => setActiveTab(3)}
             >
-              <PaymentIcon /> Payment Method
+              <TodayIcon /> Table Reservation
             </Grid>
             <Grid
               item
@@ -110,14 +112,23 @@ export default function Profile() {
               }`}
               onClick={() => setActiveTab(4)}
             >
+              <PaymentIcon /> Payment Method
+            </Grid>
+            <Grid
+              item
+              className={`${classes.spacing} ${
+                activeTab === 5 && classes.activeColor
+              }`}
+              onClick={() => setActiveTab(5)}
+            >
               <HeadsetIcon /> Contact Method
             </Grid>
             <Grid
               item
               className={`${classes.logout} ${
-                activeTab === 5 && classes.activeColor
+                activeTab === 6 && classes.activeColor
               }`}
-              onClick={() => setActiveTab(5)}
+              onClick={() => setActiveTab(6)}
             >
               <ExitToAppIcon /> Logout
             </Grid>
@@ -143,12 +154,17 @@ export default function Profile() {
                   <Order />
                 </Grid>
               )}
-              {activeTab === 3 && (
+              {activeTab === 4 && (
                 <Grid item>
                   <PaymentMethod />
                 </Grid>
               )}
-              {activeTab === 4 && (
+              {activeTab === 3 && (
+                <Grid item>
+                  <MyReservation />
+                </Grid>
+              )}
+              {activeTab === 5 && (
                 <Grid item>
                   <ContactMethod />
                 </Grid>
