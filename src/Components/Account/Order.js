@@ -29,6 +29,27 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     maxHeight: "100%",
   },
+  accepted: {
+    border: "1px solid #4caf50",
+    borderRadius: '20px',
+    padding: "2px 10px",
+    color: '#4caf50',
+    textTransform: 'capitalize'
+  },
+  pending: {
+    border: "1px solid #ff9800",
+    borderRadius: '20px',
+    padding: "2px 10px",
+    color: '#f57c00',
+    textTransform: 'capitalize'
+  },
+  rejected: {
+    border: "1px solid red",
+    borderRadius: '20px',
+    padding: "2px 10px",
+    color: 'red',
+    textTransform: 'capitalize'
+  },
 }));
 export default function Order() {
   const classes = useStyles();
@@ -104,6 +125,21 @@ export default function Order() {
                         <Typography variant="body2" color="textSecondary">
                           ID: 1030114
                         </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle1">
+                        <b>${order?.total}</b>
+                      </Typography>
+                    </Grid>
+                    <Grid item container>
+                    <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: '100%'
+                        }}
+                      >
                         <Button
                           size="small"
                           style={{ backgroundColor: "#E2E2E2" }}
@@ -111,12 +147,18 @@ export default function Order() {
                         >
                           Reorder
                         </Button>
-                      </Grid>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="subtitle1">
-                        <b>${order?.total}</b>
-                      </Typography>
+                        <span
+                          className={
+                            order?.status === "accepted"
+                              ? classes.accepted
+                              : order?.status === "pending"
+                              ? classes.pending
+                              : classes.rejected
+                          }
+                        >
+                          {order?.status}
+                        </span>
+                      </div>
                     </Grid>
                   </Grid>
                 </Grid>

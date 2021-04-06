@@ -100,7 +100,15 @@ export default function MyReservation() {
                       align="center"
                       className={classes.capitalizeText}
                     >
-                      <span className={item.status === "accepted" ? classes.accepted : item.status === "pending" ? classes.pending: classes.rejected}>
+                      <span
+                        className={
+                          item.status === "accepted"
+                            ? classes.accepted
+                            : item.status === "pending"
+                            ? classes.pending
+                            : classes.rejected
+                        }
+                      >
                         {item.status}
                       </span>
                     </TableCell>
