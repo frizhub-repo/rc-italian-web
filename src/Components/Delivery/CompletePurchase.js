@@ -6,16 +6,22 @@ import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import Header from "../Account/Header";
 import { removeOrderItems } from "../actions";
+import SuccessModal from "../Common/SuccessDialog";
 
 export default function CompletePurchase() {
   const paypal = useRef();
   const disp = useDispatch();
   const history = useHistory();
   const [status, setStatus] = useState(null);
+  const [show, setShow] = useState(false);
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const createOrder = () => {
+    handleShow();
     if (status === "ERROR") {
       toast.error("Payment cancel for some reason. Please provide payment");
     } else if (status === "COMPLETED") {
@@ -138,6 +144,12 @@ export default function CompletePurchase() {
           </Button>
         </Grid>
       </Grid>
+      <SuccessModal
+        show={show}
+        handleClose={handleClose}
+        text={"Order created successfully"}
+        title={"Order"}
+      />
     </div>
   );
 }

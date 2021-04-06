@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { reserveTable } from "../../actions/reserveTableActions";
 import { Spinner } from "react-bootstrap";
+import SuccessModal from "../Common/SuccessDialog";
 
 function Form() {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ function Form() {
   const [services, setService] = useState("lunch");
   const [res, setRes] = useState("Tomorrow");
   const [time, setTime] = useState("2021-03-12T18:00");
+  const [show, setShow] = useState(false);
   const { handleSubmit } = useForm();
   const dispatch = useDispatch();
   const { reserveTableData } = useSelector((state) => state.reservationReducer);
@@ -20,6 +22,9 @@ function Form() {
   let { token } = useUserContext();
   let now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const tableReserve = () => {
     dispatch(
@@ -29,6 +34,7 @@ function Form() {
         services: services,
       })
     );
+    handleShow();
   };
   return (
     <section className="text-gray-700 body-font overflow-hidden ">
@@ -301,6 +307,12 @@ function Form() {
           </div>
         </div>
       </div>
+      <SuccessModal
+        show={show}
+        handleClose={handleClose}
+        text={"Reservation created successfully"}
+        title={"Reservation"}
+      />
     </section>
   );
 }
