@@ -56,10 +56,15 @@ export default function Profile() {
   const classes = useStyles();
 
   const [activeTab, setActiveTab] = React.useState(0);
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    window.location.reload();
+    window.location.href = "/"
+  }
 
   return (
     <div className="OverRide">
-      <Header setActiveTab={setActiveTab} />
+      <Header setActiveTab={setActiveTab} logout={logout} />
       <div className={`container ${classes.root}`}>
         <Grid container>
           <Grid
@@ -125,10 +130,8 @@ export default function Profile() {
             </Grid>
             <Grid
               item
-              className={`${classes.logout} ${
-                activeTab === 6 && classes.activeColor
-              }`}
-              onClick={() => setActiveTab(6)}
+              className={classes.logout}
+              onClick={logout}
             >
               <ExitToAppIcon /> Logout
             </Grid>

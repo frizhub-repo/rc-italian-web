@@ -3,7 +3,7 @@ import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useUserContext } from "../../Context/userContext";
 import { useHistory } from "react-router";
 
-export default function Header({ setActiveTab }) {
+export default function Header({ setActiveTab, logout }) {
   const { restaurant, customer } = useUserContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -114,7 +114,13 @@ export default function Header({ setActiveTab }) {
         >
           Contact Method
         </MenuItem>
-        <MenuItem dense={true} onClick={handleClose}>
+        <MenuItem
+          dense={true}
+          onClick={() => {
+            handleClose();
+            logout();
+          }}
+        >
           Logout
         </MenuItem>
       </Menu>
