@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import axiosIntance from "../utils/axios-configured";
 import { GET_PRODUCT_BY_CATEGORY } from "../utils/types";
 

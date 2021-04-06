@@ -8,13 +8,11 @@ function Navbar() {
   const [modalShow, setModalShow] = React.useState(false);
   const history = useHistory();
   let { token, setToken } = useUserContext();
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    window.location.reload();
-  };
+  
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
   });
+  
   return (
     <header className="text-gray-700 body-font w-full ">
       <div className=" mx-auto flex   justify-content-center w-full">
@@ -45,12 +43,6 @@ function Navbar() {
               src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
             />
           ) : (
-            // <button
-            //   onClick={logout}
-            //   className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
-            // >
-            //   LOG OUT
-            // </button>
             <button
               className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
               onClick={() => setModalShow(true)}

@@ -82,7 +82,7 @@ export default function CompletePurchase() {
         },
         onCancel: (data) => {
           setStatus("ERROR");
-          toast.error("Payment cancel by user");
+          toast.error("Payment Cancel by User");
           console.log({ data });
         },
       });

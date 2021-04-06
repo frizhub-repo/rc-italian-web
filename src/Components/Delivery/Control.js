@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import { removeOrderItems } from "../actions";
-import { Spinner } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 function Control() {
