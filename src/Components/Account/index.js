@@ -16,10 +16,12 @@ import DeliveryAddress from "./DeliveryAddress";
 import PaymentMethod from "./PaymentMethod";
 import ContactMethod from "./ContactMethod";
 import MyReservation from "./MyReservations";
+import Footer from "../Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "40px",
+    marginBottom: "20px",
     padding: "30px 35px 0px",
   },
   leftSideBar: {
@@ -176,6 +178,7 @@ export default function Profile() {
           </Grid>
         </Grid>
       </div>
+      <Footer bg={'gray-300'}/>
     </div>
   );
 }
