@@ -30,7 +30,7 @@ export default function CompletePurchase() {
         })
         .catch((err) => console.log(err));
     } else {
-      toast.error("Payment not added. Please provide payment");
+      toast.error("Payment not Added. Please Provide Payment");
     }
   };
 
@@ -117,7 +117,7 @@ export default function CompletePurchase() {
             How do you want to pay?
           </Typography>
         </Grid>
-        <Grid item justify="flex-end">
+        <Grid item justify="flex-end" style={{ margin: '10px 0px 10px 0px' }}>
           Total amount: ${total}
         </Grid>
         <Grid item>
@@ -129,8 +129,8 @@ export default function CompletePurchase() {
               borderRadius: "15px",
               backgroundColor: "black",
               color: "white",
-              marginTop: "10px",
-              padding: "4px 6px 4px 6px",
+              marginTop: "20px",
+              padding: "4px 15px",
             }}
             onClick={createOrder}
           >
