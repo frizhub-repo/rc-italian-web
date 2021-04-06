@@ -17,6 +17,24 @@ const useStyles = makeStyles((theme) => ({
   spacing: {
     marginTop: "10px",
   },
+  accepted: {
+    border: "1px solid #4caf50",
+    borderRadius: '20px',
+    padding: "4px 6px",
+    color: '#4caf50',
+  },
+  pending: {
+    border: "1px solid #ff9800",
+    borderRadius: '20px',
+    padding: "4px 6px",
+    color: '#f57c00',
+  },
+  rejected: {
+    border: "1px solid red",
+    borderRadius: '20px',
+    padding: "4px 6px",
+    color: 'red',
+  },
 }));
 
 export default function MyReservation() {
@@ -82,7 +100,9 @@ export default function MyReservation() {
                       align="center"
                       className={classes.capitalizeText}
                     >
-                      {item.status}
+                      <span className={item.status === "accepted" ? classes.accepted : item.status === "pending" ? classes.pending: classes.rejected}>
+                        {item.status}
+                      </span>
                     </TableCell>
                   </TableRow>
                 ))}
