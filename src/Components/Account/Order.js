@@ -8,9 +8,11 @@ import {
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axiosIntance from "../../utils/axios-configured";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import { addItem, setTotal } from "../actions";
+import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -32,6 +34,21 @@ export default function Order() {
   const classes = useStyles();
   const { loading } = useSelector((state) => state.loadingReducer);
   const [orders, setOrders] = useState([]);
+  const disp = useDispatch();
+  const history = useHistory()
+
+  const reOrder = (order) => {
+    let products = []
+    let total = 0;
+    order?.map((prod) => {
+      let obj = { product: prod.product._id, price: prod.product.price, quantity: prod.quantity, name: prod.product.title }
+      products.push(obj);
+      total += prod.quantity * prod.product.price;
+    })
+    disp(addItem(products));
+    disp(setTotal(total));
+    history.push("/complete/purchase")
+  }
 
   useEffect(() => {
     axiosIntance
@@ -90,6 +107,7 @@ export default function Order() {
                         <Button
                           size="small"
                           style={{ backgroundColor: "#E2E2E2" }}
+                          onClick={() => reOrder(order?.products)}
                         >
                           Reorder
                         </Button>
