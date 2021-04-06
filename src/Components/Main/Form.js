@@ -18,6 +18,8 @@ function Form() {
   const { reserveTableData } = useSelector((state) => state.reservationReducer);
   const { loading } = useSelector((state) => state.loadingReducer);
   let { token } = useUserContext();
+  let now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 
   const tableReserve = () => {
     dispatch(
@@ -250,8 +252,9 @@ function Form() {
                 <div className="text-left mr-2 flex flex-wrap justify-content-center ">
                   <input
                     type="datetime-local"
-                    defaultValue="2021-03-13T18:00"
-                    style={{ border: "3px solid black", borderRadius: "20px" }}
+                    defaultValue={now.toISOString().slice(0,16)}
+                    required
+                    style={{ border: "3px solid black", borderRadius: "20px", padding: '3px 6px 3px 6px' }}
                     onChange={(e) => setTime(e.target.value)}
                   />
                   {/* <button className={`${time=='19:30'?'border border-gold  bg-gold text-white':''} text-gray-500 font-weight-light text-xs mr-1  py-1 w-1/6  border border-gray-500 rounded-pill `} onClick={(e)=>{
