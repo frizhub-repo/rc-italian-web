@@ -5,7 +5,7 @@ import axiosIntance from "../../utils/axios-configured";
 import { removeOrderItems, removeItem } from "../actions";
 import { useHistory } from "react-router";
 
-function Control() {
+function Control({ setItem }) {
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
@@ -56,7 +56,10 @@ function Control() {
           <div className=" w-full p-2 mt-2 border border-gray-300">
             {items.map((item, index) => {
               return (
-                <div className="flex justify-content-between w-full" key={index}>
+                <div
+                  className="flex justify-content-between w-full"
+                  key={index}
+                >
                   <div className="w-1/6 px-1">
                     <p className="text-xs text-left ">x{item.quantity}</p>
                   </div>
@@ -66,7 +69,10 @@ function Control() {
                         {item.name}
                       </p>
                       <div className="flex justify-content-start ">
-                        <button className="text-xs text-left border-0 bg-white text-black mr-1 w-8">
+                        <button
+                          className="text-xs text-left border-0 bg-white text-black mr-1 w-8"
+                          onClick={() => setItem(item)}
+                        >
                           Edit
                         </button>
                         <button

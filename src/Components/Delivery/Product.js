@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addItem, setTotal } from "../actions";
 
-function Product({ product }) {
+function Product({ product, item, setItem }) {
   const [count, setCount] = useState(0);
   const disp = useDispatch();
 
@@ -22,9 +22,19 @@ function Product({ product }) {
       setCount(0);
     }
   };
+
+  useEffect(() => {
+    if (item) {
+      document.getElementById(product._id).scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        setItem({});
+      }, 2000);
+    }
+  }, [item]);
+
   return (
-    <section className="text-gray-700 body-font mt-0  h-28 w-full mb-8">
-      <div className="px-2 py-4">
+    <section className="text-gray-700 body-font mt-0  h-28 w-full mb-8" id={product._id}>
+      <div className="px-2 py-4" style={{ backgroundColor: item ? 'lightcyan' : null }} >
         <div className="  flex  align-content-center m-2">
           <img
             alt="ecommerce"

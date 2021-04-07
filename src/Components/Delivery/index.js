@@ -14,6 +14,7 @@ import { Skeleton } from "@material-ui/lab";
 
 function Delivery() {
   const [products, setProducts] = useState([]);
+  const [item, setItem] = useState({});
   const { loading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
     axiosIntance
@@ -103,11 +104,17 @@ function Delivery() {
                   />
                 ))}
               {products.length > 0 &&
-                products.map((product) => <Product product={product} />)}
+                products.map((product) => {
+                  if(product?.title === item?.name) {
+                    return <Product product={product} item={item} setItem={setItem}/>
+                  } else{
+                    return <Product product={product} />
+                  }
+                })}
             </div>
           </div>
           <div className=" w-1/3 mt-3   max-h-80 ">
-            <Control />
+            <Control setItem={setItem} />
           </div>
         </div>
       </div>
