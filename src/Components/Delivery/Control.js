@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
-import { removeOrderItems } from "../actions";
+import { removeOrderItems, removeItem } from "../actions";
 import { useHistory } from "react-router";
 
 function Control() {
@@ -54,9 +54,9 @@ function Control() {
 
         {items.length > 0 && (
           <div className=" w-full p-2 mt-2 border border-gray-300">
-            {items.map((item) => {
+            {items.map((item, index) => {
               return (
-                <div className="flex justify-content-between w-full">
+                <div className="flex justify-content-between w-full" key={index}>
                   <div className="w-1/6 px-1">
                     <p className="text-xs text-left ">x{item.quantity}</p>
                   </div>
@@ -69,7 +69,10 @@ function Control() {
                         <button className="text-xs text-left border-0 bg-white text-black mr-1 w-8">
                           Edit
                         </button>
-                        <button className="text-xs text-left border-0 bg-white text-black mr-1 w-12">
+                        <button
+                          className="text-xs text-left border-0 bg-white text-black mr-1 w-12"
+                          onClick={() => disp(removeItem(item))}
+                        >
                           Remove
                         </button>
                       </div>
