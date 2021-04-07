@@ -31,6 +31,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         items: state.items.filter((itm)=> itm.name != action.payload.name),
+        total: state.total - (action.payload.price * action.payload.quantity)
       };
     case "REMOVE_ORDER_ITEMS":
       return {
