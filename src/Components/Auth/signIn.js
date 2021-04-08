@@ -90,6 +90,12 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     marginTop: "0px",
   },
+  facebookSpacing: {
+    marginRight: "6px"
+  },
+  googleSpacing: {
+    marginLeft: "6px"
+  },
 }));
 
 export default function SignIn({ handleClose, check2 }) {
@@ -118,7 +124,7 @@ export default function SignIn({ handleClose, check2 }) {
           height: "40px",
         }}
       >
-        <Box className={classes.socialIcon} style={{ marginRight: "6px" }}>
+        <Box className={`${classes.socialIcon} ${classes.facebookSpacing}`} >
           <img
             src={Facebook}
             width="28px"
@@ -128,7 +134,7 @@ export default function SignIn({ handleClose, check2 }) {
           />{" "}
           Facebook
         </Box>
-        <Box className={classes.socialIcon} style={{ marginLeft: "6px" }}>
+        <Box className={`${classes.socialIcon} ${classes.googleSpacing}`} >
           <img
             src={Google}
             width="23px"
