@@ -5,9 +5,12 @@ import { Link, useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 
 function Navbar() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const history = useHistory();
   let { token, setToken } = useUserContext();
+  
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -45,12 +48,12 @@ function Navbar() {
           ) : (
             <button
               className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
-              onClick={() => setModalShow(true)}
+              onClick={handleClickOpen}
             >
               LOGIN/SIGNUP
             </button>
           )}
-          <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
+          <AuthModal open={open} handleClose={handleClose} />
         </div>
       </div>
     </header>
