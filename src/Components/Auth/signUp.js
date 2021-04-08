@@ -74,14 +74,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "0px",
   },
   facebookSpacing: {
-    marginRight: "6px"
+    marginRight: "6px",
   },
   googleSpacing: {
-    marginLeft: "6px"
+    marginLeft: "6px",
   },
 }));
 
-export default function SignUp({ check1, handleClose }) {
+export default function SignUp({ check1, handleClose, setOpenDelivery }) {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
 
@@ -92,6 +92,7 @@ export default function SignUp({ check1, handleClose }) {
       handleClose();
       toast.success("Registeration Successfull!");
       console.log({ data });
+      setOpenDelivery(true);
     } catch (error) {
       console.log({ errors });
       console.log(error);
