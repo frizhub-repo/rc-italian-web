@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { withStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogContent from '@material-ui/core/DialogContent';
+import { withStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogContent from "@material-ui/core/DialogContent";
 import SignIn from "./signIn";
 import SignUp from "./signUp";
+import DeliveryAddressDialog from "../Common/DeliveryAddress";
 
 const DialogContent = withStyles((theme) => ({
   root: {
-    padding: "40px !important"
-  },  
+    padding: "40px !important",
+  },
 }))(MuiDialogContent);
 
 export default function AuthModal({ open, handleClose }) {
   const [activeTab1, setActivetab1] = useState(true);
   const [activeTab2, setActivetab2] = useState(false);
+  const [openDelivery, setOpenDelivery] = React.useState(false);
 
   const check1 = () => {
     setActivetab2(false);
@@ -26,17 +28,31 @@ export default function AuthModal({ open, handleClose }) {
   };
 
   return (
-    <Dialog
-      maxWidth="xs"
-      scroll="body"
-      onClose={handleClose}
-      aria-labelledby="customized-dialog-title"
-      open={open}
-    >
-      <DialogContent style={{ borderTop: "9px solid #C8A97E" }}>
-        {activeTab1 && <SignIn check2={check2} handleClose={handleClose} />}
-        {activeTab2 && <SignUp check1={check1} handleClose={handleClose} />}
-      </DialogContent>
-    </Dialog>
+    <div>
+      <Dialog
+        maxWidth="xs"
+        scroll="body"
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogContent style={{ borderTop: "9px solid #C8A97E" }}>
+          {activeTab1 && <SignIn check2={check2} handleClose={handleClose} />}
+          {activeTab2 && (
+            <SignUp
+              check1={check1}
+              handleClose={handleClose}
+              setOpenDelivery={setOpenDelivery}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+      {openDelivery && (
+        <DeliveryAddressDialog
+          openDelivery={openDelivery}
+          setOpenDelivery={setOpenDelivery}
+        />
+      )}
+    </div>
   );
 }
