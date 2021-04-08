@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import { useForm } from "react-hook-form";
 import { Box, TextField, Button, FormHelperText } from "@material-ui/core";
+import { addDeliveryAddress } from "../../api/DeliveryAddress";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,10 +119,15 @@ export default function DeliveryAddressDialog({
   setOpenDelivery,
 }) {
   const classes = useStyles();
+  const [services, setService] = useState("home");
   const { register, handleSubmit, errors } = useForm();
 
-  const deliveryAddressPayload = (data) => {
+  const deliveryAddressPayload = async (data) => {
+    data = { ...data, addressKey: services };
+    const res = await addDeliveryAddress(data);
+    console.log({ res })
     setOpenDelivery(false);
+    toast.success(res?.data?.message)
   };
 
   return (
@@ -139,17 +146,17 @@ export default function DeliveryAddressDialog({
           <TextField
             className={classes.txtFieldSpacing}
             fullWidth
-            placeholder="Delivery Time"
+            placeholder="Name"
             variant="outlined"
             size="small"
-            name="deliveryTime"
+            name="name"
             inputRef={register({
-              required: "Delivery Time required",
+              required: "Name required",
             })}
-            error={errors?.deliveryTime ? true : false}
+            error={errors?.name ? true : false}
           />
           <FormHelperText className={classes.helperText}>
-            {errors?.deliveryTime?.message}
+            {errors?.name?.message}
           </FormHelperText>
 
           <TextField
@@ -174,14 +181,14 @@ export default function DeliveryAddressDialog({
             placeholder="Address Line 1"
             variant="outlined"
             size="small"
-            name="addressLine"
+            name="addressLine1"
             inputRef={register({
               required: "Address Line 1 required",
             })}
-            error={errors?.addressLine ? true : false}
+            error={errors?.addressLine1 ? true : false}
           />
           <FormHelperText className={classes.helperText}>
-            {errors?.addressLine?.message}
+            {errors?.addressLine1?.message}
           </FormHelperText>
 
           <TextField
@@ -190,8 +197,15 @@ export default function DeliveryAddressDialog({
             placeholder="Address Line 2"
             variant="outlined"
             size="small"
-            name="addressLines"
+            name="addressLine2"
+            inputRef={register({
+              required: "Address Line 2 required",
+            })}
+            error={errors?.addressLine2 ? true : false}
           />
+          <FormHelperText className={classes.helperText}>
+            {errors?.addressLine2?.message}
+          </FormHelperText>
 
           <Box className={classes.citySpacing}>
             <Box>
@@ -219,16 +233,16 @@ export default function DeliveryAddressDialog({
                 placeholder="State/ province"
                 variant="outlined"
                 size="small"
-                name="state"
+                name="stateOrProvince"
                 inputRef={register({
-                  required: "State required",
+                  required: "State/ province required",
                 })}
-                error={errors?.state ? true : false}
+                error={errors?.stateOrProvince ? true : false}
               />
               <FormHelperText
                 className={`${classes.helperText} ${classes.helperTextMargin}`}
               >
-                {errors?.state?.message}
+                {errors?.stateOrProvince?.message}
               </FormHelperText>
             </Box>
           </Box>
@@ -241,14 +255,14 @@ export default function DeliveryAddressDialog({
                 placeholder="Zip/ postal code"
                 variant="outlined"
                 size="small"
-                name="postalcode"
+                name="zipOrPostalCode"
                 inputRef={register({
                   required: "Zip/ postal code required",
                 })}
-                error={errors?.postalcode ? true : false}
+                error={errors?.zipOrPostalCode ? true : false}
               />
               <FormHelperText className={classes.helperText}>
-                {errors?.postalcode?.message}
+                {errors?.zipOrPostalCode?.message}
               </FormHelperText>
             </Box>
 
@@ -272,6 +286,66 @@ export default function DeliveryAddressDialog({
               </FormHelperText>
             </Box>
           </Box>
+
+          <TextField
+            className={classes.txtFieldSpacing}
+            multiline
+            rows={4}
+            placeholder="Message"
+            variant="outlined"
+            fullWidth
+            size="small"
+            name="message"
+            inputRef={register({
+              required: "Message required",
+            })}
+            error={errors?.message ? true : false}
+          />
+          <FormHelperText className={classes.helperText}>
+            {errors?.message?.message}
+          </FormHelperText>
+
+          <div className="flex flex-wrap justify-content-between mt-2">
+            <button
+              className={`${
+                services === "home"
+                  ? "border border-gold  bg-gold text-white"
+                  : ""
+              }  text-gray-500 font-weight-light text-xs px-6 w-1/4  py-1 border border-gray-500 rounded-pill `}
+              onClick={(e) => {
+                e.preventDefault();
+                setService("home");
+              }}
+            >
+              Home
+            </button>
+            <button
+              className={`${
+                services === "work"
+                  ? "border border-gold  bg-gold text-white"
+                  : ""
+              }  text-gray-500 font-weight-light text-xs px-6  w-1/4  py-1 border border-gray-500 rounded-pill `}
+              onClick={(e) => {
+                e.preventDefault();
+                setService("work");
+              }}
+            >
+              Work
+            </button>
+            <button
+              className={`${
+                services === "other"
+                  ? "border border-gold  bg-gold text-white"
+                  : ""
+              } text-gray-500 font-weight-light text-xs px-6 w-1/4  py-1 border border-gray-500 rounded-pill `}
+              onClick={(e) => {
+                e.preventDefault();
+                setService("other");
+              }}
+            >
+              Other
+            </button>
+          </div>
 
           <Box>
             <Button
