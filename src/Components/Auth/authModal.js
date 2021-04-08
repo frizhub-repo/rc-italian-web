@@ -4,7 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import SignIn from "./signIn";
 import SignUp from "./signUp";
-import DeliveryAddressDialog from "../Common/DeliveryAddress";
+import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
 
 const DialogContent = withStyles((theme) => ({
   root: {
