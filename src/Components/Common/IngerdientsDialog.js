@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
-import {
-  Box,
-  Divider,
-  Typography,
-} from "@material-ui/core";
+import { Box, Divider, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   dialogTopBorder: {
@@ -27,21 +23,21 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "35px",
   },
   categoriesWrapper: {
-    position: 'relative',
-    width: '100px',
-    height: '100px',
-},
-img: {
-  width: "100%",
-  height: "100%",
-},
-categoryInput: {
+    position: "relative",
+    width: "100px",
+    height: "100px",
+  },
+  img: {
+    width: "100%",
+    height: "100%",
+  },
+  categoryInput: {
     position: "absolute",
     top: 0,
     left: 0,
     zIndex: 55,
-    opacity: 1
-}
+    opacity: 1,
+  },
 }));
 
 const DialogContent = withStyles((theme) => ({
@@ -82,10 +78,11 @@ export default function IngredientsDialog({ open, setOpen }) {
           </Typography>
         </Box>
         <Divider />
-        <Box>
+        <Box style={{ display: "flex" }}>
           <div className={classes.categoriesWrapper}>
             <img
-            className={classes.img}          
+              className={classes.img}
+              alt="coke"
               src="https://66.media.tumblr.com/4f3cbb1b66a76a19a9794a162373abc5/tumblr_inline_n258pbAEBc1qhwjx8.png"
             />
 
@@ -98,7 +95,8 @@ export default function IngredientsDialog({ open, setOpen }) {
           </div>
           <div className={classes.categoriesWrapper}>
             <img
-            className={classes.img}          
+              className={classes.img}
+              alt="Pepsi"
               src="https://66.media.tumblr.com/4f3cbb1b66a76a19a9794a162373abc5/tumblr_inline_n258pbAEBc1qhwjx8.png"
             />
 
@@ -111,7 +109,8 @@ export default function IngredientsDialog({ open, setOpen }) {
           </div>
           <div className={classes.categoriesWrapper}>
             <img
-            className={classes.img}          
+              className={classes.img}
+              alt="Sprite"
               src="https://66.media.tumblr.com/4f3cbb1b66a76a19a9794a162373abc5/tumblr_inline_n258pbAEBc1qhwjx8.png"
             />
 
