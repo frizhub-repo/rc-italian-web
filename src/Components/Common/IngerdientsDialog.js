@@ -96,6 +96,32 @@ export default function IngredientsDialog({ open, setOpen }) {
               id="checkID"
             />
           </div>
+          <div className={classes.categoriesWrapper}>
+            <img
+            className={classes.img}          
+              src="https://66.media.tumblr.com/4f3cbb1b66a76a19a9794a162373abc5/tumblr_inline_n258pbAEBc1qhwjx8.png"
+            />
+
+            <input
+              className={classes.categoryInput}
+              type="checkbox"
+              checked
+              id="checkID"
+            />
+          </div>
+          <div className={classes.categoriesWrapper}>
+            <img
+            className={classes.img}          
+              src="https://66.media.tumblr.com/4f3cbb1b66a76a19a9794a162373abc5/tumblr_inline_n258pbAEBc1qhwjx8.png"
+            />
+
+            <input
+              className={classes.categoryInput}
+              type="checkbox"
+              checked
+              id="checkID"
+            />
+          </div>
         </Box>
       </DialogContent>
     </Dialog>
