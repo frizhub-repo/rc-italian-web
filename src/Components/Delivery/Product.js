@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addItem, setTotal } from "../actions";
+import menu from '../../images/menu.jpg'
 
 function Product({ product, item, setItem }) {
   const [count, setCount] = useState(0);
@@ -42,7 +43,7 @@ function Product({ product, item, setItem }) {
             src={
               product.images.length > 0
                 ? process.env.REACT_APP_API_BASE_URL + "/" + product.images[0]
-                : "https://www.deputy.com/uploads/2018/10/The-Most-Popular-Menu-Items-That-You-should-Consider-Adding-to-Your-Restaurant_Content-image3-min-1024x569.png"
+                : menu
             }
           />
           <div className="lg:w-1/2 w-full px-3   flex-grow-1">
