@@ -13,6 +13,8 @@ import axiosIntance from "../../utils/axios-configured";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import { addItem, setTotal } from "../actions";
 import { useHistory } from "react-router";
+import menu from '../../images/menu.jpg'
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -129,7 +131,7 @@ export default function Order() {
                       <img
                         className={classes.img}
                         alt="complex"
-                        src="https://www.deputy.com/uploads/2018/10/The-Most-Popular-Menu-Items-That-You-should-Consider-Adding-to-Your-Restaurant_Content-image3-min-1024x569.png"
+                        src={menu}
                       />
                     </div>
                   </Grid>
