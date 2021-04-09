@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import { removeOrderItems, removeItem } from "../actions";
 import { useHistory } from "react-router";
+import IngredientsDialog from "../Common/IngerdientsDialog";
 
 function Control({ setItem }) {
+  const [open, setOpen] = useState(false);
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
@@ -87,7 +89,10 @@ function Control({ setItem }) {
                       <p className="text-black mb-0  text-xs text-right">
                         €{item.price}
                       </p>
-                      <p className="text-gold text-xs text-right">
+                      <p
+                        className="text-gold text-xs text-right"
+                        onClick={() => setOpen(true)}
+                      >
                         Ingredients
                       </p>
                     </div>
@@ -117,6 +122,7 @@ function Control({ setItem }) {
       >
         ORDER NOW
       </button>
+      <IngredientsDialog open={open} setOpen={setOpen} />
     </section>
   );
 }
