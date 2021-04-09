@@ -11,6 +11,8 @@ import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Create";
 import { useUserContext } from "../../Context/userContext";
 import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
+import { editDeleteDeliveryAddress } from "../../api/DeliveryAddress";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,6 +76,14 @@ export default function DeliveryAddress() {
   const { customer } = useUserContext();
   const [openDelivery, setOpenDelivery] = useState(false);
 
+  const deleteAddress = async (id) => {
+    const obj = { isDeleted: true };
+    const res = await editDeleteDeliveryAddress(id, obj);
+    if(res?.status === 200) {
+      toast.success("Address deleted successfully")
+    }
+  }
+
   return (
     <Grid>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -91,6 +101,7 @@ export default function DeliveryAddress() {
       <Grid container direction="row" spacing={2} className={classes.containr}>
         {customer &&
           customer?.addresses?.map((address, index) => (
+            address?.isDeleted === false ? (
             <Grid item className={classes.root} key={index}>
               <Paper className={classes.paper}>
                 <div className={classes.main}>
@@ -131,12 +142,15 @@ export default function DeliveryAddress() {
                     </div>
                     <div className={classes.action}>
                       <EditIcon className={classes.editIcon} />
-                      <DeleteIcon className={classes.deleteIcon} />
+                      <DeleteIcon className={classes.deleteIcon} onClick={() => deleteAddress(address?._id)} />
                     </div>
                   </div>
                 </div>
               </Paper>
             </Grid>
+            ) : (
+              null
+            )
           ))}
       </Grid>
       <DeliveryAddressDialog
