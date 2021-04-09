@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     // maxWidth: 500,
   },
+  root: {
+    width: "100%",
+    padding: "6px",
+  },
   image: {
     width: 200,
     height: 112,
@@ -28,27 +32,40 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     maxWidth: "100%",
     maxHeight: "100%",
+    width: "100%",
+    height: "100%",
+  },
+  gridSpacing: {
+    marginTop: "10px",
   },
   accepted: {
     border: "1px solid #4caf50",
-    borderRadius: '20px',
+    borderRadius: "20px",
     padding: "2px 10px",
-    color: '#4caf50',
-    textTransform: 'capitalize'
+    color: "#4caf50",
+    textTransform: "capitalize",
   },
   pending: {
     border: "1px solid #ff9800",
-    borderRadius: '20px',
+    borderRadius: "20px",
     padding: "2px 10px",
-    color: '#f57c00',
-    textTransform: 'capitalize'
+    color: "#f57c00",
+    textTransform: "capitalize",
   },
   rejected: {
     border: "1px solid red",
-    borderRadius: '20px',
+    borderRadius: "20px",
     padding: "2px 10px",
-    color: 'red',
-    textTransform: 'capitalize'
+    color: "red",
+    textTransform: "capitalize",
+  },
+  reOrderStatusGrid: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  reOrderButton: {
+    backgroundColor: "#E2E2E2",
   },
 }));
 export default function Order() {
@@ -56,20 +73,25 @@ export default function Order() {
   const { loading } = useSelector((state) => state.loadingReducer);
   const [orders, setOrders] = useState([]);
   const disp = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   const reOrder = (order) => {
-    let products = []
+    let products = [];
     let total = 0;
     order?.map((prod) => {
-      let obj = { product: prod.product._id, price: prod.product.price, quantity: prod.quantity, name: prod.product.title }
+      let obj = {
+        product: prod.product._id,
+        price: prod.product.price,
+        quantity: prod.quantity,
+        name: prod.product.title,
+      };
       products.push(obj);
       total += prod.quantity * prod.product.price;
-    })
+    });
     disp(addItem(products));
     disp(setTotal(total));
-    history.push("/complete/purchase")
-  }
+    history.push("/complete/purchase");
+  };
 
   useEffect(() => {
     axiosIntance
@@ -82,19 +104,24 @@ export default function Order() {
     <Grid>
       <h4>Orders</h4>
       <Divider />
-      <Grid container direction="row" spacing={2} style={{ marginTop: "10px" }}>
+      <Grid
+        container
+        direction="row"
+        spacing={2}
+        className={classes.gridSpacing}
+      >
         {loading &&
           [1, 2, 3, 4].map((item) => (
             <Skeleton
               variant="rect"
               width={700}
               height={140}
-              style={{ marginTop: "10px" }}
+              className={classes.gridSpacing}
             />
           ))}
         {orders.length > 0 &&
           orders.map((order, index) => (
-            <Grid item style={{ width: "100%" }} key={index}>
+            <Grid item className={classes.root} key={index}>
               <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                   <Grid item>
@@ -133,16 +160,10 @@ export default function Order() {
                       </Typography>
                     </Grid>
                     <Grid item container>
-                    <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          width: '100%'
-                        }}
-                      >
+                      <div className={classes.reOrderStatusGrid}>
                         <Button
                           size="small"
-                          style={{ backgroundColor: "#E2E2E2" }}
+                          className={classes.reOrderButton}
                           onClick={() => reOrder(order?.products)}
                         >
                           Reorder
