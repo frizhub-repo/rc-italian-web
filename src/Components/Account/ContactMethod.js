@@ -1,13 +1,36 @@
 import {
+  Button,
   Divider,
   FormControlLabel,
   Grid,
+  makeStyles,
   Radio,
   RadioGroup,
   Typography,
 } from "@material-ui/core";
 import React from "react";
+
+const useStyle = makeStyles((theme) => ({
+  root: {
+    marginTop: "10px",
+  },
+  heading: {
+    fontSize: "20px",
+  },
+  signInButton: {
+    borderRadius: "30px",
+    padding: "12px 20px",
+    backgroundColor: "black",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "black",
+      color: "white",
+    },
+  },
+}));
+
 export default function ContactMethod() {
+  const classes = useStyle();
   const [value, setValue] = React.useState("email");
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -17,16 +40,11 @@ export default function ContactMethod() {
     <Grid>
       <h4>Contact Method</h4>
       <Divider />
-      <Grid
-        container
-        direction="column"
-        spacing={2}
-        style={{ marginTop: "10px" }}
-      >
+      <Grid container direction="column" spacing={2} className={classes.root}>
         <Grid item>
           <Typography
             variant="subtitle1"
-            style={{ fontSize: "20px" }}
+            className={classes.heading}
             gutterBottom
           >
             I would like to receive updates via
@@ -48,6 +66,15 @@ export default function ContactMethod() {
               label="Email (Order Detail are send by email)"
             />
           </RadioGroup>
+        </Grid>
+        <Grid item>
+          <Button
+            disableElevation
+            className={classes.signInButton}
+            type="submit"
+          >
+            Save changes
+          </Button>
         </Grid>
       </Grid>
     </Grid>
