@@ -5,6 +5,10 @@ export const setTotal = (price) => {
   };
 };
 
+export const getAllOrder = (orders) => {
+  return { type: "GET_ALL_ORDER", payload: orders };
+};
+
 export const addItem = (item) => {
   return { type: "ADD_ITEM", payload: item };
 };

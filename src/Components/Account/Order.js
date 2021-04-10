@@ -11,9 +11,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axiosIntance from "../../utils/axios-configured";
 import DateRangeIcon from "@material-ui/icons/DateRange";
-import { addItem, setTotal } from "../actions";
+import { addItem, getAllOrder, setTotal } from "../actions";
 import { useHistory } from "react-router";
-import menu from '../../images/menu.jpg'
+import menu from "../../images/menu.jpg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Order() {
   const classes = useStyles();
   const { loading } = useSelector((state) => state.loadingReducer);
-  const [orders, setOrders] = useState([]);
+  const { orders } = useSelector((state) => state.orders);
   const disp = useDispatch();
   const history = useHistory();
 
@@ -98,7 +98,9 @@ export default function Order() {
   useEffect(() => {
     axiosIntance
       .get("/api/v1/orders/customers")
-      .then((res) => setOrders(res?.data?.data))
+      .then((res) => {
+        disp(getAllOrder(res?.data?.data));
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -128,11 +130,7 @@ export default function Order() {
                 <Grid container spacing={2}>
                   <Grid item>
                     <div className={classes.image}>
-                      <img
-                        className={classes.img}
-                        alt="complex"
-                        src={menu}
-                      />
+                      <img className={classes.img} alt="complex" src={menu} />
                     </div>
                   </Grid>
                   <Grid item xs={12} sm container>
