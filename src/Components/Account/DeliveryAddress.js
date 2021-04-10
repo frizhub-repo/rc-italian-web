@@ -13,7 +13,8 @@ import { useUserContext } from "../../Context/userContext";
 import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
 import { editDeleteDeliveryAddress } from "../../api/DeliveryAddress";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { DELETE_DELIVERY_ADDRESS } from "../../utils/types";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   addressKey: {
     fontSize: "15px",
-    textTransform: 'capitalize'
+    textTransform: "capitalize",
   },
   addAddressButton: {
     borderRadius: "30px",
@@ -74,17 +75,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DeliveryAddress() {
   const classes = useStyles();
+  const disp = useDispatch();
   const { customer } = useUserContext();
-  const { deliveryAddress } = useSelector(state => state.deliveryAddressReducer);
+  const { deliveryAddress } = useSelector(
+    (state) => state.deliveryAddressReducer
+  );
   const [openDelivery, setOpenDelivery] = useState(false);
 
   const deleteAddress = async (id) => {
     const obj = { isDeleted: true };
     const res = await editDeleteDeliveryAddress(id, obj);
-    if(res?.status === 200) {
-      toast.success("Address deleted successfully")
+    if (res?.status === 200) {
+      disp({ type: DELETE_DELIVERY_ADDRESS, payload: id });
+      toast.success("Address deleted successfully");
     }
-  }
+  };
 
   return (
     <Grid>
@@ -94,7 +99,9 @@ export default function DeliveryAddress() {
           disableElevation
           className={classes.addAddressButton}
           type="submit"
-          onClick={() => {setOpenDelivery(true)}}
+          onClick={() => {
+            setOpenDelivery(true);
+          }}
         >
           Add New Address
         </Button>
@@ -102,58 +109,59 @@ export default function DeliveryAddress() {
       <Divider />
       <Grid container direction="row" spacing={2} className={classes.containr}>
         {deliveryAddress &&
-          deliveryAddress.map((address, index) => (
+          deliveryAddress.map((address, index) =>
             address?.isDeleted === false ? (
-            <Grid item className={classes.root} key={index}>
-              <Paper className={classes.paper}>
-                <div className={classes.main}>
-                  <div className={classes.addressCard}>
-                    <div>
-                      <Typography variant="h6">
-                        {address?.name}{" "}
-                        <span className={classes.addressKey}>
-                          ({address?.addressKey})
-                        </span>
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        gutterBottom
-                        className={classes.text}
-                      >
-                        <b>Address Line 1: </b>
-                        {address?.addressLine1} {address?.city},{" "}
-                        {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
-                        {address?.country}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        gutterBottom
-                        className={classes.text}
-                      >
-                        <b>Address Line 2: </b>
-                        {address?.addressLine2} {address?.city},{" "}
-                        {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
-                        {address?.country}
-                      </Typography>
-                      <Typography variant="body2" className={classes.phone}>
-                        <b>Phone:</b> {address?.phoneNumber}
-                      </Typography>
-                      <Typography variant="body2">
-                        <b>Email:</b> {customer?.email}
-                      </Typography>
-                    </div>
-                    <div className={classes.action}>
-                      <EditIcon className={classes.editIcon} />
-                      <DeleteIcon className={classes.deleteIcon} onClick={() => deleteAddress(address?._id)} />
+              <Grid item className={classes.root} key={index}>
+                <Paper className={classes.paper}>
+                  <div className={classes.main}>
+                    <div className={classes.addressCard}>
+                      <div>
+                        <Typography variant="h6">
+                          {address?.name}{" "}
+                          <span className={classes.addressKey}>
+                            ({address?.addressKey})
+                          </span>
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          gutterBottom
+                          className={classes.text}
+                        >
+                          <b>Address Line 1: </b>
+                          {address?.addressLine1} {address?.city},{" "}
+                          {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
+                          {address?.country}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          gutterBottom
+                          className={classes.text}
+                        >
+                          <b>Address Line 2: </b>
+                          {address?.addressLine2} {address?.city},{" "}
+                          {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
+                          {address?.country}
+                        </Typography>
+                        <Typography variant="body2" className={classes.phone}>
+                          <b>Phone:</b> {address?.phoneNumber}
+                        </Typography>
+                        <Typography variant="body2">
+                          <b>Email:</b> {customer?.email}
+                        </Typography>
+                      </div>
+                      <div className={classes.action}>
+                        <EditIcon className={classes.editIcon} />
+                        <DeleteIcon
+                          className={classes.deleteIcon}
+                          onClick={() => deleteAddress(address?._id)}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Paper>
-            </Grid>
-            ) : (
-              null
-            )
-          ))}
+                </Paper>
+              </Grid>
+            ) : null
+          )}
       </Grid>
       <DeliveryAddressDialog
         openDelivery={openDelivery}
