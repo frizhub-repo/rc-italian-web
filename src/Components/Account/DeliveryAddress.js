@@ -13,6 +13,7 @@ import { useUserContext } from "../../Context/userContext";
 import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
 import { editDeleteDeliveryAddress } from "../../api/DeliveryAddress";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DeliveryAddress() {
   const classes = useStyles();
   const { customer } = useUserContext();
+  const { deliveryAddress } = useSelector(state => state.deliveryAddressReducer);
   const [openDelivery, setOpenDelivery] = useState(false);
 
   const deleteAddress = async (id) => {
@@ -99,8 +101,8 @@ export default function DeliveryAddress() {
       </div>
       <Divider />
       <Grid container direction="row" spacing={2} className={classes.containr}>
-        {customer &&
-          customer?.addresses?.map((address, index) => (
+        {deliveryAddress &&
+          deliveryAddress.map((address, index) => (
             address?.isDeleted === false ? (
             <Grid item className={classes.root} key={index}>
               <Paper className={classes.paper}>
