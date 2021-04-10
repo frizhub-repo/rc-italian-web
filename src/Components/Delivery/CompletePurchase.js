@@ -21,7 +21,6 @@ export default function CompletePurchase() {
   const handleShow = () => setShow(true);
 
   const createOrder = () => {
-    handleShow();
     if (status === "ERROR") {
       toast.error("Payment cancel for some reason. Please provide payment");
     } else if (status === "COMPLETED") {
