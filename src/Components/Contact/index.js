@@ -1,16 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { customerContactUs } from "../../api/ContactUs";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 
 function Contact() {
   const { register, handleSubmit, errors, reset } = useForm();
+  const { loading } = useSelector((state) => state.loadingReducer);
 
   const contactUs = async (data) => {
-    const res = await customerContactUs(data);
-    reset();
+    try {
+      const res = await customerContactUs(data);
+      reset();
+      toast.success("Your query has been submitted successfully!");
+    } catch (error) {
+      console.log({ error });
+    }
   };
+
   return (
     <div>
       <Navbar
@@ -167,6 +176,7 @@ function Contact() {
               <button
                 type="submit"
                 className="  text-white bg-black rounded-pill border-0 py-2 px-6 focus:outline-none w-1/3  rounded text-lg"
+                disabled={loading}
               >
                 Submit
               </button>
