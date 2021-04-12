@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { reserveTable } from "../../actions/reserveTableActions";
 import { Spinner } from "react-bootstrap";
+import SuccessModal from "../Common/SuccessDialog";
 
 function Form() {
   const [name, setName] = useState("");
@@ -13,11 +14,17 @@ function Form() {
   const [services, setService] = useState("lunch");
   const [res, setRes] = useState("Tomorrow");
   const [time, setTime] = useState("2021-03-12T18:00");
+  const [show, setShow] = useState(false);
   const { handleSubmit } = useForm();
   const dispatch = useDispatch();
   const { reserveTableData } = useSelector((state) => state.reservationReducer);
   const { loading } = useSelector((state) => state.loadingReducer);
   let { token } = useUserContext();
+  let now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const tableReserve = () => {
     dispatch(
@@ -27,6 +34,7 @@ function Form() {
         services: services,
       })
     );
+    handleShow();
   };
   return (
     <section className="text-gray-700 body-font overflow-hidden ">
@@ -250,8 +258,9 @@ function Form() {
                 <div className="text-left mr-2 flex flex-wrap justify-content-center ">
                   <input
                     type="datetime-local"
-                    defaultValue="2021-03-13T18:00"
-                    style={{ border: "3px solid black", borderRadius: "20px" }}
+                    defaultValue={now.toISOString().slice(0,16)}
+                    required
+                    style={{ border: "3px solid black", borderRadius: "20px", padding: '3px 6px 3px 6px' }}
                     onChange={(e) => setTime(e.target.value)}
                   />
                   {/* <button className={`${time=='19:30'?'border border-gold  bg-gold text-white':''} text-gray-500 font-weight-light text-xs mr-1  py-1 w-1/6  border border-gray-500 rounded-pill `} onClick={(e)=>{
@@ -298,6 +307,12 @@ function Form() {
           </div>
         </div>
       </div>
+      <SuccessModal
+        show={show}
+        handleClose={handleClose}
+        text={"Reservation created successfully"}
+        title={"Reservation"}
+      />
     </section>
   );
 }

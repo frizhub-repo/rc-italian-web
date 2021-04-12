@@ -6,16 +6,22 @@ import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
 import Header from "../Account/Header";
 import { removeOrderItems } from "../actions";
+import SuccessModal from "../Common/SuccessDialog";
 
 export default function CompletePurchase() {
   const paypal = useRef();
   const disp = useDispatch();
   const history = useHistory();
   const [status, setStatus] = useState(null);
+  const [show, setShow] = useState(false);
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const createOrder = () => {
+    handleShow();
     if (status === "ERROR") {
       toast.error("Payment cancel for some reason. Please provide payment");
     } else if (status === "COMPLETED") {
@@ -30,7 +36,7 @@ export default function CompletePurchase() {
         })
         .catch((err) => console.log(err));
     } else {
-      toast.error("Payment not added. Please provide payment");
+      toast.error("Payment not Added. Please Provide Payment");
     }
   };
 
@@ -82,7 +88,7 @@ export default function CompletePurchase() {
         },
         onCancel: (data) => {
           setStatus("ERROR");
-          toast.error("Payment cancel by user");
+          toast.error("Payment Cancel by User");
           console.log({ data });
         },
       });
@@ -117,7 +123,7 @@ export default function CompletePurchase() {
             How do you want to pay?
           </Typography>
         </Grid>
-        <Grid item justify="flex-end">
+        <Grid item justify="flex-end" style={{ margin: '10px 0px 10px 0px' }}>
           Total amount: ${total}
         </Grid>
         <Grid item>
@@ -129,8 +135,8 @@ export default function CompletePurchase() {
               borderRadius: "15px",
               backgroundColor: "black",
               color: "white",
-              marginTop: "10px",
-              padding: "4px 6px 4px 6px",
+              marginTop: "20px",
+              padding: "4px 15px",
             }}
             onClick={createOrder}
           >
@@ -138,6 +144,12 @@ export default function CompletePurchase() {
           </Button>
         </Grid>
       </Grid>
+      <SuccessModal
+        show={show}
+        handleClose={handleClose}
+        text={"Order created successfully"}
+        title={"Order"}
+      />
     </div>
   );
 }

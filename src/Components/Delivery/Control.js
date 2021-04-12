@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configured";
-import { removeOrderItems } from "../actions";
-import { Spinner } from "react-bootstrap";
+import { removeOrderItems, removeItem } from "../actions";
 import { useHistory } from "react-router";
+import IngredientsDialog from "../Common/IngerdientsDialog";
 
-function Control() {
+function Control({ setItem }) {
+  const [open, setOpen] = useState(false);
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
@@ -55,9 +56,12 @@ function Control() {
 
         {items.length > 0 && (
           <div className=" w-full p-2 mt-2 border border-gray-300">
-            {items.map((item) => {
+            {items.map((item, index) => {
               return (
-                <div className="flex justify-content-between w-full">
+                <div
+                  className="flex justify-content-between w-full"
+                  key={index}
+                >
                   <div className="w-1/6 px-1">
                     <p className="text-xs text-left ">x{item.quantity}</p>
                   </div>
@@ -67,10 +71,16 @@ function Control() {
                         {item.name}
                       </p>
                       <div className="flex justify-content-start ">
-                        <button className="text-xs text-left border-0 bg-white text-black mr-1 w-8">
+                        <button
+                          className="text-xs text-left border-0 bg-white text-black mr-1 w-8"
+                          onClick={() => setItem(item)}
+                        >
                           Edit
                         </button>
-                        <button className="text-xs text-left border-0 bg-white text-black mr-1 w-12">
+                        <button
+                          className="text-xs text-left border-0 bg-white text-black mr-1 w-12"
+                          onClick={() => disp(removeItem(item))}
+                        >
                           Remove
                         </button>
                       </div>
@@ -79,7 +89,10 @@ function Control() {
                       <p className="text-black mb-0  text-xs text-right">
                         €{item.price}
                       </p>
-                      <p className="text-gold text-xs text-right">
+                      <p
+                        className="text-gold text-xs text-right"
+                        onClick={() => setOpen(true)}
+                      >
                         Ingredients
                       </p>
                     </div>
@@ -109,6 +122,7 @@ function Control() {
       >
         ORDER NOW
       </button>
+      <IngredientsDialog open={open} setOpen={setOpen} />
     </section>
   );
 }

@@ -5,22 +5,23 @@ import { Link, useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 
 function Navbar() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const history = useHistory();
   let { token, setToken } = useUserContext();
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    window.location.reload();
-  };
+  
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
   });
+  
   return (
     <header className="text-gray-700 body-font w-full ">
       <div className=" mx-auto flex   justify-content-center w-full">
         <div
           className="md:ml-auto md:mr-auto flex w-full    justify-center"
-          style={{ textShadow: "2px 4px 6px #000132", alignItems: "center" }}
+          style={{  alignItems: "center" }}
         >
           <Link to="/" className="mr-5 text-white text-xs">
             HOME
@@ -34,9 +35,6 @@ function Navbar() {
           <Link to="/tableReservation" className="mr-5 text-white text-xs">
             TABLE RESERVATION
           </Link>
-          <Link to="/customer/reservation" className="text-white text-xs mr-5">
-            MY RESERVATION's
-          </Link>
           <Link to="contact" className="text-white text-xs mr-5">
             CONTACT US
           </Link>
@@ -48,20 +46,14 @@ function Navbar() {
               src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
             />
           ) : (
-            // <button
-            //   onClick={logout}
-            //   className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
-            // >
-            //   LOG OUT
-            // </button>
             <button
               className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
-              onClick={() => setModalShow(true)}
+              onClick={handleClickOpen}
             >
               LOGIN/SIGNUP
             </button>
           )}
-          <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
+          <AuthModal open={open} handleClose={handleClose} />
         </div>
       </div>
     </header>

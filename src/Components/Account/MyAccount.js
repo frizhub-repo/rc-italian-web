@@ -28,7 +28,7 @@ export default function MyAccount() {
       <h4>My Account</h4>
       <Divider />
       <Grid container direction="row" spacing={2} className={classes.root}>
-        <Grid item md={6}>
+        <Grid item md={6} xs={12} sm={6}>
           <TextField
             size="small"
             fullWidth
@@ -38,7 +38,7 @@ export default function MyAccount() {
             variant="outlined"
           />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={6} xs={12} sm={6}>
           <TextField
             size="small"
             fullWidth
@@ -51,7 +51,7 @@ export default function MyAccount() {
       </Grid>
 
       <Grid container direction="row" spacing={2} className={classes.root}>
-        <Grid item md={6}>
+        <Grid item md={6} xs={12} sm={6}>
           <TextField
             size="small"
             fullWidth
@@ -62,7 +62,7 @@ export default function MyAccount() {
             variant="outlined"
           />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={6} xs={12} sm={6}>
           <TextField
             size="small"
             fullWidth
@@ -74,7 +74,7 @@ export default function MyAccount() {
         </Grid>
       </Grid>
       <Grid container direction="row" spacing={2} className={classes.root}>
-        <Grid item md={12}>
+        <Grid item md={12} xs={12}>
           <TextField
             size="small"
             fullWidth

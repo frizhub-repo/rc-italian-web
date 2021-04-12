@@ -6,7 +6,7 @@ export default function PaymentMethod() {
       <h4>Payment Method</h4>
       <Divider />
       <Grid container direction="row" spacing={2} style={{ marginTop: "10px" }}>
-        <h1>My Orders</h1>
+        Payment Method
       </Grid>
     </Grid>
   );

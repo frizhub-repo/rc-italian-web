@@ -28,10 +28,10 @@ export default function (state = initialState, action) {
     //   items: state.items.concat(action.payload),
     // };
     case "REMOVE_ITEM":
-      const index = state.items.indexOf(action.payload);
       return {
         ...state,
-        items: state.items.splice(index, 1),
+        items: state.items.filter((itm)=> itm.name != action.payload.name),
+        total: state.total - (action.payload.price * action.payload.quantity)
       };
     case "REMOVE_ORDER_ITEMS":
       return {
