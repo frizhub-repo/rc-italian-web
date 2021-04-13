@@ -117,6 +117,7 @@ const DialogContent = withStyles((theme) => ({
 export default function DeliveryAddressDialog({
   openDelivery,
   setOpenDelivery,
+  setRefetch,
 }) {
   const classes = useStyles();
   const [services, setService] = useState("home");
@@ -125,9 +126,12 @@ export default function DeliveryAddressDialog({
   const deliveryAddressPayload = async (data) => {
     data = { ...data, addressKey: services };
     const res = await addDeliveryAddress(data);
-    console.log({ res })
+    console.log({ res });
+    setRefetch((prevState) => ({
+      refetch: !prevState,
+    }));
     setOpenDelivery(false);
-    toast.success(res?.data?.message)
+    toast.success(res?.data?.message);
   };
 
   return (

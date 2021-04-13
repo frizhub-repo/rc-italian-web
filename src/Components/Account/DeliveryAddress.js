@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DeliveryAddress() {
   const classes = useStyles();
   const disp = useDispatch();
-  const { customer } = useUserContext();
+  const { customer, setRefetch } = useUserContext();
   const { deliveryAddress } = useSelector(
     (state) => state.deliveryAddressReducer
   );
@@ -166,6 +166,7 @@ export default function DeliveryAddress() {
       <DeliveryAddressDialog
         openDelivery={openDelivery}
         setOpenDelivery={setOpenDelivery}
+        setRefetch={setRefetch}
       />
     </Grid>
   );

@@ -10,6 +10,7 @@ export function UserProvider({ children }) {
   const disp = useDispatch();
   const [restaurant, setRestaurant] = React.useState({});
   const [customer, setCustomer] = React.useState({});
+  const [refetch, setRefetch] = React.useState(false);
   const [token, setToken] = React.useState(
     window?.localStorage?.getItem("token")
   );
@@ -22,7 +23,10 @@ export function UserProvider({ children }) {
               "Authorization"
             ] = window.localStorage.getItem("token");
             const res = await axiosIntance.get("/api/v1/customers");
-            disp({ type: GET_DELIVERY_ADDRESS, payload: res?.data?.data?.addresses })
+            disp({
+              type: GET_DELIVERY_ADDRESS,
+              payload: res?.data?.data?.addresses,
+            });
             setCustomer(res?.data?.data);
           } catch (error) {
             console.log({ error });
@@ -39,7 +43,7 @@ export function UserProvider({ children }) {
         window.location.reload();
       }
     }
-  }, [token]);
+  }, [token, refetch]);
 
   React.useEffect(() => {
     async function fetchRestaurantInfo() {
@@ -53,7 +57,9 @@ export function UserProvider({ children }) {
     fetchRestaurantInfo();
   }, []);
   return (
-    <UserContext.Provider value={{ token, setToken, restaurant, customer }}>
+    <UserContext.Provider
+      value={{ token, setToken, restaurant, customer, setRefetch }}
+    >
       {children}
     </UserContext.Provider>
   );
