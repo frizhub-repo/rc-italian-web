@@ -202,14 +202,8 @@ export default function DeliveryAddressDialog({
             variant="outlined"
             size="small"
             name="addressLine2"
-            inputRef={register({
-              required: "Address Line 2 required",
-            })}
-            error={errors?.addressLine2 ? true : false}
+            inputRef={register}
           />
-          <FormHelperText className={classes.helperText}>
-            {errors?.addressLine2?.message}
-          </FormHelperText>
 
           <Box className={classes.citySpacing}>
             <Box>

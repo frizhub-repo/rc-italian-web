@@ -132,16 +132,18 @@ export default function DeliveryAddress() {
                           {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
                           {address?.country}
                         </Typography>
-                        <Typography
-                          variant="body2"
-                          gutterBottom
-                          className={classes.text}
-                        >
-                          <b>Address Line 2: </b>
-                          {address?.addressLine2} {address?.city},{" "}
-                          {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
-                          {address?.country}
-                        </Typography>
+                        {!!address?.addressLine2 && (
+                          <Typography
+                            variant="body2"
+                            gutterBottom
+                            className={classes.text}
+                          >
+                            <b>Address Line 2: </b>
+                            {address?.addressLine2} {address?.city},{" "}
+                            {address?.zipOrPostalCode}{" "}
+                            {address?.stateOrProvince}, {address?.country}
+                          </Typography>
+                        )}
                         <Typography variant="body2" className={classes.phone}>
                           <b>Phone:</b> {address?.phoneNumber}
                         </Typography>
