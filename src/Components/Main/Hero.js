@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import { fetchAllResInfo } from "../../actions/appActions";
 import { useSelector, useDispatch } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
+import { Link } from "react-router-dom";
 
 function Hero() {
   const dispatch = useDispatch();
@@ -43,9 +44,9 @@ function Hero() {
           <p className="text-white font-weight-bolder text-sm ">
             COME EXPERIENCE OUR DELICIOUS FOOD
           </p>
-          <button className="rounded-pill bg-white px-12 py-3 text-black text-center text-sm mb-12">
+          <Link to="/menu/1" className="rounded-pill bg-white px-12 py-3 text-black text-center text-sm mb-12 hover:text-black">
             Our menu
-          </button>
+          </Link>
         </div>
       </div>
     </section>
