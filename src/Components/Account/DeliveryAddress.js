@@ -22,6 +22,7 @@ import {
   GET_DELIVERY_ADDRESS,
 } from "../../utils/types";
 import { Skeleton } from "@material-ui/lab";
+import EditDeliveryAddressDialog from "../Common/EditDeliveryAddressModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -88,6 +89,8 @@ export default function DeliveryAddress() {
     (state) => state.deliveryAddressReducer
   );
   const [openDelivery, setOpenDelivery] = useState(false);
+  const [openEditDelivery, setOpenEditDelivery] = useState(false);
+  const [address, setAddress] = useState({});
 
   const deleteAddress = async (id) => {
     const obj = { isDeleted: true };
@@ -184,7 +187,13 @@ export default function DeliveryAddress() {
                         </Typography>
                       </div>
                       <div className={classes.action}>
-                        <EditIcon className={classes.editIcon} />
+                        <EditIcon
+                          className={classes.editIcon}
+                          onClick={() => {
+                            setAddress(address);
+                            setOpenEditDelivery(true);
+                          }}
+                        />
                         <DeleteIcon
                           className={classes.deleteIcon}
                           onClick={() => deleteAddress(address?._id)}
@@ -201,6 +210,13 @@ export default function DeliveryAddress() {
         openDelivery={openDelivery}
         setOpenDelivery={setOpenDelivery}
       />
+      {openEditDelivery && (
+        <EditDeliveryAddressDialog
+          openEditDelivery={openEditDelivery}
+          setOpenEditDelivery={setOpenEditDelivery}
+          address={address}
+        />
+      )}
     </Grid>
   );
 }
