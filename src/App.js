@@ -24,7 +24,7 @@ function App() {
           <Route path="/tableReservation" exact component={Home} />
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu/:id" exact component={Menu} />
-          <Route path="/order" exact component={Delivery} />
+          <Route path="/delivery" exact component={Delivery} />
           <Route path="/customer/reservation" exact component={Reservation} />
           <Route path="/customer/order" exact component={Order} />
           <Route path="/complete/purchase" exact component={CompletePurchase} />
@@ -32,7 +32,7 @@ function App() {
             path="*"
             render={() => (
               <div>
-                <h1>Page not found.</h1>
+                <h1>Oops, Page not found.</h1>
                 <a href="/">Go Back</a>
               </div>
             )}

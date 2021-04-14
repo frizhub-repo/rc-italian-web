@@ -29,8 +29,8 @@ function Navbar() {
           <Link to="/menu/1" className="mr-5 text-white text-xs">
             MENU
           </Link>
-          <Link to="/order" className="mr-5 text-white text-xs">
-            Order
+          <Link to="/delivery" className="mr-5 text-white text-xs">
+            DELIVERY
           </Link>
           <Link to="/tableReservation" className="mr-5 text-white text-xs">
             TABLE RESERVATION

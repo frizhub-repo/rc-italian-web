@@ -91,7 +91,7 @@ function Control({ setItem }) {
                       </p>
                       <p
                         className="text-gold text-xs text-right"
-                        onClick={() => setOpen(true)}
+                        // onClick={() => setOpen(true)}
                       >
                         Ingredients
                       </p>
