@@ -26,6 +26,10 @@
   color: white;
 }
 
+.customDialog .MuiPaper-rounded {
+  border-radius: 0px;
+}
+
 .App-link {
   color: #61dafb;
 }

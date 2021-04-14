@@ -6,15 +6,22 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Create";
 import { useUserContext } from "../../Context/userContext";
 import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
-import { editDeleteDeliveryAddress } from "../../api/DeliveryAddress";
+import {
+  editDeleteDeliveryAddress,
+  getDeliveryAddress,
+} from "../../api/DeliveryAddress";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETE_DELIVERY_ADDRESS } from "../../utils/types";
+import {
+  DELETE_DELIVERY_ADDRESS,
+  GET_DELIVERY_ADDRESS,
+} from "../../utils/types";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -76,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DeliveryAddress() {
   const classes = useStyles();
   const disp = useDispatch();
-  const { customer, setRefetch } = useUserContext();
+  const { customer } = useUserContext();
   const { deliveryAddress } = useSelector(
     (state) => state.deliveryAddressReducer
   );
@@ -84,12 +91,28 @@ export default function DeliveryAddress() {
 
   const deleteAddress = async (id) => {
     const obj = { isDeleted: true };
-    const res = await editDeleteDeliveryAddress(id, obj);
-    if (res?.status === 200) {
-      disp({ type: DELETE_DELIVERY_ADDRESS, payload: id });
-      toast.success("Address deleted successfully");
+    try {
+      const res = await editDeleteDeliveryAddress(id, obj);
+      if (res?.status === 200) {
+        disp({ type: DELETE_DELIVERY_ADDRESS, payload: id });
+        toast.success("Address deleted successfully");
+      }
+    } catch (error) {
+      console.log({ error });
     }
   };
+
+  useEffect(async () => {
+    try {
+      const res = await getDeliveryAddress();
+      disp({
+        type: GET_DELIVERY_ADDRESS,
+        payload: res?.data?.data,
+      });
+    } catch (error) {
+      console.log({ error });
+    }
+  }, []);
 
   return (
     <Grid>
@@ -108,6 +131,15 @@ export default function DeliveryAddress() {
       </div>
       <Divider />
       <Grid container direction="row" spacing={2} className={classes.containr}>
+        {!deliveryAddress &&
+          [1, 2, 3].map(() => (
+            <Skeleton
+              variant="rect"
+              width={700}
+              height={170}
+              style={{ marginTop: "10px" }}
+            />
+          ))}
         {deliveryAddress &&
           deliveryAddress.map((address, index) =>
             address?.isDeleted === false ? (
@@ -168,7 +200,6 @@ export default function DeliveryAddress() {
       <DeliveryAddressDialog
         openDelivery={openDelivery}
         setOpenDelivery={setOpenDelivery}
-        setRefetch={setRefetch}
       />
     </Grid>
   );

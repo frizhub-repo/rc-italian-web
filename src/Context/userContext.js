@@ -10,7 +10,6 @@ export function UserProvider({ children }) {
   const disp = useDispatch();
   const [restaurant, setRestaurant] = React.useState({});
   const [customer, setCustomer] = React.useState({});
-  const [refetch, setRefetch] = React.useState(false);
   const [token, setToken] = React.useState(
     window?.localStorage?.getItem("token")
   );
@@ -43,7 +42,7 @@ export function UserProvider({ children }) {
         window.location.reload();
       }
     }
-  }, [token, refetch]);
+  }, [token]);
 
   React.useEffect(() => {
     async function fetchRestaurantInfo() {
@@ -58,7 +57,7 @@ export function UserProvider({ children }) {
   }, []);
   return (
     <UserContext.Provider
-      value={{ token, setToken, restaurant, customer, setRefetch }}
+      value={{ token, setToken, restaurant, customer }}
     >
       {children}
     </UserContext.Provider>

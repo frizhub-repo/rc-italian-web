@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { Box, TextField, Button, FormHelperText } from "@material-ui/core";
 import { addDeliveryAddress } from "../../api/DeliveryAddress";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { ADD_DELIVERY_ADDRESS } from "../../utils/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,21 +119,22 @@ const DialogContent = withStyles((theme) => ({
 export default function DeliveryAddressDialog({
   openDelivery,
   setOpenDelivery,
-  setRefetch,
 }) {
   const classes = useStyles();
+  const disp = useDispatch();
   const [services, setService] = useState("home");
   const { register, handleSubmit, errors } = useForm();
 
   const deliveryAddressPayload = async (data) => {
-    data = { ...data, addressKey: services };
-    const res = await addDeliveryAddress(data);
-    console.log({ res });
-    setRefetch((prevState) => ({
-      refetch: !prevState,
-    }));
-    setOpenDelivery(false);
-    toast.success(res?.data?.message);
+    try {
+      data = { ...data, addressKey: services };
+      const res = await addDeliveryAddress(data);
+      disp({ type: ADD_DELIVERY_ADDRESS, payload: res?.data?.data });
+      setOpenDelivery(false);
+      toast.success("Address added successfully");
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return (
@@ -141,6 +144,7 @@ export default function DeliveryAddressDialog({
       onClose={() => setOpenDelivery(false)}
       aria-labelledby="customized-dialog-title"
       open={openDelivery}
+      className={`customDialog`}
     >
       <DialogContent className={classes.dialogTopBorder}>
         <Box className={classes.signInWithSocial}>
