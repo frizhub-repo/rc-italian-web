@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
+import { useUserContext } from "../../Context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,10 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyAccount() {
   const classes = useStyles();
+  const { customer } = useUserContext();
 
   return (
     <Grid>
-      <h4>My Account</h4>
+      <h4>My Account</h4>{console.log({customer})}
       <Divider />
       <Grid container direction="row" spacing={2} className={classes.root}>
         <Grid item md={6} xs={12} sm={6}>
@@ -36,6 +38,7 @@ export default function MyAccount() {
             id="outlined-basic1"
             placeholder="Name"
             variant="outlined"
+            value={`${customer?.firstName} ${customer?.lastName}`}
           />
         </Grid>
         <Grid item md={6} xs={12} sm={6}>
@@ -60,6 +63,8 @@ export default function MyAccount() {
             placeholder="Email"
             type="email"
             variant="outlined"
+            value={customer?.email}
+            disabled
           />
         </Grid>
         <Grid item md={6} xs={12} sm={6}>
@@ -70,6 +75,8 @@ export default function MyAccount() {
             id="outlined-basic4"
             placeholder="Phone Number"
             variant="outlined"
+            type="text"
+            value={customer?.phoneNumber}
           />
         </Grid>
       </Grid>
@@ -81,7 +88,7 @@ export default function MyAccount() {
             className={classes.bgColor}
             id="outlined-basic5"
             placeholder="Password"
-            type="password"
+            type="text"
             variant="outlined"
           />
         </Grid>
