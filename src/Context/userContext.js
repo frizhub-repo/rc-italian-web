@@ -1,10 +1,13 @@
 import jwtDecode from "jwt-decode";
 import React from "react";
+import { useDispatch } from "react-redux";
 import axiosIntance from "../utils/axios-configured";
+import { GET_DELIVERY_ADDRESS } from "../utils/types";
 
 const UserContext = React.createContext();
 
 export function UserProvider({ children }) {
+  const disp = useDispatch();
   const [restaurant, setRestaurant] = React.useState({});
   const [customer, setCustomer] = React.useState({});
   const [token, setToken] = React.useState(
@@ -19,6 +22,10 @@ export function UserProvider({ children }) {
               "Authorization"
             ] = window.localStorage.getItem("token");
             const res = await axiosIntance.get("/api/v1/customers");
+            disp({
+              type: GET_DELIVERY_ADDRESS,
+              payload: res?.data?.data?.addresses,
+            });
             setCustomer(res?.data?.data);
           } catch (error) {
             console.log({ error });
@@ -49,7 +56,9 @@ export function UserProvider({ children }) {
     fetchRestaurantInfo();
   }, []);
   return (
-    <UserContext.Provider value={{ token, setToken, restaurant, customer }}>
+    <UserContext.Provider
+      value={{ token, setToken, restaurant, customer }}
+    >
       {children}
     </UserContext.Provider>
   );

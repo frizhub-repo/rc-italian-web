@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
+import { useUserContext } from "../../Context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyAccount() {
   const classes = useStyles();
+  const { customer } = useUserContext();
 
   return (
     <Grid>
@@ -36,6 +38,8 @@ export default function MyAccount() {
             id="outlined-basic1"
             placeholder="Name"
             variant="outlined"
+            value={`${customer?.firstName} ${customer?.lastName}`}
+            label="Username"
           />
         </Grid>
         <Grid item md={6} xs={12} sm={6}>
@@ -46,6 +50,7 @@ export default function MyAccount() {
             id="outlined-basic2"
             placeholder="Username"
             variant="outlined"
+            label="Surename"
           />
         </Grid>
       </Grid>
@@ -57,9 +62,11 @@ export default function MyAccount() {
             fullWidth
             className={classes.bgColor}
             id="outlined-basic3"
-            placeholder="Email"
             type="email"
             variant="outlined"
+            value={customer?.email}
+            disabled
+            label="Email"
           />
         </Grid>
         <Grid item md={6} xs={12} sm={6}>
@@ -68,21 +75,11 @@ export default function MyAccount() {
             fullWidth
             className={classes.bgColor}
             id="outlined-basic4"
-            placeholder="Phone Number"
             variant="outlined"
-          />
-        </Grid>
-      </Grid>
-      <Grid container direction="row" spacing={2} className={classes.root}>
-        <Grid item md={12} xs={12}>
-          <TextField
-            size="small"
-            fullWidth
-            className={classes.bgColor}
-            id="outlined-basic5"
-            placeholder="Password"
-            type="password"
-            variant="outlined"
+            type="text"
+            value={customer?.phoneNumber}
+            label="Phone Number"
+            disabled
           />
         </Grid>
       </Grid>

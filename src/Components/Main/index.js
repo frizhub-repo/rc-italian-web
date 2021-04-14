@@ -7,6 +7,8 @@ import './index.css'
 import Form from "./Form";
 import Gallery from "../Gallery";
 import Footer from "../Footer";
+import { Link } from "react-router-dom";
+
 function Main() {
 return(
     <div>
@@ -26,9 +28,9 @@ return(
                         air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot
                         chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
                     <div className="flex justify-center">
-                        <button
+                        <Link
                             className="inline-flex text-white bg-gold border-0 py-2 px-4 focus:outline-none rounded-pill text-xs ">OUR MENU
-                        </button>
+                        </Link>
                         <button
                             className="ml-4 inline-flex text-white bg-black border-0 py-2 px-4 focus:outline-none  rounded-pill text-xs">OUR STORY
                         </button>

@@ -35,6 +35,7 @@ export default function AuthModal({ open, handleClose }) {
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        className={`customDialog`}
       >
         <DialogContent style={{ borderTop: "9px solid #C8A97E" }}>
           {activeTab1 && <SignIn check2={check2} handleClose={handleClose} />}

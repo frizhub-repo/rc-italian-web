@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
-import { useForm } from "react-hook-form";
 import { Box, TextField, Button, FormHelperText } from "@material-ui/core";
-import { addDeliveryAddress } from "../../api/DeliveryAddress";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { ADD_DELIVERY_ADDRESS } from "../../utils/types";
+import { editDeleteDeliveryAddress } from "../../api/DeliveryAddress";
+import { EDIT_DELIVERY_ADDRESS } from "../../utils/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,22 +116,35 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-export default function DeliveryAddressDialog({
-  openDelivery,
-  setOpenDelivery,
+export default function EditDeliveryAddressDialog({
+  openEditDelivery,
+  setOpenEditDelivery,
+  address,
 }) {
   const classes = useStyles();
   const disp = useDispatch();
-  const [services, setService] = useState("home");
-  const { register, handleSubmit, errors } = useForm();
+  const [services, setService] = useState(address.addressKey);
+  const { register, handleSubmit, errors } = useForm({
+    defaultValues: {
+      name: address.name,
+      phoneNumber: address.phoneNumber,
+      addressLine1: address.addressLine1,
+      addressLine2: address.addressLine2,
+      city: address.city,
+      stateOrProvince: address.stateOrProvince,
+      zipOrPostalCode: address.zipOrPostalCode,
+      country: address.country,
+      message: address.message,
+    },
+  });  
 
   const deliveryAddressPayload = async (data) => {
     try {
-      data = { ...data, addressKey: services };
-      const res = await addDeliveryAddress(data);
-      disp({ type: ADD_DELIVERY_ADDRESS, payload: res?.data?.data });
-      setOpenDelivery(false);
-      toast.success("Address added successfully");
+        data = { ...data, addressKey: services };
+        const res = await editDeleteDeliveryAddress(address._id, data);        
+        disp({ type: EDIT_DELIVERY_ADDRESS, payload: {id: address._id, res: res.data.data } });
+        setOpenEditDelivery(false);
+        toast.success("Address has been updated successfully");
     } catch (error) {
       console.log({ error });
     }
@@ -141,9 +154,9 @@ export default function DeliveryAddressDialog({
     <Dialog
       maxWidth="xs"
       scroll="body"
-      onClose={() => setOpenDelivery(false)}
+      onClose={() => setOpenEditDelivery(false)}
       aria-labelledby="customized-dialog-title"
-      open={openDelivery}
+      open={openEditDelivery}
       className={`customDialog`}
     >
       <DialogContent className={classes.dialogTopBorder}>

@@ -3,10 +3,13 @@ const initialState = {
   items: [],
   minimum: 0,
   delivery: 0,
+  orders: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case "GET_ALL_ORDER":
+      return { ...state, orders: action.payload };
     case "ADD_ITEM":
       const index1 = state.items
         .map(function (e) {
@@ -30,8 +33,8 @@ export default function (state = initialState, action) {
     case "REMOVE_ITEM":
       return {
         ...state,
-        items: state.items.filter((itm)=> itm.name != action.payload.name),
-        total: state.total - (action.payload.price * action.payload.quantity)
+        items: state.items.filter((itm) => itm.name != action.payload.name),
+        total: state.total - action.payload.price * action.payload.quantity,
       };
     case "REMOVE_ORDER_ITEMS":
       return {
