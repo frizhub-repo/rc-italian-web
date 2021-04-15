@@ -30,6 +30,12 @@
   border-radius: 0px;
 }
 
+.enterValueTxtField .MuiOutlinedInput-root {
+  width: 110px;
+  height: 35px;
+  border-radius: 0px !important;
+}
+
 .App-link {
   color: #61dafb;
 }
