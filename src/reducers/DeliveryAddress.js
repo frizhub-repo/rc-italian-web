@@ -28,7 +28,10 @@ export default function (state = initialState, actions) {
       const address = state.deliveryAddress.findIndex(
         (addrss) => addrss._id === actions.payload.id
       );
-      state.deliveryAddress[address] = actions.payload.res;
+      state.deliveryAddress[address] = {
+        ...state.deliveryAddress[address],
+        ...actions.payload.res,
+      };
       return {
         ...state,
       };

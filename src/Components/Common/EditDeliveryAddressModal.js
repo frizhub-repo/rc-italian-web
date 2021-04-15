@@ -302,24 +302,6 @@ export default function EditDeliveryAddressDialog({
             </Box>
           </Box>
 
-          <TextField
-            className={classes.txtFieldSpacing}
-            multiline
-            rows={4}
-            placeholder="Message"
-            variant="outlined"
-            fullWidth
-            size="small"
-            name="message"
-            inputRef={register({
-              required: "Message required",
-            })}
-            error={errors?.message ? true : false}
-          />
-          <FormHelperText className={classes.helperText}>
-            {errors?.message?.message}
-          </FormHelperText>
-
           <div className="flex flex-wrap justify-content-between mt-2">
             <button
               className={`${

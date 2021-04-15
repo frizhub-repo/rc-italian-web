@@ -9,5 +9,5 @@ export const editDeleteDeliveryAddress = (id, payload) => {
 }
 
 export const getDeliveryAddress = () => {
-  return axiosIntance.get("/api/v1/address/get/customer");
+  return axiosIntance.get("/api/v1/address/customers");
 }
