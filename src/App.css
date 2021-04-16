@@ -28,6 +28,7 @@
 
 .customDialog .MuiPaper-rounded {
   border-radius: 0px;
+  max-width: 470px;
 }
 
 .enterValueTxtField .MuiOutlinedInput-root {
