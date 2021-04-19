@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Gallery from "../Gallery/index";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import { Table, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import axiosIntance from "../../utils/axios-configured";
 import { useSelector } from "react-redux";
 import "../../App.css";

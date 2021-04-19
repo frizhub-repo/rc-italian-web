@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import { useUserContext } from "../../Context/userContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,12 +12,10 @@ function Form() {
   const [phone, setPhone] = useState("");
   const [number, setNumber] = useState("3");
   const [services, setService] = useState("lunch");
-  const [res, setRes] = useState("Tomorrow");
   const [time, setTime] = useState("2021-03-12T18:00");
   const [show, setShow] = useState(false);
   const { handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const { reserveTableData } = useSelector((state) => state.reservationReducer);
   const { loading } = useSelector((state) => state.loadingReducer);
   let { token } = useUserContext();
   let now = new Date();
@@ -131,7 +129,7 @@ function Form() {
                 <div className="text-left mr-2 flex flex-wrap justify-content-center ">
                   <button
                     className={`${
-                      number == "1"
+                      number === "1"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     } text-gray-500 font-weight-light text-xs mr-1  py-1 w-1/6  border border-gray-500 rounded-pill `}
@@ -144,7 +142,7 @@ function Form() {
                   </button>
                   <button
                     className={`${
-                      number == "2"
+                      number === "2"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     }  text-gray-500 font-weight-light text-xs mr-1  w-1/6  py-1 border border-gray-500 rounded-pill `}
@@ -157,7 +155,7 @@ function Form() {
                   </button>
                   <button
                     className={`${
-                      number == "3"
+                      number === "3"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     } text-gray-500 font-weight-light text-xs mr-1  w-1/6  py-1 border border-gray-500 rounded-pill `}
@@ -170,7 +168,7 @@ function Form() {
                   </button>
                   <button
                     className={`${
-                      number == "4"
+                      number === "4"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     } text-gray-500 font-weight-light text-xs mr-1  w-1/6  py-1 border border-gray-500 rounded-pill `}
@@ -183,7 +181,7 @@ function Form() {
                   </button>
                   <button
                     className={`${
-                      number == "5"
+                      number === "5"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     }  text-gray-500 font-weight-light text-xs mr-1  w-1/6  py-1 border border-gray-500 rounded-pill `}
@@ -207,7 +205,7 @@ function Form() {
                 <div className="text-left mr-2 flex flex-wrap justify-content-between ">
                   <button
                     className={`${
-                      services == "breakfast"
+                      services === "breakfast"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     } text-gray-500 font-weight-light text-xs px-6   py-1 w-1/4  border border-gray-500 rounded-pill `}
@@ -220,7 +218,7 @@ function Form() {
                   </button>
                   <button
                     className={`${
-                      services == "lunch"
+                      services === "lunch"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     }  text-gray-500 font-weight-light text-xs px-6  w-1/4  py-1 border border-gray-500 rounded-pill `}
@@ -233,7 +231,7 @@ function Form() {
                   </button>
                   <button
                     className={`${
-                      services == "dinner"
+                      services === "dinner"
                         ? "border border-gold  bg-gold text-white"
                         : ""
                     } text-gray-500 font-weight-light text-xs px-6 w-1/4  py-1 border border-gray-500 rounded-pill `}

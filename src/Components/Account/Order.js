@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axiosIntance from "../../utils/axios-configured";
 import DateRangeIcon from "@material-ui/icons/DateRange";

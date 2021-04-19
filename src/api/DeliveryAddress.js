@@ -6,8 +6,8 @@ export const addDeliveryAddress = (payload) => {
 
 export const editDeleteDeliveryAddress = (id, payload) => {
   return axiosIntance.patch(`/api/v1/address/customers/${id}`, payload);
-}
+};
 
 export const getDeliveryAddress = () => {
   return axiosIntance.get("/api/v1/address/customers");
-}
+};

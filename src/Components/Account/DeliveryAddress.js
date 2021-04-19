@@ -105,16 +105,19 @@ export default function DeliveryAddress() {
     }
   };
 
-  useEffect(async () => {
-    try {
-      const res = await getDeliveryAddress();
-      disp({
-        type: GET_DELIVERY_ADDRESS,
-        payload: res?.data?.data,
-      });
-    } catch (error) {
-      console.log({ error });
+  useEffect(() => {
+    async function fetchDeliveryAddress() {
+      try {
+        const res = await getDeliveryAddress();
+        disp({
+          type: GET_DELIVERY_ADDRESS,
+          payload: res?.data?.data,
+        });
+      } catch (error) {
+        console.log({ error });
+      }
     }
+    fetchDeliveryAddress()
   }, []);
 
   return (

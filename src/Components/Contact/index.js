@@ -17,7 +17,7 @@ function Contact() {
 
   const contactUs = async (data) => {
     try {
-      const res = await customerContactUs(data);
+      await customerContactUs(data);
       reset();
       toast.success("Your query has been submitted successfully!");
     } catch (error) {

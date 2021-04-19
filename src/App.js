@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Components/Home";
@@ -9,12 +8,10 @@ import Delivery from "./Components/Delivery/index";
 import Reservation from "./Components/Lists/Reservations";
 import Order from "./Components/Lists/Order";
 import Profile from "./Components/Account/index";
-import { useUserContext } from "./Context/userContext";
 import CompletePurchase from "./Components/Delivery/CompletePurchase";
 import Custom from "./Components/Account/CustomHeader";
 
 function App() {
-  const { token } = useUserContext();
 
   return (
     <div className="App">
