@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Skeleton } from "@material-ui/lab";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { customerContactUs } from "../../api/ContactUs";
+import {
+  customerContactUs,
+  getGoogleMyBusinessLocations,
+} from "../../api/ContactUs";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 
 function Contact() {
   const { register, handleSubmit, errors, reset } = useForm();
+  const [openingHours, setOpeningHours] = useState([]);
   const { loading } = useSelector((state) => state.loadingReducer);
 
   const contactUs = async (data) => {
@@ -19,6 +24,18 @@ function Contact() {
       console.log({ error });
     }
   };
+
+  useEffect(() => {
+    const fetchGMBLocations = async () => {
+      try {
+        const res = await getGoogleMyBusinessLocations();
+        setOpeningHours(res?.data?.data?.regularHours?.periods);
+      } catch (error) {
+        console.log({ error });
+      }
+    };
+    fetchGMBLocations();
+  }, []);
 
   return (
     <div>
@@ -55,45 +72,34 @@ function Contact() {
             <div className="  py-4 mx-auto w-full">
               <div className="flex flex-col text-left w-full mb-4">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-                  Opening ours
+                  Opening Hours
                 </h1>
                 <div className=" w-full p-1 divide-y divide-dashed divide-gray-300 ">
-                  <div className=" d-flex justify-content-around mt-2">
-                    <p className=" font-weight-bold flex-grow-1 text-xs">
-                      Monday
-                    </p>
-                    <p className="text-xs">09:00-20:00</p>
-                  </div>
-                  <div className=" d-flex justify-content-around pt-1">
-                    <p className=" font-weight-bold flex-grow-1 text-xs">
-                      Tuesday
-                    </p>
-                    <p className="text-xs">09:00-20:00</p>
-                  </div>
-                  <div className=" d-flex justify-content-around pt-1">
-                    <p className=" font-weight-bold flex-grow-1 text-xs">
-                      Wednesday
-                    </p>
-                    <p className="text-xs">09:00-20:00</p>
-                  </div>
-                  <div className=" d-flex justify-content-around pt-1">
-                    <p className=" font-weight-bold flex-grow-1 text-xs">
-                      Thursday
-                    </p>
-                    <p className="text-xs">09:00-20:00</p>
-                  </div>
-                  <div className=" d-flex justify-content-around pt-1">
-                    <p className=" font-weight-bold flex-grow-1 text-xs">
-                      Friday
-                    </p>
-                    <p className="text-xs">09:00-20:00</p>
-                  </div>
-                  <div className=" d-flex justify-content-around pt-1">
-                    <p className=" font-weight-bold flex-grow-1 text-xs">
-                      Saturday
-                    </p>
-                    <p className="text-xs">09:00-20:00</p>
-                  </div>
+                  {openingHours.length
+                    ? openingHours.map((item, index) => (
+                        <div
+                          className=" d-flex justify-content-around pt-2"
+                          key={index}
+                        >
+                          <p className=" font-weight-bold flex-grow-1 text-xs">
+                            {item?.openDay}
+                          </p>
+                          <p className="text-xs">
+                            {item?.openTime} - {item?.closeTime}
+                          </p>
+                        </div>
+                      ))
+                    : [1, 2, 3, 4, 5].map(() => (
+                        <Skeleton
+                          variant="rect"
+                          width={585}
+                          height={55}
+                          style={{
+                            borderBottom: "2px dashed",
+                            marginTop: "10px",
+                          }}
+                        />
+                      ))}
                 </div>
               </div>
             </div>
