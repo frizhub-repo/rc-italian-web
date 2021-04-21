@@ -12,6 +12,7 @@ import Profile from "./Components/Account/index";
 import { useUserContext } from "./Context/userContext";
 import CompletePurchase from "./Components/Delivery/CompletePurchase";
 import Custom from "./Components/Account/CustomHeader";
+import OrdersReceived from "./Components/Orders/OrdersReceived";
 
 function App() {
   const { token } = useUserContext();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/customer/order" exact component={Order} />
           <Route path="/complete/purchase" exact component={CompletePurchase} />
           <Route path="/custom" exact component={Custom} />
+          <Route path="/ordersreceived" exact component={OrdersReceived} />
           <Route
             path="*"
             render={() => (
