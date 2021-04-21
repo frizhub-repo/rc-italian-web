@@ -18,7 +18,6 @@ export default function CompletePurchase() {
   const items = useSelector((state) => state.orders).items;
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const createOrder = () => {
     if (status === "ERROR") {

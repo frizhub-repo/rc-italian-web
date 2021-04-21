@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Gallery from "../Gallery/index";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import { useParams } from "react-router-dom";
 import Menu1 from "./menu1";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByCategory } from "../../actions/productActions";
@@ -30,7 +29,7 @@ function Menu() {
           <div className=" w-1/4 mt-3 bg-gray-900 p-4 max-h-80 divide-y divide-gray-100">
             <p
               className={` mb-4 text-xs text-left  cursor-pointer py-2 ${
-                menu == "1" ? "text-gold" : "text-white"
+                menu === "1" ? "text-gold" : "text-white"
               } `}
               onClick={() => setMenu("1")}
             >
@@ -38,7 +37,7 @@ function Menu() {
             </p>
             <p
               className={`${
-                menu == "2" ? "text-gold" : "text-white"
+                menu === "2" ? "text-gold" : "text-white"
               } mb-4 text-xs text-left   cursor-pointer  py-2`}
               onClick={() => setMenu("2")}
             >
@@ -46,7 +45,7 @@ function Menu() {
             </p>
             <p
               className={`${
-                menu == "3" ? "text-gold" : "text-white"
+                menu === "3" ? "text-gold" : "text-white"
               } mb-4 text-xs text-left  cursor-pointer  py-2`}
               onClick={() => setMenu("3")}
             >
@@ -54,7 +53,7 @@ function Menu() {
             </p>
             <p
               className={`${
-                menu == "4" ? "text-gold" : "text-white"
+                menu === "4" ? "text-gold" : "text-white"
               } mb-4 text-xs text-left   cursor-pointer mb-24  py-2`}
               onClick={() => setMenu("4")}
             >
@@ -62,28 +61,28 @@ function Menu() {
             </p>
           </div>
           <div className=" w-52/3 flex-grow-1 mt-3 ml-4">
-            {menu == "1" && (
+            {menu === "1" && (
               <Menu1
                 name={"Menu di mezzodi"}
                 img={"bg-menu-1"}
                 productByCategory={productByCategory}
               />
             )}
-            {menu == "2" && (
+            {menu === "2" && (
               <Menu1
                 name={"Menu sera"}
                 img={"bg-menu-2"}
                 productByCategory={productByCategory}
               />
             )}
-            {menu == "3" && (
+            {menu === "3" && (
               <Menu1
                 name={"Menu non solo birra"}
                 img={"bg-menu-3"}
                 productByCategory={productByCategory}
               />
             )}
-            {menu == "4" && (
+            {menu === "4" && (
               <Menu1
                 name={"Cocktails"}
                 img={"bg-menu-4"}

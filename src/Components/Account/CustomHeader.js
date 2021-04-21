@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     margin: "0px 9px 5px 0px",
-    color: "white",
     fontSize: "1.2rem",
     fontWeight: "500",
     color: "black",
@@ -98,6 +97,7 @@ export default function Custom() {
             <div className={classes.imgRoot}>
               <img
                 className={classes.img}
+                alt="logo"
                 src="https://cdn.dribbble.com/users/595119/screenshots/1971790/attachments/343766/Resto_Logo_Preview_%28Dribbble%29_800x600px_A.png?compress=1&resize=400x300"
               />
             </div>

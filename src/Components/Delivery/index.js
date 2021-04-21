@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/index";
-import Menu1 from "../Menu/menu1";
 import Card from "./Card";
 import Carousel from "react-multi-carousel";
 import Product from "./Product";
@@ -8,7 +7,6 @@ import Control from "./Control";
 import Gallery from "../Gallery";
 import Footer from "../Footer";
 import axiosIntance from "../../utils/axios-configured";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
 
