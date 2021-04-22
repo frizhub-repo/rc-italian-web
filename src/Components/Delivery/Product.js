@@ -34,32 +34,32 @@ function Product({ product, item, setItem }) {
   }, [item]);
 
   return (
-    <section className="text-gray-700 body-font mt-0  h-28 w-full mb-8" id={product._id}>
+    <section className="text-gray-700 body-font mt-0  h-28 w-full mb-8" id={product?._id}>
       <div className="px-2 py-4" style={{ backgroundColor: item ? 'lightcyan' : null }} >
         <div className="  flex  align-content-center m-2">
           <img
             alt="ecommerce"
             className="lg:w-1/3 w-full h-24 object-cover object-center rounded"
             src={
-              product.images.length > 0
-                ? process.env.REACT_APP_API_BASE_URL + "/" + product.images[0]
+              product?.images?.length > 0
+                ? process.env.REACT_APP_API_BASE_URL + "/" + product?.images[0]
                 : menu
             }
           />
           <div className="lg:w-1/2 w-full px-3   flex-grow-1">
             <div className="d-flex w-full justify-content-between ">
               <h1 className="text-gray-500 text-sm text-left title-font font-medium mb-1 flex-grow-1">
-                {product.title}
+                {product?.title}
               </h1>
               <span className=" font-medium text-sm  text-gold">
-                {product.price} €
+                {product?.price} €
               </span>
             </div>
             <OverlayTrigger
               key="bottom"
               placement="bottom"
               overlay={
-                <Tooltip id={`tooltip-bottom`}>{product.description}</Tooltip>
+                <Tooltip id={`tooltip-bottom`}>{product?.description}</Tooltip>
               }
             >
               <p
@@ -70,7 +70,7 @@ function Product({ product, item, setItem }) {
                   textOverflow: "ellipsis",
                 }}
               >
-                {product.description}
+                {product?.description}
               </p>
             </OverlayTrigger>
             <div className="flex  items-center mt-1  ">

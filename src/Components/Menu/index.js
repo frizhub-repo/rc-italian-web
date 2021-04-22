@@ -9,8 +9,7 @@ import { getProductByCategory } from "../../actions/productActions";
 function Menu() {
   const dispatch = useDispatch();
   const { productByCategory } = useSelector((state) => state.productReducer);
-
-  const [menu, setMenu] = useState("1");
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     dispatch(getProductByCategory());
@@ -27,68 +26,26 @@ function Menu() {
       <div className="container w-full  mt-5  mb-8 ">
         <div className="container d-flex  w-75">
           <div className=" w-1/4 mt-3 bg-gray-900 p-4 max-h-80 divide-y divide-gray-100">
-            <p
-              className={` mb-4 text-xs text-left  cursor-pointer py-2 ${
-                menu === "1" ? "text-gold" : "text-white"
-              } `}
-              onClick={() => setMenu("1")}
-            >
-              Menu di mezzodi{" "}
-            </p>
-            <p
-              className={`${
-                menu === "2" ? "text-gold" : "text-white"
-              } mb-4 text-xs text-left   cursor-pointer  py-2`}
-              onClick={() => setMenu("2")}
-            >
-              Menu sera
-            </p>
-            <p
-              className={`${
-                menu === "3" ? "text-gold" : "text-white"
-              } mb-4 text-xs text-left  cursor-pointer  py-2`}
-              onClick={() => setMenu("3")}
-            >
-              Non solo birra
-            </p>
-            <p
-              className={`${
-                menu === "4" ? "text-gold" : "text-white"
-              } mb-4 text-xs text-left   cursor-pointer mb-24  py-2`}
-              onClick={() => setMenu("4")}
-            >
-              Cocktails
-            </p>
+            {productByCategory &&
+              productByCategory?.map((menu, index) => (
+                <p
+                  className={` mb-4 text-xs text-left  cursor-pointer py-2 ${
+                    key === index ? "text-gold" : "text-white"
+                  } `}
+                  onClick={() => setKey(index)}
+                >
+                  {menu?.title}
+                </p>
+              ))}
           </div>
           <div className=" w-52/3 flex-grow-1 mt-3 ml-4">
-            {menu === "1" && (
+            {
               <Menu1
-                name={"Menu di mezzodi"}
+                name={productByCategory?.[key]?.title}
                 img={"bg-menu-1"}
-                productByCategory={productByCategory}
+                productByCategory={productByCategory?.[key]?.category}
               />
-            )}
-            {menu === "2" && (
-              <Menu1
-                name={"Menu sera"}
-                img={"bg-menu-2"}
-                productByCategory={productByCategory}
-              />
-            )}
-            {menu === "3" && (
-              <Menu1
-                name={"Menu non solo birra"}
-                img={"bg-menu-3"}
-                productByCategory={productByCategory}
-              />
-            )}
-            {menu === "4" && (
-              <Menu1
-                name={"Cocktails"}
-                img={"bg-menu-4"}
-                productByCategory={productByCategory}
-              />
-            )}
+            }
           </div>
         </div>
       </div>

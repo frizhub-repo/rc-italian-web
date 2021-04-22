@@ -9,16 +9,31 @@ import Footer from "../Footer";
 import axiosIntance from "../../utils/axios-configured";
 import { useSelector } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  category: {
+    fontWeight: "bold",
+    fontSize: "15px",
+    cursor: "pointer",
+  },
+  selected: {
+    color: "#C8A97E",
+    borderBottom: "5px solid #C8A97E",
+  },
+}));
 
 function Delivery() {
-  const [products, setProducts] = useState([]);
+  const classes = useStyles();
   const [item, setItem] = useState({});
+  const [key, setKey] = useState(0);
+  const [category, setCategory] = useState([]);
   const { loading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
     axiosIntance
-      .get("/api/v1/products/customers")
+      .get("/api/v1/product/customers/public")
       .then((res) => {
-        setProducts(res.data.data);
+        setCategory(res.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -92,6 +107,65 @@ function Delivery() {
               </div>
             </Carousel>
             <div className="w-full divide-y divide-gray-300 divide-dashed ">
+              <Carousel
+                additionalTransfrom={0}
+                arrows
+                autoPlaySpeed={3000}
+                centerMode={false}
+                className=""
+                containerClass="container"
+                dotListClass=""
+                draggable
+                focusOnSelect={false}
+                infinite={false}
+                itemClass=""
+                keyBoardControl
+                minimumTouchDrag={80}
+                // partialVisible
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                responsive={{
+                  desktop: {
+                    breakpoint: {
+                      max: 3000,
+                      min: 1024,
+                    },
+                    items: 4,
+                    partialVisibilityGutter: 40,
+                  },
+                  mobile: {
+                    breakpoint: {
+                      max: 464,
+                      min: 0,
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 30,
+                  },
+                  tablet: {
+                    breakpoint: {
+                      max: 1024,
+                      min: 464,
+                    },
+                    items: 2,
+                    partialVisibilityGutter: 30,
+                  },
+                }}
+                showDots={false}
+                sliderClass=""
+                slidesToSlide={1}
+                swipeable
+              >
+                {category?.map((categry, index) => (
+                  <p
+                    className={`${classes.category} ${
+                      key === index && classes.selected
+                    }`}
+                    onClick={() => setKey(index)}
+                  >
+                    {categry?.name}
+                  </p>
+                ))}
+              </Carousel>
               {loading &&
                 [1, 2, 3].map(() => (
                   <Skeleton
@@ -101,12 +175,18 @@ function Delivery() {
                     height={100}
                   />
                 ))}
-              {products.length > 0 &&
-                products.map((product) => {
-                  if(product?.title === item?.name) {
-                    return <Product product={product} item={item} setItem={setItem}/>
-                  } else{
-                    return <Product product={product} />
+              {category &&
+                category?.[key]?.products.map((product, index) => {
+                  if (product?.title === item?.name) {
+                    return (
+                      <Product
+                        product={product}
+                        item={item}
+                        setItem={setItem}
+                      />
+                    );
+                  } else {
+                    return <Product product={product} />;
                   }
                 })}
             </div>
