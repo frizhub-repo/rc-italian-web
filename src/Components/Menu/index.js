@@ -43,7 +43,7 @@ function Menu() {
               <Menu1
                 name={productByCategory?.[key]?.title}
                 img={"bg-menu-1"}
-                productByCategory={productByCategory?.[key]?.category}
+                productByCategory={productByCategory?.[key]?.items}
               />
             }
           </div>

@@ -16,7 +16,7 @@ function Menu1({ name, img, productByCategory }) {
           productByCategory?.map((item) => (
             <div key={item?._id}>
               <h6 className="text-sm text-left font-weight-bold text-gold">
-                {item?.name}
+                {item?.category?.name}
               </h6>
               {item?.products?.map((product) => (
                 <div className="d-flex justify-content-between p-0 list-disc mb-0">

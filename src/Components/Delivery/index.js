@@ -162,7 +162,7 @@ function Delivery() {
                     }`}
                     onClick={() => setKey(index)}
                   >
-                    {categry?.name}
+                    {categry?.category?.name}
                   </p>
                 ))}
               </Carousel>
