@@ -75,31 +75,34 @@ function Contact() {
                   Opening Hours
                 </h1>
                 <div className=" w-full p-1 divide-y divide-dashed divide-gray-300 ">
-                  {openingHours.length
-                    ? openingHours.map((item, index) => (
-                        <div
-                          className=" d-flex justify-content-around pt-2"
-                          key={index}
-                        >
-                          <p className=" font-weight-bold flex-grow-1 text-xs">
-                            {item?.openDay}
-                          </p>
-                          <p className="text-xs">
-                            {item?.openTime} - {item?.closeTime}
-                          </p>
-                        </div>
-                      ))
-                    : [1, 2, 3, 4, 5].map(() => (
-                        <Skeleton
-                          variant="rect"
-                          width={585}
-                          height={55}
-                          style={{
-                            borderBottom: "2px dashed",
-                            marginTop: "10px",
-                          }}
-                        />
-                      ))}
+                  {!openingHours &&
+                    [1, 2, 3, 4, 5].map(() => (
+                      <Skeleton
+                        variant="rect"
+                        height={55}
+                        style={{
+                          borderBottom: "2px dashed",
+                          marginTop: "10px",
+                        }}
+                      />
+                    ))}
+                  {openingHours.length ? (
+                    openingHours.map((item, index) => (
+                      <div
+                        className=" d-flex justify-content-around pt-2"
+                        key={index}
+                      >
+                        <p className=" font-weight-bold flex-grow-1 text-xs">
+                          {item?.openDay}
+                        </p>
+                        <p className="text-xs">
+                          {item?.openTime} - {item?.closeTime}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <span>No items</span>
+                  )}
                 </div>
               </div>
             </div>
