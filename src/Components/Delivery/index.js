@@ -31,7 +31,7 @@ function Delivery() {
   const { loading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
     axiosIntance
-      .get("/api/v1/product/customers/public")
+      .get("/api/v1/products/category/public")
       .then((res) => {
         setCategory(res.data.data);
       })
@@ -162,7 +162,7 @@ function Delivery() {
                     }`}
                     onClick={() => setKey(index)}
                   >
-                    {categry?.category?.name}
+                    {categry?.name}
                   </p>
                 ))}
               </Carousel>

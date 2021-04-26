@@ -13,11 +13,11 @@ function Product({ product, item, setItem }) {
     if (count > 0) {
       const item = {
         product: product._id,
-        price: product.price,
+        price: product?.sizes?.[0]?.price,
         quantity: count,
         name: product.title,
       };
-      const total = count * product.price;
+      const total = count * product?.sizes?.[0]?.price;
       disp(addItem(item));
       disp(setTotal(total));
       setCount(0);
@@ -52,7 +52,7 @@ function Product({ product, item, setItem }) {
                 {product?.title}
               </h1>
               <span className=" font-medium text-sm  text-gold">
-                {product?.price} €
+                {product?.sizes?.[0]?.price} €
               </span>
             </div>
             <OverlayTrigger
