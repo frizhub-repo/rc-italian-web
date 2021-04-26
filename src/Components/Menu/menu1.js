@@ -22,7 +22,7 @@ function Menu1({ name, img, productByCategory }) {
                 <div className="d-flex justify-content-between p-0 list-disc mb-0">
                   <p className="text-xs font-weight-light">{product?.title}</p>
                   <span className="text-sm  font-weight-bold text-gold">
-                    {product?.price} {product?.currency}
+                    {product?.sizes?.[0]?.price} {product?.currency}
                   </span>
                 </div>
               ))}
