@@ -28,8 +28,8 @@ function Contact() {
   useEffect(() => {
     const fetchGMBLocations = async () => {
       try {
-        const res = await getGoogleMyBusinessLocations();
-        setOpeningHours(res?.data?.data?.regularHours?.periods);
+        // const res = await getGoogleMyBusinessLocations();
+        // setOpeningHours(res?.data?.data?.regularHours?.periods);
       } catch (error) {
         console.log({ error });
       }
