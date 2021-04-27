@@ -4,7 +4,7 @@ import store from "../store";
 import { toast } from "react-toastify";
 
 let axiosIntance = axios.create({
-  baseURL: process.env.REACT_APP_LOCAL_URL,
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 export const setAuthHeader = (clientId, token) => {
