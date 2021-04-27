@@ -44,8 +44,8 @@ function Gallery() {
   const fetchSocialImages = async () => {
     try {
       setLoading(true);
-      const res = await getSocialImages();
-      setSocialImages(res?.data?.data);
+      // const res = await getSocialImages();
+      // setSocialImages(res?.data?.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
