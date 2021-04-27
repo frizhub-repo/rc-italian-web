@@ -12,6 +12,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import Footer from "../Footer";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -99,6 +100,8 @@ const useStyles = makeStyles((theme) => ({
 
 const OrdersReceived = () => {
   const classes = useStyles();
+  const total = useSelector((state) => state.orders).total;
+  const items = useSelector((state) => state.orders).items;
 
   return (
     <div>
@@ -276,7 +279,7 @@ const OrdersReceived = () => {
                     fontSize: "1.2rem",
                   }}
                 >
-                  €230
+                  € {total}
                 </label>
                 <div>
                   <ShoppingBasketIcon htmlColor="#656565" />
@@ -310,7 +313,7 @@ const OrdersReceived = () => {
                   fontSize: "10px",
                 }}
               >
-                {[1, 2].map((item, i) => (
+                {items.map((item, i) => (
                   <>
                     <Box
                       style={{
@@ -319,7 +322,7 @@ const OrdersReceived = () => {
                       }}
                     >
                       <div style={{ display: "flex" }}>
-                        <label>3x</label>
+                        <label>{item?.quantity}x</label>
                         <div
                           style={{
                             display: "flex",
@@ -329,23 +332,23 @@ const OrdersReceived = () => {
                           }}
                         >
                           <label style={{ marginBottom: "0px" }}>
-                            Fried Brussels + Apple
+                            {item?.name}
                           </label>
-                          <label style={{ marginBottom: "0px" }}>
+                          {/* <label style={{ marginBottom: "0px" }}>
                             Made for lunch
-                          </label>
-                          <label>deliver it quickly</label>
-                          <Box style={{ display: "flex", marginBotom: "10px" }}>
+                          </label> */}
+                          {/* <label>deliver it quickly</label> */}
+                          {/* <Box style={{ display: "flex", marginBotom: "10px" }}>
                             <div style={{ cursor: "pointer" }}>Edit</div>
                             <div
                               style={{ marginLeft: "11px", cursor: "pointer" }}
                             >
                               Remove
                             </div>
-                          </Box>
+                          </Box> */}
                         </div>
                       </div>
-                      <label>€ 23.0</label>
+                      <label>€ {item?.price}</label>
                     </Box>
                     {i !== [1, 2].length - 1 ? (
                       <Divider style={{ margin: "10px 0px" }} />
@@ -374,9 +377,9 @@ const OrdersReceived = () => {
                   <label>Total</label>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <label>€ 23.0</label>
+                  <label>€ {total}</label>
                   <label>€ .0</label>
-                  <label>€ 45.50</label>
+                  <label>€ {total}</label>
                 </div>
               </Box>
             </Paper>

@@ -28,8 +28,8 @@ export default function CompletePurchase() {
         .post("/api/v1/orders/customers", { products: items })
         .then((res) => {
           toast.success("Order created successfully");
-          disp(removeOrderItems());
-          history.push("/");
+          // disp(removeOrderItems());
+          history.push("/ordersreceived");
           console.log(res);
         })
         .catch((err) => console.log(err));
