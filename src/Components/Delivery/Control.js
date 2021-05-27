@@ -5,6 +5,9 @@ import axiosIntance from "../../utils/axios-configured";
 import { removeOrderItems, removeItem } from "../actions";
 import { useHistory } from "react-router";
 import IngredientsDialog from "../Common/IngerdientsDialog";
+import { useUserContext } from "../../Context/userContext";
+import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
+import ChooseDeliveryAddress from "./ChooseDeliveryAddress";
 
 function Control({ setItem }) {
   const [open, setOpen] = useState(false);
@@ -13,11 +16,18 @@ function Control({ setItem }) {
   const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
   const { loading } = useSelector((state) => state.loadingReducer);
+  const [openDelivery, setOpenDelivery] = useState(false);
+  const [visible, setVisible] = useState(false)
+  const { customer } = useUserContext();
   const disp = useDispatch();
   const history = useHistory();
 
   const orderNow = () => {
-    items.length > 0 && history.push("/complete/purchase");
+    if (customer?.addresses?.length === 0) {
+      setOpenDelivery(true);
+    } else {
+      items.length > 0 && setVisible(true) /* history.push("/complete/purchase"); */
+    }
     // items.length > 0 &&
     //   axiosIntance
     //     .post("/api/v1/orders/customers", { products: items })
@@ -126,7 +136,14 @@ function Control({ setItem }) {
       >
         ORDER NOW
       </button>
+      {openDelivery && (
+        <DeliveryAddressDialog
+          openDelivery={openDelivery}
+          setOpenDelivery={setOpenDelivery}
+        />
+      )}
       <IngredientsDialog open={open} setOpen={setOpen} />
+      <ChooseDeliveryAddress visible={visible} setVisible={setVisible} />
     </section>
   );
 }

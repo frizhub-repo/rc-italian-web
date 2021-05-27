@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Box, Button, CircularProgress, Backdrop } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -7,8 +7,19 @@ import axiosIntance from "../../utils/axios-configured";
 import Header from "../Account/Header";
 import { removeOrderItems } from "../actions";
 import SuccessModal from "../Common/SuccessDialog";
+import Tables from "../Common/Table";
+
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 export default function CompletePurchase() {
+  const classes = useStyles()
   const paypal = useRef();
   const disp = useDispatch();
   const history = useHistory();
@@ -17,26 +28,29 @@ export default function CompletePurchase() {
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
 
+  const [open, setOpen] = React.useState(false);
+ 
+
   const handleClose = () => setShow(false);
 
-  const createOrder = () => {
-    if (status === "ERROR") {
-      toast.error("Payment cancel for some reason. Please provide payment");
-    } else if (status === "COMPLETED") {
-      setStatus(null);
-      axiosIntance
-        .post("/api/v1/orders/customers", { products: items })
-        .then((res) => {
-          toast.success("Order created successfully");
-          // disp(removeOrderItems());
-          history.push("/ordersreceived");
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      toast.error("Payment not Added. Please Provide Payment");
-    }
-  };
+  // const createOrder = () => {
+  //   if (status === "ERROR") {
+  //     toast.error("Payment cancel for some reason. Please provide payment");
+  //   } else if (status === "COMPLETED") {
+  //     setStatus(null);
+  //     axiosIntance
+  //       .post("/api/v1/orders/customers", { products: items })
+  //       .then((res) => {
+  //         toast.success("Order created successfully");
+  //         // disp(removeOrderItems());
+  //         history.push("/ordersreceived");
+  //         console.log(res);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     toast.error("Payment not Added. Please Provide Payment");
+  //   }
+  // };
 
   useEffect(() => {
     var FUNDING_SOURCES = [
@@ -69,10 +83,23 @@ export default function CompletePurchase() {
           });
         },
         onApprove: async (data, actions) => {
+          setOpen(true)
           const order = await actions.order.capture();
           if (order?.status === "COMPLETED") {
-            toast.success("Payment got successfull");
             setStatus("COMPLETED");
+            axiosIntance
+              .post("/api/v1/orders/customers", { products: items })
+              .then((res) => {
+          setOpen(false)
+
+                toast.success("Order created successfully");
+                // disp(removeOrderItems());
+                history.push("/ordersreceived");
+                console.log(res);
+              })
+              .catch((err) =>{
+                setOpen(false)
+                console.log(err)});
           } else {
             setStatus("ERROR");
             toast.error("Something went wrong");
@@ -109,25 +136,35 @@ export default function CompletePurchase() {
   return (
     <div>
       <Header />
-      <Grid
+      <Box style={{ padding: "3rem" }}>
+        <Tables products={items} total={total} />
+      </Box>
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <div ref={paypal} style={{ display: "flex", width: "50%" }}></div>
+      </Box>
+      {/* <Grid
         container
         justify="center"
         alignItems="center"
         direction="column"
-        style={{ marginTop: "50px" }}
-      >
-        <Grid item>
+      > */}
+      {/* <Grid item>
           <Typography variant="h6" gutterBottom>
             How do you want to pay?
           </Typography>
         </Grid>
         <Grid item justify="flex-end" style={{ margin: '10px 0px 10px 0px' }}>
           Total amount: ${total}
-        </Grid>
-        <Grid item>
-          <div ref={paypal} style={{ display: "flex" }}></div>
-        </Grid>
-        <Grid item>
+        </Grid> */}
+      {/* <Grid item>
+          <div ref={paypal} style={{ display: "flex", width: "55%" }}></div>
+        </Grid> */}
+      {/* <Grid item>
           <Button
             style={{
               borderRadius: "15px",
@@ -140,14 +177,17 @@ export default function CompletePurchase() {
           >
             Complte Purchase
           </Button>
-        </Grid>
-      </Grid>
+        </Grid> */}
+      {/* </Grid> */}
       <SuccessModal
         show={show}
         handleClose={handleClose}
         text={"Order created successfully"}
         title={"Order"}
       />
+       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }
