@@ -122,7 +122,7 @@ function Control({ setItem }) {
           color: items.length === 0 ? "green" : "",
           backgroundColor: items.length === 0 ? "darkgray" : "",
         }}
-        disabled={items.length === 0 || loading}
+        disabled={items.length === 0}
       >
         ORDER NOW
       </button>
