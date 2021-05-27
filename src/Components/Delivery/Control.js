@@ -118,7 +118,11 @@ function Control({ setItem }) {
       <button
         className="w-full rounded-pill bg-black text-white text-center text-xs py-2 font-weight-light"
         onClick={orderNow}
-        disabled={loading}
+        style={{
+          color: items.length === 0 ? "green" : "",
+          backgroundColor: items.length === 0 ? "darkgray" : "",
+        }}
+        disabled={items.length === 0 || loading}
       >
         ORDER NOW
       </button>
