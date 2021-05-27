@@ -91,6 +91,7 @@ export default function DeliveryAddress() {
   const [openDelivery, setOpenDelivery] = useState(false);
   const [openEditDelivery, setOpenEditDelivery] = useState(false);
   const [address, setAddress] = useState({});
+  const [loeading, setLoading] = useState(false);
 
   const deleteAddress = async (id) => {
     const obj = { isDeleted: true };
@@ -107,17 +108,20 @@ export default function DeliveryAddress() {
 
   useEffect(() => {
     async function fetchDeliveryAddress() {
+      setLoading(true);
       try {
         const res = await getDeliveryAddress();
         disp({
           type: GET_DELIVERY_ADDRESS,
-          payload: res?.data?.data,
+          payload: res?.data?.data?.addresses,
         });
+        setLoading(false);
       } catch (error) {
         console.log({ error });
+        setLoading(false);
       }
     }
-    fetchDeliveryAddress()
+    fetchDeliveryAddress();
   }, []);
 
   return (
@@ -137,7 +141,7 @@ export default function DeliveryAddress() {
       </div>
       <Divider />
       <Grid container direction="row" spacing={2} className={classes.containr}>
-        {!deliveryAddress &&
+        {loeading &&
           [1, 2, 3].map(() => (
             <Skeleton
               variant="rect"
@@ -147,7 +151,7 @@ export default function DeliveryAddress() {
             />
           ))}
         {deliveryAddress &&
-          deliveryAddress.map((address, index) =>
+          deliveryAddress?.map((address, index) =>
             address?.isDeleted === false ? (
               <Grid item className={classes.root} key={index}>
                 <Paper className={classes.paper}>
