@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { editDeleteDeliveryAddress } from "../../api/DeliveryAddress";
 import { EDIT_DELIVERY_ADDRESS } from "../../utils/types";
+import { Spinner } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
   helperTextMargin: {
     marginLeft: "7px",
   },
+  spinner: { marginRight: "10px" },
 }));
 
 const DialogContent = withStyles((theme) => ({
@@ -124,6 +126,7 @@ export default function EditDeliveryAddressDialog({
   const classes = useStyles();
   const disp = useDispatch();
   const [services, setService] = useState(address.addressKey);
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       name: address.name,
@@ -136,17 +139,24 @@ export default function EditDeliveryAddressDialog({
       country: address.country,
       message: address.message,
     },
-  });  
+  });
 
   const deliveryAddressPayload = async (data) => {
+    setLoading(true);
     try {
-        data = { ...data, addressKey: services };
-        const res = await editDeleteDeliveryAddress(address._id, data);        
-        disp({ type: EDIT_DELIVERY_ADDRESS, payload: {id: address._id, res: res.data.data } });
-        setOpenEditDelivery(false);
-        toast.success("Address has been updated successfully");
+      data = { ...data, addressKey: services };
+      const res = await editDeleteDeliveryAddress(address._id, data);
+      disp({
+        type: EDIT_DELIVERY_ADDRESS,
+        payload: { id: address._id, res: data },
+      });
+      setOpenEditDelivery(false);
+      toast.success("Address has been updated successfully");
+      setLoading(false);
     } catch (error) {
       console.log({ error });
+      toast.error("Error updating address");
+      setLoading(false);
     }
   };
 
@@ -350,6 +360,13 @@ export default function EditDeliveryAddressDialog({
               className={classes.signInButton}
               type="submit"
             >
+              {loading && (
+                <Spinner
+                  animation="border"
+                  size="sm"
+                  className={classes.spinner}
+                />
+              )}
               continue
             </Button>
           </Box>

@@ -23,19 +23,19 @@ function Navbar() {
           className="md:ml-auto md:mr-auto flex w-full    justify-center"
           style={{  alignItems: "center" }}
         >
-          <Link to="/" className="mr-5 text-white text-xs">
+          <Link to="/" className="mr-5 text-black text-xs">
             HOME
           </Link>
-          <Link to="/menu/1" className="mr-5 text-white text-xs">
+          <Link to="/menu/1" className="mr-5 text-black text-xs">
             MENU
           </Link>
-          <Link to="/delivery" className="mr-5 text-white text-xs">
+          <Link to="/delivery" className="mr-5 text-black text-xs">
             DELIVERY
           </Link>
-          <Link to="/tableReservation" className="mr-5 text-white text-xs">
+          <Link to="/tableReservation" className="mr-5 text-black text-xs">
             TABLE RESERVATION
           </Link>
-          <Link to="contact" className="text-white text-xs mr-5">
+          <Link to="contact" className="text-black text-xs mr-5">
             CONTACT US
           </Link>
           {token ? (
