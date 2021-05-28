@@ -15,6 +15,9 @@
   }
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
