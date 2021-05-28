@@ -116,8 +116,7 @@ export default function Header({ setActiveTab, logout }) {
               }}
             />
             <p style={{ margin: "0px 9px 5px 0px", color: "white" }}>
-              {/* {customer?.firstName} {customer?.lastName}{" "} */}
-              Name
+              {customer?.firstName} {customer?.lastName}{" "}
             </p>
             <Avatar
               onClick={handleClick}
