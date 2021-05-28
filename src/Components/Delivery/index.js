@@ -28,14 +28,19 @@ function Delivery() {
   const [item, setItem] = useState({});
   const [key, setKey] = useState(0);
   const [category, setCategory] = useState([]);
-  const { loading } = useSelector((state) => state.loadingReducer);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     axiosIntance
       .get("/api/v1/products/category/public")
       .then((res) => {
         setCategory(res.data.data);
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
 
   return (

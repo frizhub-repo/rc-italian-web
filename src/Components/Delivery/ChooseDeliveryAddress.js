@@ -1,8 +1,9 @@
 import {
-    Box,
-    Button,
-    FormControlLabel,
-    Radio, RadioGroup
+  Box,
+  Button,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
 } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
@@ -11,7 +12,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { useUserContext } from "../../Context/userContext";
-
+import { addOrderAddress } from "../actions";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -54,7 +55,7 @@ export default function ChooseDeliveryAddress({ visible, setVisible }) {
 
   const handleSubmit = () => {
     if (value > -1) {
-      //   dispatch(addOrderAddress(customerData.addresses[parseInt(value)]));
+      disp(addOrderAddress(customer.addresses[parseInt(value)]));
       history.push("/complete/purchase");
     } else {
       setIsErr(true);

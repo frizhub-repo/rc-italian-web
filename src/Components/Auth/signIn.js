@@ -6,6 +6,7 @@ import { Box, TextField, Button, FormHelperText } from "@material-ui/core";
 import { customerSignIn } from "../../api/customer";
 import Facebook from "../../images/facebook.svg";
 import Google from "../../images/google.svg";
+import { useUserContext } from "../../Context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,11 +102,13 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn({ handleClose, check2 }) {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
+  const { setToken } = useUserContext();
 
   const signIn = async (data) => {
     try {
       const res = await customerSignIn(data);
       window.localStorage.setItem("token", res?.data?.data?.token);
+      setToken(res?.data?.data?.token)
       handleClose();
       toast.success(res?.data?.message);
     } catch (error) {

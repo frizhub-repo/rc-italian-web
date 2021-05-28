@@ -4,6 +4,7 @@ const initialState = {
   minimum: 0,
   delivery: 0,
   orders: [],
+  address: {},
 };
 
 export default function (state = initialState, action) {
@@ -41,6 +42,11 @@ export default function (state = initialState, action) {
         ...state,
         items: [],
         total: 0,
+      };
+    case "ADD_ORDER_ADDRESS":
+      return {
+        ...state,
+        address: action.payload,
       };
     case "TOTAL":
       return {
