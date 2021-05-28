@@ -19,3 +19,7 @@ export const removeItem = (item) => {
 export const removeOrderItems = () => {
   return { type: "REMOVE_ORDER_ITEMS" };
 };
+
+export const addOrderAddress = (payload) => {
+  return { type: "ADD_ORDER_ADDRESS", payload };
+};

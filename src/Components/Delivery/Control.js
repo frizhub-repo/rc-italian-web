@@ -8,6 +8,7 @@ import IngredientsDialog from "../Common/IngerdientsDialog";
 import { useUserContext } from "../../Context/userContext";
 import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
 import ChooseDeliveryAddress from "./ChooseDeliveryAddress";
+import AuthModal from "../Auth/authModal";
 
 function Control({ setItem }) {
   const [open, setOpen] = useState(false);
@@ -17,16 +18,22 @@ function Control({ setItem }) {
   const delivery = useSelector((state) => state.orders).delivery;
   const { loading } = useSelector((state) => state.loadingReducer);
   const [openDelivery, setOpenDelivery] = useState(false);
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const [authModalVisible, setAuthModalVisible] = useState(false);
   const { customer } = useUserContext();
   const disp = useDispatch();
   const history = useHistory();
 
   const orderNow = () => {
+    if (!Object.values(customer).length) {
+      setAuthModalVisible(true);
+      return;
+    }
     if (customer?.addresses?.length === 0) {
       setOpenDelivery(true);
     } else {
-      items.length > 0 && setVisible(true) /* history.push("/complete/purchase"); */
+      items.length > 0 &&
+        setVisible(true); /* history.push("/complete/purchase"); */
     }
     // items.length > 0 &&
     //   axiosIntance
@@ -37,6 +44,10 @@ function Control({ setItem }) {
     //       console.log(res);
     //     })
     //     .catch((err) => console.log(err));
+  };
+
+  const handleClose = () => {
+    setAuthModalVisible(false);
   };
 
   return (
@@ -144,6 +155,9 @@ function Control({ setItem }) {
       )}
       <IngredientsDialog open={open} setOpen={setOpen} />
       <ChooseDeliveryAddress visible={visible} setVisible={setVisible} />
+      {authModalVisible && (
+        <AuthModal open={authModalVisible} handleClose={handleClose} />
+      )}
     </section>
   );
 }

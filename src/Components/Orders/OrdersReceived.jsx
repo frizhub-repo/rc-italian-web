@@ -102,6 +102,7 @@ const OrdersReceived = () => {
   const classes = useStyles();
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
+  const address = useSelector((state) => state.orders).address;
 
   return (
     <div>
@@ -203,9 +204,11 @@ const OrdersReceived = () => {
                     lineHeight: "10px",
                   }}
                 >
-                  <label>North Fork Table & Inn 57225 Main Rd.</label>
-                  <label>Southold, NY 119717</label>
-                  <label>Fried Brussels + Apple</label>
+                  <label>
+                    {address?.addressLine1} {address?.city},{" "}
+                    {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
+                    {address?.country}
+                  </label>
                 </div>
               </Card>
 

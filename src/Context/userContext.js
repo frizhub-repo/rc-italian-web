@@ -16,11 +16,14 @@ export function UserProvider({ children }) {
   React.useEffect(() => {
     if (token) {
       try {
+        let decoded = jwtDecode(token);
+        if (Date.now() >= decoded.exp * 1000) {
+          throw Error("token expired");
+        }
         async function fetchCustomerinfo() {
           try {
-            axiosIntance.defaults.headers.common[
-              "Authorization"
-            ] = window.localStorage.getItem("token");
+            axiosIntance.defaults.headers.common["Authorization"] =
+              window.localStorage.getItem("token");
             const res = await axiosIntance.get("/api/v1/customers");
             disp({
               type: GET_DELIVERY_ADDRESS,
@@ -29,13 +32,10 @@ export function UserProvider({ children }) {
             setCustomer(res?.data?.data);
           } catch (error) {
             console.log({ error });
+            throw Error("Customer data now found");
           }
         }
         fetchCustomerinfo();
-        let decoded = jwtDecode(token);
-        if (Date.now() >= decoded.exp * 1000) {
-          throw Error("token expired");
-        }
       } catch (error) {
         console.log(error);
         localStorage.removeItem("token");
@@ -56,9 +56,7 @@ export function UserProvider({ children }) {
     fetchRestaurantInfo();
   }, []);
   return (
-    <UserContext.Provider
-      value={{ token, setToken, restaurant, customer }}
-    >
+    <UserContext.Provider value={{ token, setToken, restaurant, customer }}>
       {children}
     </UserContext.Provider>
   );

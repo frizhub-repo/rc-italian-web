@@ -9,17 +9,17 @@ import { removeOrderItems } from "../actions";
 import SuccessModal from "../Common/SuccessDialog";
 import Tables from "../Common/Table";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
+    color: "#fff",
   },
 }));
 
 export default function CompletePurchase() {
-  const classes = useStyles()
+  const classes = useStyles();
   const paypal = useRef();
   const disp = useDispatch();
   const history = useHistory();
@@ -27,10 +27,7 @@ export default function CompletePurchase() {
   const [show, setShow] = useState(false);
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
-
   const [open, setOpen] = React.useState(false);
- 
-
   const handleClose = () => setShow(false);
 
   // const createOrder = () => {
@@ -74,7 +71,7 @@ export default function CompletePurchase() {
             intent: "CAPTURE",
             purchase_units: [
               {
-                description: "Restaurant Club",
+                description: "Restaurants Club",
                 amount: {
                   value: total,
                 },
@@ -83,36 +80,39 @@ export default function CompletePurchase() {
           });
         },
         onApprove: async (data, actions) => {
-          setOpen(true)
+          setOpen(true);
           const order = await actions.order.capture();
           if (order?.status === "COMPLETED") {
             setStatus("COMPLETED");
             axiosIntance
               .post("/api/v1/orders/customers", { products: items })
               .then((res) => {
-          setOpen(false)
-
+                setOpen(false);
                 toast.success("Order created successfully");
                 // disp(removeOrderItems());
                 history.push("/ordersreceived");
                 console.log(res);
               })
-              .catch((err) =>{
-                setOpen(false)
-                console.log(err)});
+              .catch((err) => {
+                setOpen(false);
+                console.log(err);
+              });
           } else {
             setStatus("ERROR");
+            setOpen(false);
             toast.error("Something went wrong");
           }
           console.log({ order });
         },
         onError: (err) => {
           setStatus("ERROR");
+          setOpen(false);
           toast.error("Error occured while sending money");
           console.log({ err });
         },
         onCancel: (data) => {
           setStatus("ERROR");
+          setOpen(false);
           toast.error("Payment Cancel by User");
           console.log({ data });
         },
@@ -185,7 +185,7 @@ export default function CompletePurchase() {
         text={"Order created successfully"}
         title={"Order"}
       />
-       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+      <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>
