@@ -8,55 +8,78 @@ function Navbar() {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
   let { token, setToken } = useUserContext();
-  
+
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
   });
-  
+
   return (
-    <header className="text-gray-700 body-font w-full ">
-      <div className=" mx-auto flex   justify-content-center w-full">
-        <div
-          className="md:ml-auto md:mr-auto flex w-full    justify-center"
-          style={{  alignItems: "center" }}
+    <nav
+      className="navbar fixed-top navbar-expand-lg navbar-dark"
+      style={{ background: "#B29051" }}
+    >
+      <div className="container-fluid">
+        <Link className="btn btn-outline-light navbar-brand" to="/">
+          Logo
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <Link to="/" className="mr-5 text-black text-xs">
-            HOME
-          </Link>
-          <Link to="/menu/1" className="mr-5 text-black text-xs">
-            MENU
-          </Link>
-          <Link to="/delivery" className="mr-5 text-black text-xs">
-            DELIVERY
-          </Link>
-          <Link to="/tableReservation" className="mr-5 text-black text-xs">
-            TABLE RESERVATION
-          </Link>
-          <Link to="contact" className="text-black text-xs mr-5">
-            CONTACT US
-          </Link>
-          {token ? (
-            <Avatar
-              alt="Cindy Baker"
-              className="cursor-pointer"
-              onClick={() => history.push("/profile")}
-              src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
+                HOME
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/menu/1" className="nav-link">
+                MENU
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/tableReservation" className="nav-link">
+                TABLE RESERVATION
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/delivery" className="nav-link">
+                DELIVERY
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/contact" className="nav-link">
+                CONTACT
+              </Link>
+            </li>
+          </ul>
+          <button
+            className="d-flex btn btn-lg btn-outline-light btn-rounded"
+            style={{ borderRadius: "20px" }}
+            onClick={handleClickOpen}
+          >
+            <img
+              src="assets/login.png"
+              width="20"
+              style={{ marginRight: "5px" }}
             />
-          ) : (
-            <button
-              className="rounded-pill d-inline border border-white -mt-2 py-2 px-4 mb-2 text-white text-center text-sm"
-              onClick={handleClickOpen}
-            >
-              LOGIN/SIGNUP
-            </button>
-          )}
+            Sign In/Sign Up
+          </button>
           <AuthModal open={open} handleClose={handleClose} />
         </div>
       </div>
-    </header>
+    </nav>
   );
 }
 
