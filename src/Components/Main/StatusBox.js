@@ -1,4 +1,6 @@
+import { useScrollTrigger } from "@material-ui/core";
 import React from "react";
+import { useScrollSection } from "react-scroll-section";
 
 const useStyles = () => ({
   container: {
@@ -17,6 +19,7 @@ const useStyles = () => ({
 
 export default function StatusBox({ isOpened }) {
   const styles = useStyles();
+  const openingHourSection = useScrollSection("opening-hour");
 
   return (
     <div style={styles.container}>
@@ -43,6 +46,7 @@ export default function StatusBox({ isOpened }) {
         <h4>From 12:00 - To 15:30</h4>
       </div>
       <button
+        onClick={openingHourSection.onClick}
         style={{
           ...styles.subContainer,
           background: "white",

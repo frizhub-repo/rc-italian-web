@@ -2,12 +2,12 @@ import React from "react";
 
 const useStyle = () => ({
   container: {
-    padding: "40px 60px",
+    padding: "60px",
     background: "#272727",
   },
   header: {
     fontFamily: "Clicker Script",
-    fontSize: "8vw",
+    fontSize: "10vw",
     color: "#B29051",
   },
   storyText: {
@@ -26,11 +26,11 @@ export default function Story() {
           <img src="assets/hero-logo.png" width={500} />
         </div>
         <div className="col col-md-6" style={styles.storyText}>
-          <h1 style={{ fontSize: "5vm" }}>
+          <h2 className="mb-4">
             Da Ciccio
             <br /> Italians do it better
-          </h1>
-          <p style={{ fontSize: "2vm" }}>
+          </h2>
+          <p>
             Restaurants range from inexpensive and informal lunching or dining
             places catering to people working nearby, with modest food served in
             simple settings at low prices, to expensive establishments serving

@@ -4,7 +4,6 @@ import ReserveTableForm from "./ReserveTableForm";
 
 const useStyle = () => ({
   container: {
-    width: "80%",
     backgroundColor: "white",
   },
 });
@@ -15,7 +14,7 @@ export default function ReserveTableCard() {
   return (
     <div style={styles.container} className="row">
       {/* left */}
-      <div className="col-12 col-lg-4 col-xl-6">
+      <div className="col-12 col-lg-6">
         {/* carousel */}
         <div className="row">
           <Carousel className="p-0">
@@ -36,7 +35,7 @@ export default function ReserveTableCard() {
         </div> */}
       </div>
       {/* right */}
-      <div className="col-12 col-lg-8 col-xl-6">
+      <div className="col-12 col-lg-6">
         <ReserveTableForm />
       </div>
     </div>
