@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import Navbar from "../Navbar/Navbar";
-import StatusBox from "./StatusBox";
 import { fetchAllResInfo } from "../../actions/appActions";
 import { useSelector, useDispatch } from "react-redux";
-import { Skeleton } from "@material-ui/lab";
-import { Link } from "react-router-dom";
+import StatusBox1 from "./StatusBox1";
+import StatusBox2 from "./StatusBox2";
 
-function Hero() {
+function Hero({ heroImage, showStatusBox, statusBoxFormat, height }) {
   const dispatch = useDispatch();
   const { restaurant } = useSelector((state) => state.appReducer);
   const { loading } = useSelector((state) => state.loadingReducer);
@@ -15,11 +13,10 @@ function Hero() {
   }, [dispatch]);
   return (
     <section>
-      <Navbar />
       <div
         style={{
-          backgroundImage: "url(assets/hero.png)",
-          height: "100vh",
+          backgroundImage: `url("${heroImage}")`,
+          height: `${height ?? "100vh"}`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -34,7 +31,12 @@ function Hero() {
           width={400}
           style={{ margin: "20px" }}
         />
-        <StatusBox isOpened={true} />
+        {showStatusBox &&
+          (statusBoxFormat === 1 ? (
+            <StatusBox1 isOpened={true} />
+          ) : (
+            <StatusBox2 isOpened={true} />
+          ))}
       </div>
     </section>
   );

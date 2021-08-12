@@ -1,20 +1,23 @@
 import React from "react";
 import { Section, ScrollingProvider } from "react-scroll-section";
-import "./index.css";
 import ReserveTable from "./ReserveTable";
-import Hero from "./Hero";
+import Hero from "../Body/Hero";
 import Story from "./Story";
 import FindUs from "./FindUs";
 import OpeningHours from "./OpeningHours";
-import Gallery from "./Gallery";
-import Testimonial from "./Testimonial";
+import Gallery from "../Body/Gallery";
+import Testimonial from "../Body/testimonial";
 
 function Main() {
   return (
     <div>
       <ScrollingProvider>
         <section>
-          <Hero />
+          <Hero
+            heroImage="assets/hero.png"
+            showStatusBox={true}
+            statusBoxFormat={1}
+          />
         </section>
         <section>
           <ReserveTable />

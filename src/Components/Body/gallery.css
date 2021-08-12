@@ -7,8 +7,24 @@
   padding: 10px 0px;
   /* padding-bottom: 10px; */
 }
-.col-5 > .row > .col-6 > img {
+
+#root
+  > div.App
+  > div
+  > section:nth-child(4)
+  > div
+  > div
+  > div.col-5
+  > div
+  > div.ScrollbarsCustom-Wrapper
+  > div
+  > div
+  > .pr-3
+  > .row
+  > .col-6
+  > img {
   width: 90%;
+  margin-bottom: 10px;
   border-radius: 20px;
 }
 
