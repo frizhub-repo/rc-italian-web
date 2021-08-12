@@ -1,0 +1,46 @@
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(1)
+  > div:nth-child(2)
+  > div
+  > div
+  > nav {
+  background-color: #b29051;
+  display: flex;
+  justify-content: center;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(1)
+  > div:nth-child(2)
+  > div
+  > div
+  > nav
+  > a {
+  padding: 15px;
+  color: white;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(1)
+  > div:nth-child(2)
+  > div
+  > div
+  > nav
+  > a.nav-item.nav-link.active {
+  color: #b29051;
+}

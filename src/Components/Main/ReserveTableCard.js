@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import ReserveTableForm from "./ReserveTableForm";
+import ReserveTableMenu from "./ReserveTableMenu";
 
 const useStyle = () => ({
   container: {
@@ -17,7 +18,7 @@ export default function ReserveTableCard() {
       <div className="col-12 col-lg-6">
         {/* carousel */}
         <div className="row">
-          <Carousel className="p-0">
+          <Carousel className="p-0" interval={5000}>
             <Carousel.Item>
               <img className="d-block w-100" src="assets/carousel-img1.png" />
             </Carousel.Item>
@@ -30,9 +31,9 @@ export default function ReserveTableCard() {
           </Carousel>
         </div>
         {/* menu list */}
-        {/* <div className="row">
-          <h1>Hello</h1>
-        </div> */}
+        <div className="d-none d-md-block row">
+          <ReserveTableMenu />
+        </div>
       </div>
       {/* right */}
       <div className="col-12 col-lg-6">
