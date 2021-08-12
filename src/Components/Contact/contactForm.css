@@ -1,0 +1,20 @@
+label {
+  color: white;
+  background: #b29051;
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+input[type="text"] {
+  padding: 30px 20px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+iframe {
+  border-radius: 10px;
+}
+
+div > p > span {
+  color: #b29051;
+}

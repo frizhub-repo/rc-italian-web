@@ -13,7 +13,9 @@ function Main() {
   return (
     <div>
       <ScrollingProvider>
-        <Hero />
+        <section>
+          <Hero />
+        </section>
         <section>
           <ReserveTable />
         </section>
