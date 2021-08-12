@@ -1,0 +1,31 @@
+table {
+  margin-top: 30px;
+}
+
+td,
+th {
+  padding: 10px 0px;
+  width: 50%;
+  border: 2px solid #997b44;
+}
+
+table tr:nth-child(2) {
+  background-color: #b91010;
+}
+
+tr {
+  background-color: #b29051;
+}
+
+table th {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
