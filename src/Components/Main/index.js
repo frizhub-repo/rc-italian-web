@@ -6,7 +6,7 @@ import Story from "./Story";
 import FindUs from "./FindUs";
 import OpeningHours from "./OpeningHours";
 import Gallery from "../Body/Gallery";
-import Testimonial from "../Body/testimonial";
+import Testimonial from "../Body/Testimonial";
 
 function Main() {
   return (

@@ -12,6 +12,7 @@ import CompletePurchase from "./Components/Delivery/CompletePurchase";
 import Custom from "./Components/Account/CustomHeader";
 import OrdersReceived from "./Components/Orders/OrdersReceived";
 import Navbar from "./Components/Navbar/Navbar";
+import TableReservation from "./Components/TableReservation";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Main} />
           <Route path="/profile" exact component={Profile} />
-          <Route path="/tableReservation" exact component={Home} />
+          <Route path="/tableReservation" exact component={TableReservation} />
           <Route path="/contact" exact component={Contact} />
           <Route path="/menu" exact component={Menu} />
           <Route path="/delivery" exact component={Delivery} />
