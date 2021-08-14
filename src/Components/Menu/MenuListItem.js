@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const useStyle = () => ({
   container: {
-    maxHeight: "30vh",
-    overflowY: "scroll",
+    background: "white",
+    borderRadius: "10px",
   },
   mainText: {
     color: "#B29051",
@@ -11,44 +11,9 @@ const useStyle = () => ({
   },
 });
 
-export default function ReserveTableMenuList() {
+export default function MenuListItem() {
   const styles = useStyle();
   const [items, setItems] = useState([
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
     {
       name: "Linguine ai frutti di mare",
       detail: "Pasta di grano, cozze, vongole, calamari",

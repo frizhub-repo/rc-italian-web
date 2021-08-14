@@ -3,7 +3,7 @@ import MenuSelector from "./MenuSelector";
 
 const useStyle = () => ({
   container: {
-    padding: "30px 60px",
+    paddingBottom: "20px",
     background: "#272727",
     display: "flex",
     flexDirection: "column",

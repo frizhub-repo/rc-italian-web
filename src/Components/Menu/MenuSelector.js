@@ -36,7 +36,7 @@ export default function MenuSelector() {
   }
 
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center">
       <div className="d-flex justify-content-between">
         <button
           onClick={(e) => handleButtonClick(0)}
