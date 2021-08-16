@@ -1,10 +1,9 @@
 import React from "react";
 import Gallery from "../Body/Gallery";
 import Hero from "../Body/Hero";
-import Testimonial from "../Body/Testimonial";
+import Testimonial from "../Body/testimonial";
 import Info from "./Info";
 import OptionSelection from "./OptionSelection";
-import OptionSelector from "./OptionSelector";
 import Status from "./Status";
 
 export default function TableReservation() {
