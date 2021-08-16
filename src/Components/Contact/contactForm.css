@@ -1,4 +1,33 @@
-label {
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > div.row.d-flex.justify-content-between
+  > div
+  > label {
+  color: white;
+  background: #b29051;
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > div.d-flex.flex-column.pb-4
+  > label {
   color: white;
   background: #b29051;
   font-size: 24px;
@@ -9,6 +38,27 @@ label {
 input[type="text"] {
   padding: 30px 20px;
   border-radius: 0px 0px 10px 10px;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(1)
+  > div
+  > form
+  > div:nth-child(3)
+  > button {
+  border: 3px solid #b29051;
+  width: 100%;
+  background-color: white;
+  color: #b29051;
+  border-radius: 10px;
+  font-size: 30px;
+  padding: 10px;
+  margin: 20px 0px;
 }
 
 iframe {

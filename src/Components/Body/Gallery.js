@@ -1,75 +1,153 @@
-import React from 'react'
+import React, { useState } from "react";
+import { Scrollbar } from "react-scrollbars-custom";
+import "./gallery.css";
 
-function Gallery() {
-return(
-    <section className="text-gray-700 body-font w-full">
-        <div className="container  py-4 mx-auto w-full">
-            <div className="flex flex-col text-left w-full mb-4">
-                <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">User photos</h1>
+const useStyle = () => ({
+  container: {
+    padding: "30px 60px",
+    background: "#272727",
+  },
+  header: {
+    fontFamily: "Clicker Script",
+    fontSize: "10vw",
+    color: "#B29051",
+  },
+  gallery: {
+    marginTop: "20px",
+    background: "#B29051",
+    padding: "30px",
+    borderRadius: "20px",
+  },
+  images: {
+    maxHeight: "60vh",
+  },
+  previewImage: {
+    width: "100%",
+  },
+});
 
+export default function Gallery() {
+  const styles = useStyle();
+  const [selected, setSelected] = useState(1);
+  const [images, setImages] = useState([
+    { src: "assets/gallery-image.png", selected: true },
+    { src: "assets/gallery-image.png", selected: false },
+    { src: "assets/gallery-image.png", selected: false },
+    { src: "assets/gallery-image.png", selected: false },
+    { src: "assets/gallery-image.png", selected: false },
+    { src: "assets/gallery-image.png", selected: false },
+    { src: "assets/gallery-image.png", selected: false },
+    { src: "assets/gallery-image.png", selected: false },
+  ]);
+
+  function handleImageClick(e) {
+    setSelected(e.target.id);
+    setImages(
+      images.map((image, index) => ({
+        src: image.src,
+        selected: e.target.id == index + 1,
+      }))
+    );
+  }
+
+  return (
+    <div className="d-none d-md-block" style={styles.container}>
+      <h1 style={styles.header}>Photo Gallery</h1>
+
+      {/* Gallery */}
+      <div style={styles.gallery} className="row">
+        {/* Images */}
+        <div style={styles.images} className="col-5">
+          <Scrollbar style={{ width: "100%", height: "100%" }}>
+            <div className="pr-3">
+              <div className="row">
+                <div className="col-6">
+                  <img
+                    id={1}
+                    className={images[0].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[0].src}
+                    width={420}
+                  />
+                </div>
+                <div className="col-6">
+                  <img
+                    id={2}
+                    className={images[1].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[1].src}
+                    width={420}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <img
+                    id={3}
+                    className={images[2].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[2].src}
+                    width={420}
+                  />
+                </div>
+                <div className="col-6">
+                  <img
+                    id={4}
+                    className={images[3].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[3].src}
+                    width={420}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <img
+                    id={5}
+                    className={images[4].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[4].src}
+                    width={420}
+                  />
+                </div>
+                <div className="col-6">
+                  <img
+                    id={6}
+                    className={images[5].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[5].src}
+                    width={420}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <img
+                    id={7}
+                    className={images[6].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[6].src}
+                    width={420}
+                  />
+                </div>
+                <div className="col-6">
+                  <img
+                    id={8}
+                    className={images[7].selected ? "" : "opacity-50"}
+                    onClick={handleImageClick}
+                    src={images[7].src}
+                    width={420}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="flex flex-wrap w-full h-full ">
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1  h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-                <div className="lg:w-1/4 sm:w-1/3 p-1 h-full ">
-                    <div className="flex ">
-                        <img alt="gallery" className=" w-full h-full  object-center"
-                             src="https://dummyimage.com/600x360"/>
-
-                    </div>
-                </div>
-
-            </div>
+          </Scrollbar>
         </div>
-    </section>
-)
+        {/* Preview */}
+        <div className="col-7">
+          <img style={styles.previewImage} src={images[selected - 1].src} />
+        </div>
+      </div>
+    </div>
+  );
 }
-export default Gallery
-

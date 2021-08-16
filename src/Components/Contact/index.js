@@ -1,12 +1,16 @@
 import React from "react";
-import Hero from "./Hero";
+import Hero from "../Body/Hero";
 import Touch from "./Touch";
 
 export default function index() {
   return (
     <div>
       <section>
-        <Hero />
+        <Hero
+          heroImage="assets/contact-hero.png"
+          showStatusBox={false}
+          height="80vh"
+        />
       </section>
       <section>
         <Touch />

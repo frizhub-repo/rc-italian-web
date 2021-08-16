@@ -11,18 +11,19 @@ import Profile from "./Components/Account/index";
 import CompletePurchase from "./Components/Delivery/CompletePurchase";
 import Custom from "./Components/Account/CustomHeader";
 import OrdersReceived from "./Components/Orders/OrdersReceived";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
-
   return (
     <div className="App">
       <Router>
+        <Navbar />
         <Switch>
           <Route path="/" exact component={Main} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/tableReservation" exact component={Home} />
           <Route path="/contact" exact component={Contact} />
-          <Route path="/menu/:id" exact component={Menu} />
+          <Route path="/menu" exact component={Menu} />
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/customer/reservation" exact component={Reservation} />
           <Route path="/customer/order" exact component={Order} />

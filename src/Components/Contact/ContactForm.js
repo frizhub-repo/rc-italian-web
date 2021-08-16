@@ -19,6 +19,9 @@ export default function ContactForm() {
           <label>Message</label>
           <input type="text" />
         </div>
+        <div>
+          <button type="submit">SUBMIT</button>
+        </div>
       </form>
     </div>
   );
