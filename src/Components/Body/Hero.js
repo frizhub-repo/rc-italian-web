@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { fetchAllResInfo } from "../../actions/appActions";
 import { useSelector, useDispatch } from "react-redux";
-import StatusBox1 from "./StatusBox1";
-import StatusBox2 from "./StatusBox2";
+import StatusBoxHome from "./StatusBoxHome";
+import StatusBoxMenu from "./StatusBoxMenu";
 
 function Hero({ heroImage, showStatusBox, statusBoxFormat, height }) {
   const dispatch = useDispatch();
@@ -32,10 +32,10 @@ function Hero({ heroImage, showStatusBox, statusBoxFormat, height }) {
           style={{ margin: "20px" }}
         />
         {showStatusBox &&
-          (statusBoxFormat === 1 ? (
-            <StatusBox1 isOpened={true} />
+          (statusBoxFormat === "home" ? (
+            <StatusBoxHome isOpened={true} />
           ) : (
-            <StatusBox2 isOpened={true} />
+            <StatusBoxMenu isOpened={true} />
           ))}
       </div>
     </section>

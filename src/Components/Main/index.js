@@ -16,7 +16,7 @@ function Main() {
           <Hero
             heroImage="assets/hero.png"
             showStatusBox={true}
-            statusBoxFormat={1}
+            statusBoxFormat={"home"}
           />
         </section>
         <section>

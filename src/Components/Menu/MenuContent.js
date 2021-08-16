@@ -20,12 +20,12 @@ const useStyle = () => ({
   },
 });
 
-export default function MenuContent() {
+export default function MenuContent({ selected }) {
   const styles = useStyle();
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.header}>Lunch Menu</h1>
+      <h1 style={styles.header}>{selected}</h1>
       <div style={styles.menus} className="row">
         <div className="col-sm-12 col-lg-6">
           <MenuListItem header="Primi Piatti" />

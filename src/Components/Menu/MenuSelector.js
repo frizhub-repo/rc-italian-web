@@ -62,7 +62,7 @@ export default function MenuSelector() {
           <img src="assets/menu-right.png" style={styles.menuButton} />
         </button>
       </div>
-      <MenuContent />
+      <MenuContent selected={options[selected]} />
     </div>
   );
 }

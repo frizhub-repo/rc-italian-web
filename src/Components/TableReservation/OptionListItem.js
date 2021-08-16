@@ -11,7 +11,7 @@ const useStyle = () => ({
   },
 });
 
-export default function MenuListItem({ header }) {
+export default function OptionListItem({ header }) {
   const styles = useStyle();
   const [items, setItems] = useState([
     {
