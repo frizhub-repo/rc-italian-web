@@ -20,7 +20,7 @@ function Menu() {
         <Hero
           heroImage="assets/hero.png"
           showStatusBox={true}
-          statusBoxFormat={2}
+          statusBoxFormat={"menu"}
         />
       </section>
       <section>
