@@ -3,6 +3,9 @@ import Gallery from "../Body/Gallery";
 import Hero from "../Body/Hero";
 import Testimonial from "../Body/Testimonial";
 import Info from "./Info";
+import OptionSelection from "./OptionSelection";
+import OptionSelector from "./OptionSelector";
+import Status from "./Status";
 
 export default function TableReservation() {
   return (
@@ -16,6 +19,12 @@ export default function TableReservation() {
       </section>
       <section>
         <Info />
+      </section>
+      <section>
+        <OptionSelection />
+      </section>
+      <section>
+        <Status />
       </section>
       <section>
         <Gallery />
