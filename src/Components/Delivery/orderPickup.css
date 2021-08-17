@@ -1,0 +1,25 @@
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(2)
+  > div:nth-child(2)
+  > div.d-flex.justify-content-between {
+  cursor: pointer;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div:nth-child(2)
+  > div:nth-child(2)
+  > div.d-flex.justify-content-between.active {
+  background-color: #272727;
+  color: #b29051;
+  border-radius: 20px;
+}
