@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Scrollbar } from "react-scrollbars-custom";
-import "./gallery.css";
+import classes from "./gallery.module.css";
 
 const useStyle = () => ({
   container: {
@@ -30,14 +30,14 @@ export default function Gallery() {
   const styles = useStyle();
   const [selected, setSelected] = useState(1);
   const [images, setImages] = useState([
-    { src: "assets/gallery-image.png", selected: true },
-    { src: "assets/gallery-image.png", selected: false },
-    { src: "assets/gallery-image.png", selected: false },
-    { src: "assets/gallery-image.png", selected: false },
-    { src: "assets/gallery-image.png", selected: false },
-    { src: "assets/gallery-image.png", selected: false },
-    { src: "assets/gallery-image.png", selected: false },
-    { src: "assets/gallery-image.png", selected: false },
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
+    "assets/gallery-image.png",
   ]);
 
   function handleImageClick(e) {
@@ -61,91 +61,25 @@ export default function Gallery() {
           <Scrollbar style={{ width: "100%", height: "100%" }}>
             <div className="pr-3">
               <div className="row">
-                <div className="col-6">
-                  <img
-                    id={1}
-                    className={images[0].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[0].src}
-                    width={420}
-                  />
-                </div>
-                <div className="col-6">
-                  <img
-                    id={2}
-                    className={images[1].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[1].src}
-                    width={420}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <img
-                    id={3}
-                    className={images[2].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[2].src}
-                    width={420}
-                  />
-                </div>
-                <div className="col-6">
-                  <img
-                    id={4}
-                    className={images[3].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[3].src}
-                    width={420}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <img
-                    id={5}
-                    className={images[4].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[4].src}
-                    width={420}
-                  />
-                </div>
-                <div className="col-6">
-                  <img
-                    id={6}
-                    className={images[5].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[5].src}
-                    width={420}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <img
-                    id={7}
-                    className={images[6].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[6].src}
-                    width={420}
-                  />
-                </div>
-                <div className="col-6">
-                  <img
-                    id={8}
-                    className={images[7].selected ? "" : "opacity-50"}
-                    onClick={handleImageClick}
-                    src={images[7].src}
-                    width={420}
-                  />
-                </div>
+                {images.map((image, index) => (
+                  <div className="col-6">
+                    <img
+                      className={`${classes.image} ${
+                        selected === index ? "" : "opacity-50"
+                      }`}
+                      onClick={(e) => setSelected(index)}
+                      src={image}
+                      width={420}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </Scrollbar>
         </div>
         {/* Preview */}
         <div className="col-7">
-          <img style={styles.previewImage} src={images[selected - 1].src} />
+          <img style={styles.previewImage} src={images[selected]} />
         </div>
       </div>
     </div>

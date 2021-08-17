@@ -8,7 +8,6 @@ import Delivery from "./Components/Delivery/index";
 import Reservation from "./Components/Lists/Reservations";
 import Order from "./Components/Lists/Order";
 import Profile from "./Components/Account/index";
-import CompletePurchase from "./Components/Delivery/CompletePurchase";
 import Custom from "./Components/Account/CustomHeader";
 import OrdersReceived from "./Components/Orders/OrdersReceived";
 import Navbar from "./Components/Navbar/Navbar";
@@ -28,8 +27,6 @@ function App() {
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/customer/reservation" exact component={Reservation} />
           <Route path="/customer/order" exact component={Order} />
-          <Route path="/complete/purchase" exact component={CompletePurchase} />
-          <Route path="/custom" exact component={Custom} />
           <Route path="/ordersreceived" exact component={OrdersReceived} />
           <Route
             path="*"
