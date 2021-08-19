@@ -1,0 +1,14 @@
+.option {
+  width: 100px;
+  cursor: pointer;
+}
+
+.option_un_active {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.option_active {
+  color: #b29051;
+  border-bottom: 1px solid #b29051;
+}

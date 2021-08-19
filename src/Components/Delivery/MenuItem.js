@@ -59,6 +59,8 @@ export default function MenuItem({
   allergeni,
   ingredients,
   tags,
+  discountGenre,
+  isDeal,
 }) {
   const styles = useStyle();
 
@@ -79,7 +81,13 @@ export default function MenuItem({
         className="d-flex justify-content-between p-1"
         style={styles.detailsContainer}
       >
-        {/* <p className={classes.discount}>15</p> */}
+        {isDeal ? (
+          <div className={classes.discount_container}>
+            <p className={classes.discount}>-15%</p>
+          </div>
+        ) : (
+          ""
+        )}
         {/* image container */}
         <div className="d-none d-sm-flex" style={styles.imageContainer}>
           <img style={styles.image} src="assets/placeholder.png" width={100} />

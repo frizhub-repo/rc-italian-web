@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuItem from "./MenuItem";
-import { Scrollbar } from "react-scrollbars-custom";
 
 const useStyle = () => ({
   container: {
@@ -11,7 +10,7 @@ const useStyle = () => ({
   },
 });
 
-export default function MenuList() {
+export default function MenuList({ isDeal, discountGenre }) {
   const styles = useStyle();
 
   const [items, setItems] = useState([
@@ -59,13 +58,17 @@ export default function MenuList() {
     },
   ]);
 
+  useEffect(() => {
+    console.log(isDeal, discountGenre);
+  });
+
   return (
     <div style={styles.container}>
       <bold className="h1">Primi Piatti</bold>
       <div className="row">
         {items.map((item) => (
           <div className="col-md-6">
-            <MenuItem {...item} />
+            <MenuItem {...item} discountGenre={discountGenre} isDeal={isDeal} />
           </div>
         ))}
       </div>

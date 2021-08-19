@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DicountGenre from "./DicountGenre";
 import MealType from "./MealType";
 import MenuOption from "./MenuOption";
 
@@ -19,7 +20,13 @@ const useStyle = () => ({
 
 export default function MealMenu() {
   const styles = useStyle();
+
+  const [genreSelected, setGenreSelected] = useState(0);
   const [optionSelected, setOptionSelected] = useState(2);
+
+  function handleClickGenre(id) {
+    setGenreSelected(id);
+  }
 
   function handleClickOption(id) {
     setOptionSelected(id);
@@ -29,7 +36,16 @@ export default function MealMenu() {
     <div style={styles.container}>
       <div style={styles.innerContainer}>
         <MenuOption selected={optionSelected} handleClick={handleClickOption} />
-        <MealType />
+        {(optionSelected === 0 || optionSelected === 1) && (
+          <DicountGenre
+            selected={genreSelected}
+            handleClick={setGenreSelected}
+          />
+        )}
+        <MealType
+          isDeal={optionSelected === 0 || optionSelected === 1}
+          discountGenre={genreSelected}
+        />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const useStyle = () => ({
   },
 });
 
-export default function MealType() {
+export default function MealType({ isDeal, discountGenre }) {
   const styles = useStyle();
   const [selected, setSelected] = useState(2);
   const [types, setTypes] = useState([
@@ -60,7 +60,7 @@ export default function MealType() {
           <img src="assets/menu-right.png" style={styles.menuButton} />
         </button>
       </div>
-      <MenuList />
+      <MenuList isDeal={isDeal} discountGenre={discountGenre} />
     </div>
   );
 }
