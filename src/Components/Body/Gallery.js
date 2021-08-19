@@ -40,16 +40,6 @@ export default function Gallery() {
     "assets/gallery-image.png",
   ]);
 
-  function handleImageClick(e) {
-    setSelected(e.target.id);
-    setImages(
-      images.map((image, index) => ({
-        src: image.src,
-        selected: e.target.id == index + 1,
-      }))
-    );
-  }
-
   return (
     <div className="d-none d-md-block" style={styles.container}>
       <h1 style={styles.header}>Photo Gallery</h1>

@@ -1,0 +1,13 @@
+.tag_un_active {
+  filter: grayscale(1);
+}
+
+.size_active {
+  color: rgb(178, 144, 81);
+  cursor: pointer;
+}
+
+.size_un_active {
+  cursor: pointer;
+  color: rgba(178, 144, 81, 0.6);
+}

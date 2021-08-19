@@ -1,0 +1,74 @@
+import React, { useState } from "react";
+import MenuItem from "./MenuItem";
+import { Scrollbar } from "react-scrollbars-custom";
+
+const useStyle = () => ({
+  container: {
+    marginTop: "30px",
+    background: "white",
+    padding: "10px",
+    borderRadius: "20px",
+  },
+});
+
+export default function MenuList() {
+  const styles = useStyle();
+
+  const [items, setItems] = useState([
+    {
+      price: "15€",
+      itemName: "Linguine ai frutti di mare",
+      allergeni: ["Farina", "Crostacei"],
+      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
+      tags: { vegan: true },
+    },
+    {
+      price: "15€",
+      itemName: "Linguine ai frutti di mare",
+      allergeni: ["Farina", "Crostacei"],
+      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
+      tags: { vegan: true },
+    },
+    {
+      price: "15€",
+      itemName: "Linguine ai frutti di mare",
+      allergeni: ["Farina", "Crostacei"],
+      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
+      tags: { vegan: true },
+    },
+    {
+      price: "15€",
+      itemName: "Linguine ai frutti di mare",
+      allergeni: ["Farina", "Crostacei"],
+      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
+      tags: { vegan: true },
+    },
+    {
+      price: "15€",
+      itemName: "Linguine ai frutti di mare",
+      allergeni: ["Farina", "Crostacei"],
+      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
+      tags: { vegan: true },
+    },
+    {
+      price: "15€",
+      itemName: "Linguine ai frutti di mare",
+      allergeni: ["Farina", "Crostacei"],
+      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
+      tags: { vegan: true },
+    },
+  ]);
+
+  return (
+    <div style={styles.container}>
+      <bold className="h1">Primi Piatti</bold>
+      <div className="row">
+        {items.map((item) => (
+          <div className="col-md-6">
+            <MenuItem {...item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

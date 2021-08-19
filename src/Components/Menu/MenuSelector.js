@@ -20,10 +20,6 @@ export default function MenuSelector() {
     "Drinks",
   ]);
 
-  function handleClick(e) {
-    setSelected(parseInt(e.target.id));
-  }
-
   function handleButtonClick(dir) {
     switch (dir) {
       case 0:
@@ -38,27 +34,20 @@ export default function MenuSelector() {
   return (
     <div className="d-flex flex-column align-items-center">
       <div className="d-flex justify-content-between">
-        <button
-          onClick={(e) => handleButtonClick(0)}
-          className="d-none d-md-block"
-        >
+        <button onClick={(e) => handleButtonClick(0)}>
           <img src="assets/menu-left.png" style={styles.menuButton} />
         </button>
-        <div className="d-flex justify-content-center shadow-lg row">
+        <div className="d-none d-md-flex justify-content-center shadow-lg row">
           {options.map((option, index) => (
             <button
-              id={index}
-              onClick={handleClick}
+              onClick={(e) => setSelected(index)}
               className={`lead col-auto ${selected === index && "active"}`}
             >
               {option}
             </button>
           ))}
         </div>
-        <button
-          onClick={(e) => handleButtonClick(1)}
-          className="d-none d-md-block"
-        >
+        <button onClick={(e) => handleButtonClick(1)}>
           <img src="assets/menu-right.png" style={styles.menuButton} />
         </button>
       </div>

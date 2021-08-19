@@ -15,7 +15,7 @@ export default function ReserveTableCard() {
   return (
     <div style={styles.container} className="row">
       {/* left */}
-      <div className="col-12 col-lg-6">
+      <div className="col-12 col-lg-6 pl-0">
         {/* carousel */}
         <div className="row">
           <Carousel className="p-0" interval={5000}>

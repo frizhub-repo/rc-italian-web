@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import MealOption from "./MealOption";
+import MealType from "./MealType";
+import MenuOption from "./MenuOption";
 
 const useStyle = () => ({
   container: {
@@ -9,9 +10,10 @@ const useStyle = () => ({
   innerContainer: {
     border: "5px solid #1d1d1d",
     borderRadius: "10px",
-    padding: "0px 20px",
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "0px 20px",
   },
 });
 
@@ -26,7 +28,8 @@ export default function MealMenu() {
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        <MealOption selected={optionSelected} handleClick={handleClickOption} />
+        <MenuOption selected={optionSelected} handleClick={handleClickOption} />
+        <MealType />
       </div>
     </div>
   );

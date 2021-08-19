@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classes from "./mealOption.module.css";
 
 const useStyle = () => ({
   optionsContainer: {
@@ -6,18 +7,17 @@ const useStyle = () => ({
     maxWidth: "800px",
     minWidth: "250px",
     color: "white",
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    border: "5px solid #1d1d1d",
+    background: "#272727",
+    border: "2px solid #1d1d1d",
     marginTop: "-5px",
   },
   optionContainer: {
     cursor: "pointer",
+    width: "20%",
   },
 });
 
-export default function MealOption({ selected, handleClick }) {
+export default function MenuOption({ selected, handleClick }) {
   const styles = useStyle();
 
   const [options, setOptions] = useState([
@@ -29,13 +29,16 @@ export default function MealOption({ selected, handleClick }) {
   ]);
 
   return (
-    <div style={styles.optionsContainer}>
+    <div
+      className="d-flex justify-content-around align-items-center"
+      style={styles.optionsContainer}
+    >
       {options.map((option, index) => (
         <div
           style={styles.optionContainer}
           onClick={(e) => handleClick(index)}
           className={`d-flex flex-column align-items-center justify-content-center ${
-            selected === index ? "active" : "un-active"
+            selected === index ? classes.active : classes.un_active
           }`}
         >
           <img src={option.image} width={50} />
