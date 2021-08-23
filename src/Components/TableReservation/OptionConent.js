@@ -19,6 +19,7 @@ const useStyle = () => ({
   menus: {
     maxHeight: "60vh",
     overflowY: "scroll",
+    padding: "10px",
   },
   groupContainer: {
     display: "flex",

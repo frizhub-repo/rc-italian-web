@@ -1,0 +1,9 @@
+.active {
+  border: 2px solid #1d1d1d;
+  transform: scale(1.1);
+  background-color: #272727;
+}
+
+.un_active {
+  filter: grayscale(100);
+}

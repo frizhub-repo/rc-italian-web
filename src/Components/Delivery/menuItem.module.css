@@ -1,0 +1,38 @@
+.tag_un_active {
+  filter: grayscale(1);
+}
+
+.size_active {
+  color: rgb(178, 144, 81);
+  cursor: pointer;
+}
+
+.size_un_active {
+  cursor: pointer;
+  color: rgba(178, 144, 81, 0.6);
+}
+
+.discount_container {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 20px 0px 0px 0px;
+  overflow: hidden;
+  display: flex;
+}
+
+.discount {
+  position: absolute;
+  top: -2px;
+  left: -18px;
+  background-color: #272727;
+  color: white;
+  transform: rotate(-45deg);
+  text-align: center;
+  padding-top: 5px;
+  margin: 0;
+  width: 60px;
+  font-size: 10px;
+}

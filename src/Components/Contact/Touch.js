@@ -1,5 +1,6 @@
 import React from "react";
 import ContactForm from "./ContactForm";
+import classes from "./contactForm.module.css";
 
 const useStyle = () => ({
   container: {
@@ -49,17 +50,18 @@ export default function Touch() {
               marginWidth="0"
               scrolling="no"
               src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-              style={{ width: "100%", height: "40vh" }}
+              className={classes.iframe}
             ></iframe>
             <div style={styles.contactDetail}>
               <p>
-                <span>Address: </span>Vis mario rossi Milan Italy
+                <span className={classes.title}>Address: </span>Vis mario rossi
+                Milan Italy
               </p>
               <p>
-                <span>Email: </span>starters@cafe.com
+                <span className={classes.title}>Email: </span>starters@cafe.com
               </p>
               <p>
-                <span>Phone: </span>33344455566
+                <span className={classes.title}>Phone: </span>33344455566
               </p>
             </div>
           </div>
