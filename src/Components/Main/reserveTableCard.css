@@ -1,0 +1,35 @@
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div.col-12.col-lg-6.px-0
+  > div:nth-child(1)
+  > div {
+  margin: 0px;
+  max-width: 100%;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div.col-12.col-lg-6.px-0
+  > div:nth-child(1) {
+  max-width: 100%;
+}
+
+#root
+  > div.App
+  > div
+  > section:nth-child(2)
+  > div
+  > div
+  > div.col-12.col-lg-6.px-0
+  > div.d-none.d-md-block.row {
+  max-width: 100%;
+  margin: 0px;
+}

@@ -18,7 +18,8 @@ const useStyle = () => ({
     borderRadius: "20px",
   },
   contactDetail: {
-    marginTop: "20px",
+    width: "100%",
+    margin: "20px 0px",
     padding: "20px 30px",
     border: "5px solid #1d1d1d",
     borderRadius: "20px",

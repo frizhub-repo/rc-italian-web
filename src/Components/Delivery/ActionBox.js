@@ -7,7 +7,7 @@ import OrderPickup from "./OrderPickup";
 const useStyle = () => ({
   container: {
     background: "#272727",
-    padding: "20px 30px",
+    padding: "20px",
   },
   innerContainer: {
     border: "5px solid #1d1d1d",
@@ -41,7 +41,7 @@ export default function ActionBox() {
         <div className="d-none d-xl-block col-auto">
           <OpenStatus />
         </div>
-        <div className="col-auto col-sm-12 col-lg-4 mb-2">
+        <div className="col-auto col-sm-12 col-lg-4 mb-2 px-0">
           <AllergyAlert />
           <OrderPickup />
         </div>

@@ -6,6 +6,7 @@ import "./reserveTableMenu.css";
 const useStyle = () => ({
   container: {
     padding: "0px",
+    margin: "0px",
   },
   tabStyle: {
     color: "white",
