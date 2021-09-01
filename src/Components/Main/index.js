@@ -7,8 +7,12 @@ import FindUs from "./FindUs";
 import OpeningHours from "./OpeningHours";
 import Gallery from "../Body/Gallery";
 import Testimonial from "../Body/testimonial";
+import { useUserContext } from "Context/userContext";
 
 function Main() {
+  const {
+    restaurant: { placeData },
+  } = useUserContext();
   return (
     <div>
       <ScrollingProvider>
@@ -17,6 +21,7 @@ function Main() {
             heroImage="assets/hero.png"
             showStatusBox={true}
             statusBoxFormat={"home"}
+            placeData={placeData}
           />
         </section>
         <section>
