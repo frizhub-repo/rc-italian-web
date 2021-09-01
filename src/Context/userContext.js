@@ -32,7 +32,7 @@ export function UserProvider({ children }) {
             setCustomer(res?.data?.data);
           } catch (error) {
             console.log({ error });
-            throw Error("Customer data now found");
+            throw Error("Customer data not found");
           }
         }
         fetchCustomerinfo();
