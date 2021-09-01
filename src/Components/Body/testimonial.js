@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Carousel } from "react-bootstrap";
 
 const useStyle = () => ({
@@ -24,40 +24,27 @@ const useStyle = () => ({
   },
 });
 
-export default function Testimonial() {
+export default function Testimonial({ reviews }) {
   const styles = useStyle();
-  const [testimonials, setTestimonials] = useState([
-    {
-      img: "assets/testimonial-client.png",
-      content:
-        "Birre ottime e panini buoni nel pane e nella farcitura, carne scelta. Locale informale e caldo. Ragazzi preparati e gentili. Patatine buone servite con più salse. Buoni i gelati e i sorbettie buono il soufflé al cioccolato. Da provare indubbiamente",
-      author: "Giulia",
-    },
-    {
-      img: "assets/testimonial-client.png",
-      content:
-        "Birre ottime e panini buoni nel pane e nella farcitura, carne scelta. Locale informale e caldo. Ragazzi preparati e gentili. Patatine buone servite con più salse. Buoni i gelati e i sorbettie buono il soufflé al cioccolato. Da provare indubbiamente",
-      author: "Giulia",
-    },
-  ]);
 
   return (
     <div style={styles.container}>
       <h1 style={styles.header}>Our client says</h1>
       <Carousel interval={1000}>
-        {testimonials.map((testimonial) => {
-          return (
-            <Carousel.Item interval={5000}>
-              <div style={styles.carouselContent}>
-                <img src={testimonial.img} className="mb-3" />
-                <p style={styles.carouselMessage}>‘’{testimonial.content}’’</p>
-              </div>
-              <Carousel.Caption>
-                <p>-{testimonial.author}-</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          );
-        })}
+        {reviews?.length > 0 &&
+          reviews.map((review) => {
+            return (
+              <Carousel.Item interval={5000}>
+                <div style={styles.carouselContent}>
+                  <img src={review.profile_photo_url} className="mb-3" />
+                  <p style={styles.carouselMessage}>‘’{review.text}’’</p>
+                </div>
+                <Carousel.Caption>
+                  <p>-{review?.author_name}-</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            );
+          })}
       </Carousel>
     </div>
   );

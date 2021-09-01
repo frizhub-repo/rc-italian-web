@@ -37,10 +37,13 @@ function Main() {
           <OpeningHours placeData={placeData} />
         </Section>
         <section>
-          <Testimonial />
+          <Testimonial reviews={placeData?.reviews} />
         </section>
         <section>
-          <FindUs />
+          <FindUs
+            formattedAddress={placeData?.formatted_address}
+            phoneNumber={placeData?.formatted_phone_number}
+          />
         </section>
       </ScrollingProvider>
     </div>
