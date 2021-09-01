@@ -34,7 +34,7 @@ function Main() {
           <Gallery />
         </section>
         <Section id="opening-hour">
-          <OpeningHours />
+          <OpeningHours placeData={placeData} />
         </Section>
         <section>
           <Testimonial />
