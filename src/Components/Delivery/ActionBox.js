@@ -29,7 +29,7 @@ const useStyle = () => ({
   },
 });
 
-export default function ActionBox() {
+export default function ActionBox({ openNow }) {
   const styles = useStyle();
 
   return (
@@ -39,7 +39,7 @@ export default function ActionBox() {
         className="row d-flex justify-content-center justify-content-md-between align-items-center"
       >
         <div className="d-none d-xl-block col-auto">
-          <OpenStatus />
+          <OpenStatus openNow={openNow} />
         </div>
         <div className="col-auto col-sm-12 col-lg-4 mb-2">
           <AllergyAlert />
