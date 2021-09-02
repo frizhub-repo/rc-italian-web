@@ -7,8 +7,12 @@ import FindUs from "./FindUs";
 import OpeningHours from "./OpeningHours";
 import Gallery from "../Body/Gallery";
 import Testimonial from "../Body/testimonial";
+import { useUserContext } from "Context/userContext";
 
 function Main() {
+  const {
+    restaurant: { placeData },
+  } = useUserContext();
   return (
     <div>
       <ScrollingProvider>
@@ -17,6 +21,7 @@ function Main() {
             heroImage="assets/hero.png"
             showStatusBox={true}
             statusBoxFormat={"home"}
+            placeData={placeData}
           />
         </section>
         <section>
@@ -29,13 +34,16 @@ function Main() {
           <Gallery />
         </section>
         <Section id="opening-hour">
-          <OpeningHours />
+          <OpeningHours placeData={placeData} />
         </Section>
         <section>
-          <Testimonial />
+          <Testimonial reviews={placeData?.reviews} />
         </section>
         <section>
-          <FindUs />
+          <FindUs
+            formattedAddress={placeData?.formatted_address}
+            phoneNumber={placeData?.formatted_phone_number}
+          />
         </section>
       </ScrollingProvider>
     </div>

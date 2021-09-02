@@ -23,7 +23,7 @@ const useStyle = () => ({
   },
 });
 
-export default function FindUs() {
+export default function FindUs({ formattedAddress, phoneNumber }) {
   const styles = useStyle();
 
   return (
@@ -45,8 +45,8 @@ export default function FindUs() {
         </div>
 
         <h2 className="my-4">Da Ciccio</h2>
-        <p>Via Firenze</p>
-        <p>50013 Campi Bisenzio FI</p>
+        <p>{phoneNumber}</p>
+        <p>{formattedAddress}</p>
       </div>
     </div>
   );
