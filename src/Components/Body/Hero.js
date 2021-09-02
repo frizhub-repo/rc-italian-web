@@ -39,7 +39,7 @@ function Hero({
           (statusBoxFormat === "home" ? (
             <StatusBoxHome isOpened={placeData?.opening_hours?.open_now} />
           ) : (
-            <StatusBoxMenu isOpened={true} />
+            <StatusBoxMenu />
           ))}
       </div>
     </section>
