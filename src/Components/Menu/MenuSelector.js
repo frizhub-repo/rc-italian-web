@@ -42,7 +42,7 @@ export default function MenuSelector() {
         if (selected > 0) setSelected(selected - 1);
         break;
       case 1:
-        if (selected < 4) setSelected(selected + 1);
+        if (selected < menus?.length - 1) setSelected(selected + 1);
         break;
     }
   }
