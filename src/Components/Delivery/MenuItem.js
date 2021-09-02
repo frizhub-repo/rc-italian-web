@@ -1,5 +1,7 @@
+import { addItem, setTotal } from "Components/actions";
 import { useUserContext } from "Context/userContext";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { isEmpty } from "utils/common";
 import messages from "utils/messages";
@@ -74,6 +76,7 @@ export default function MenuItem({
   const {
     customer: { _id: customerId },
   } = useUserContext();
+  const dispatch = useDispatch();
   const styles = useStyle();
   const [price, setPrice] = useState(0);
   const [productSize, setProdctSize] = useState(null);
@@ -190,7 +193,8 @@ export default function MenuItem({
         offer,
         bundledProduct: offer?.bundledProduct ?? [],
       };
-      console.log("productObj :>> ", productObj);
+      dispatch(addItem(productObj));
+      dispatch(setTotal(discountedPrice * qty));
     } catch (error) {
       if (error.message) {
         toast.error(error.message);
