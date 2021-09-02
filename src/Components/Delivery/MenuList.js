@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MenuItem from "./MenuItem";
 
 const useStyle = () => ({
@@ -7,71 +7,39 @@ const useStyle = () => ({
     background: "white",
     padding: "10px",
     borderRadius: "20px",
+    width: "100%",
   },
 });
 
-export default function MenuList({ isDeal, discountGenre }) {
+export default function MenuList({
+  sectionTitle = "",
+  products,
+  discountList = {},
+  setDiscountList = {},
+}) {
   const styles = useStyle();
-
-  const [items, setItems] = useState([
-    {
-      price: "15€",
-      itemName: "Linguine ai frutti di mare",
-      allergeni: ["Farina", "Crostacei"],
-      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
-      tags: { vegan: true },
-    },
-    {
-      price: "15€",
-      itemName: "Linguine ai frutti di mare",
-      allergeni: ["Farina", "Crostacei"],
-      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
-      tags: { vegan: true },
-    },
-    {
-      price: "15€",
-      itemName: "Linguine ai frutti di mare",
-      allergeni: ["Farina", "Crostacei"],
-      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
-      tags: { vegan: true },
-    },
-    {
-      price: "15€",
-      itemName: "Linguine ai frutti di mare",
-      allergeni: ["Farina", "Crostacei"],
-      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
-      tags: { vegan: true },
-    },
-    {
-      price: "15€",
-      itemName: "Linguine ai frutti di mare",
-      allergeni: ["Farina", "Crostacei"],
-      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
-      tags: { vegan: true },
-    },
-    {
-      price: "15€",
-      itemName: "Linguine ai frutti di mare",
-      allergeni: ["Farina", "Crostacei"],
-      ingredients: ["Pasta di grano", "cozze", "vongole", "calamari"],
-      tags: { vegan: true },
-    },
-  ]);
-
-  useEffect(() => {
-    console.log(isDeal, discountGenre);
-  });
-
   return (
     <div style={styles.container}>
-      <bold className="h1">Primi Piatti</bold>
-      <div className="row">
-        {items.map((item) => (
-          <div className="col-md-6">
-            <MenuItem {...item} discountGenre={discountGenre} isDeal={isDeal} />
+      {products?.length > 0 ? (
+        <>
+          <bold className="h1">{sectionTitle}</bold>
+          <div className="row">
+            {products?.map((product) => (
+              <div className="col-md-6">
+                <MenuItem
+                  product={product?.product ? product?.product : product}
+                  size={product?.size ? product?.size : product?.sizes?.[0]}
+                  offer={product?.offer}
+                  discountList={discountList}
+                  setDiscountList={setDiscountList}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <span>This section don't have any products</span>
+      )}
     </div>
   );
 }

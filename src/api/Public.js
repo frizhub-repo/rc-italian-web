@@ -11,3 +11,6 @@ export const getHotDeals = () =>
 
 export const getReservationOffers = () =>
   axiosIntance.get("/api/v1/reservation/discount/public");
+
+export const getDeliverableMenus = () =>
+  axiosIntance.get("/api/v1/menu/deliverables/customers/public");
