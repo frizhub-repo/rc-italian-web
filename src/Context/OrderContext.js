@@ -1,5 +1,5 @@
+import { getOrders } from "api/Order";
 import * as React from "react";
-import { getOrders } from "../api/Order";
 
 const OrderContext = React.createContext();
 
@@ -11,9 +11,9 @@ export function OrderProvider({ children }) {
     async function fetchCustomerOrders() {
       try {
         const res = await getOrders();
-        const pendingOrdersRes = filterPendingOrders(res?.data);
+        const pendingOrdersRes = filterPendingOrders(res?.data?.data);
         setPendingOrders(pendingOrdersRes);
-        setOrders(res?.data);
+        setOrders(res?.data?.data);
       } catch (error) {
         console.log({ error });
       }

@@ -10,12 +10,15 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./Context/userContext";
+import { OrderProvider } from "Context/OrderContext";
 
 ReactDOM.render(
   [
     <Provider store={store}>
       <UserProvider>
-        <App />
+        <OrderProvider>
+          <App />
+        </OrderProvider>
       </UserProvider>
     </Provider>,
     <ToastContainer />,
