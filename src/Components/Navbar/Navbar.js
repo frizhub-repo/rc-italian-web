@@ -18,7 +18,6 @@ function Navbar() {
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
   });
-  console.log("location :>> ", location);
 
   return (
     <nav
