@@ -1,4 +1,8 @@
+import { useUserContext } from "Context/userContext";
 import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import AllergyAlert from "./AllergyAlert";
 import Billing from "./Billing";
 import OpenStatus from "./OpenStatus";
@@ -31,6 +35,28 @@ const useStyle = () => ({
 
 export default function ActionBox({ openNow }) {
   const styles = useStyle();
+  const items = useSelector((state) => state.orders);
+  const { customer } = useUserContext();
+  const history = useHistory();
+
+  const orderNow = () => {
+    try {
+      if (items?.items?.length <= 0) {
+        throw new Error("Please provide some products to proceed");
+      }
+      if (customer?.addresses?.length) {
+        history.push("/chooseAddress");
+      } else {
+        history.push("/deliveryAddress");
+      }
+    } catch (error) {
+      if (error.message) {
+        toast.error(error.message);
+        return;
+      }
+      toast.error("Error occured");
+    }
+  };
 
   return (
     <div style={styles.container}>
@@ -46,7 +72,7 @@ export default function ActionBox({ openNow }) {
           <OrderPickup />
         </div>
         <div className="col-auto pr-0">
-          <Billing />
+          <Billing items={items} />
         </div>
         <div className="col-auto text-light d-flex flex-md-column align-items-center justify-content-between my-2">
           <div style={{ ...styles.button, ...styles.proceedButton }}>
@@ -55,7 +81,10 @@ export default function ActionBox({ openNow }) {
               order to proceed
             </small>
           </div>
-          <div style={{ ...styles.button, ...styles.paymentButton }}>
+          <div
+            onClick={orderNow}
+            style={{ ...styles.button, ...styles.paymentButton }}
+          >
             <small>Choose a Payment method</small>
           </div>
         </div>
