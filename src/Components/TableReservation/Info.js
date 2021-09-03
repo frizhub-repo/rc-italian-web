@@ -25,7 +25,6 @@ const useStyle = () => ({
     height: "100%",
   },
   topRightInfo: {
-    background: "#B29051",
     color: "white",
     border: "3px solid #B29051",
     borderRadius: "0px 10px 0px 0px",
@@ -49,9 +48,12 @@ const useStyle = () => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  closed: {
+    background: "#B91010",
+  },
 });
 
-export default function Info() {
+export default function Info({ placeData }) {
   const styles = useStyle();
 
   return (
@@ -73,7 +75,14 @@ export default function Info() {
             </div>
             <div className="col-xs-6 col-sm-6 col-md-4 p-0 m-0 row">
               <div
-                style={styles.topRightInfo}
+                style={
+                  (styles.topRightInfo,
+                  {
+                    background: !placeData?.opening_hours?.open_now
+                      ? "#B91010"
+                      : "#B29051",
+                  })
+                }
                 className="row d-flex flex-column justify-content-center align-items-center py-1 px-2 m-0"
               >
                 <h5>Now Opened</h5>
@@ -92,11 +101,11 @@ export default function Info() {
               <div className="d-flex justify-content-between my-3">
                 <button style={styles.statusButton}>
                   <img className="mr-2" src="assets/like.png" width={30} />
-                  <p className="m-0">4|5</p>
+                  <p className="m-0">{placeData?.rating}|5</p>
                 </button>
                 <button style={styles.statusButton}>
                   <img className="mr-2" src="assets/chat.png" width={30} />
-                  <p className="m-0">427</p>
+                  <p className="m-0">{placeData?.user_ratings_total}</p>
                 </button>
                 <button style={styles.statusButton}>
                   <img
@@ -111,8 +120,7 @@ export default function Info() {
                 style={styles.address}
                 className="d-flex flex-column align-items-center"
               >
-                <h5>Da Ciccio</h5>
-                <h5>Via Firenze 50013 Campi Bisenzio FI</h5>
+                <h5>{placeData?.formatted_address}</h5>
               </div>
             </div>
             <div className="d-none d-xl-block">
