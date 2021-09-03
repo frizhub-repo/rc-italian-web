@@ -1,5 +1,6 @@
 import { getSpecialMenus } from "api/Public";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import InformationOption from "./InformationOption";
 import OptionListItem from "./OptionListItem";
 
@@ -61,6 +62,7 @@ const useStyle = () => ({
 
 export default function OptionContent({ selected }) {
   const styles = useStyle();
+  const history = useHistory();
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [specialMenu, setSpecialMenus] = React.useState([]);
 
@@ -75,6 +77,8 @@ export default function OptionContent({ selected }) {
     }
     getSpecialMenuHandler();
   }, []);
+
+  const showMenuPage = () => history.push("/menu");
 
   if (selected === "INFORMATIONS")
     return (
@@ -124,7 +128,9 @@ export default function OptionContent({ selected }) {
           >
             <img src="assets/button-menu.png" width={50} />
           </div>
-          <button style={styles.groupButton}>CHECK ALSO OUR MENU!</button>
+          <button onClick={showMenuPage} style={styles.groupButton}>
+            CHECK ALSO OUR MENU!
+          </button>
         </div>
       </div>
     );
