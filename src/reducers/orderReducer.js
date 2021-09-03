@@ -59,6 +59,12 @@ export default function (state = initialState, action) {
         ...state,
         address: action.payload,
       };
+    case "ADD_DELIVERY_TIME":
+      return {
+        ...state,
+        time: action.payload.time,
+        note: action.payload.note ? action.payload.note : "",
+      };
     case "TOTAL":
       return {
         ...state,
