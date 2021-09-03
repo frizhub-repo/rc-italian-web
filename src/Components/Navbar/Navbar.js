@@ -1,13 +1,14 @@
 import React from "react";
 import AuthModal from "../Auth/authModal";
 import { useUserContext } from "../../Context/userContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 
 function Navbar() {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
-  let { token, setToken, customer } = useUserContext();
+  const location = useLocation();
+  let { token, setToken, customer, restaurant } = useUserContext();
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -24,8 +25,15 @@ function Navbar() {
       style={{ background: "#B29051" }}
     >
       <div className="container-fluid">
-        <Link className="btn btn-outline-light navbar-brand" to="/">
-          Logo
+        <Link style={{ padding: "0 10px" }} to="/">
+          <img
+            width="40"
+            src={
+              process.env.REACT_APP_API_BASE_URL +
+              "/" +
+              restaurant?.restaurant?.logoUrl
+            }
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -41,27 +49,52 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link
+                to="/"
+                className={`nav-link hoverNavBar ${
+                  location.pathname === "/" && "activeNavbar"
+                }`}
+              >
                 HOME
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/menu" className="nav-link">
+              <Link
+                to="/menu"
+                className={`nav-link hoverNavBar ${
+                  location.pathname === "/menu" && "activeNavbar"
+                }`}
+              >
                 MENU
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/tableReservation" className="nav-link">
+              <Link
+                to="/tableReservation"
+                className={`nav-link hoverNavBar ${
+                  location.pathname === "/tableReservation" && "activeNavbar"
+                }`}
+              >
                 TABLE RESERVATION
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/delivery" className="nav-link">
+              <Link
+                to="/delivery"
+                className={`nav-link hoverNavBar ${
+                  location.pathname === "/delivery" && "activeNavbar"
+                }`}
+              >
                 DELIVERY
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/contact" className="nav-link">
+              <Link
+                to="/contact"
+                className={`nav-link hoverNavBar ${
+                  location.pathname === "/contact" && "activeNavbar"
+                }`}
+              >
                 CONTACT
               </Link>
             </li>

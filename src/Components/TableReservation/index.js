@@ -27,13 +27,13 @@ export default function TableReservation() {
         <OptionSelection />
       </section>
       <section>
-        <Status />
+        <Status placeData={placeData} />
       </section>
       <section>
         <Gallery />
       </section>
       <section>
-        <Testimonial />
+        <Testimonial reviews={placeData?.reviews} />
       </section>
     </div>
   );

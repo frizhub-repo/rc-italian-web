@@ -16,7 +16,7 @@ const useStyle = () => ({
   },
 });
 
-export default function Status() {
+export default function Status({ placeData }) {
   const styles = useStyle();
 
   return (
@@ -29,14 +29,17 @@ export default function Status() {
         <div className="d-flex my-3 align-items-center">
           <img className="mr-5" src="assets/like.png" />
           <h5>
-            <span style={styles.statusStyle}>4</span>|5
+            <span style={styles.statusStyle}>{placeData?.rating}</span>|5
           </h5>
         </div>
         <div className="d-flex align-items-center">
           <h5>WITH</h5>
           <img className="mx-4" src="assets/chat.png" />
           <h5>
-            <span style={styles.statusStyle}>781</span> REVIEWS
+            <span style={styles.statusStyle}>
+              {placeData?.user_ratings_total}
+            </span>{" "}
+            REVIEWS
           </h5>
         </div>
       </div>

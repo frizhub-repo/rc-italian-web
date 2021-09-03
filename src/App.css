@@ -56,3 +56,11 @@
 .my_custom_text_field .MuiOutlinedInput-root {
   border-radius: 30px;
 }
+
+.hoverNavBar:hover {
+  text-decoration: underline !important;
+}
+
+.activeNavbar {
+  text-decoration: underline !important;
+}
