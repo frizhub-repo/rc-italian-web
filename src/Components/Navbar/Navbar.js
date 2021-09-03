@@ -2,13 +2,17 @@ import React from "react";
 import AuthModal from "../Auth/authModal";
 import { useUserContext } from "../../Context/userContext";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { Avatar } from "@material-ui/core";
+import { Badge, Menu, MenuItem } from "@material-ui/core";
+import classes from "./Navbar.module.css";
+import { useOrderContext } from "Context/OrderContext";
+import shopingBag from "images/shopingBag.png";
 
 function Navbar() {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
   let { token, setToken, customer, restaurant } = useUserContext();
+  const { pendingOrders } = useOrderContext();
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -19,13 +23,26 @@ function Navbar() {
     setToken(localStorage.getItem("token"));
   });
 
+  const handleMenuItemClick = (orderId) => {
+    setAnchorEl1(null);
+    history.push(`/ordersreceived/${orderId}`);
+  };
+
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
+
+  const handleClickListItem = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
   return (
     <nav
-      className="navbar fixed-top navbar-expand-lg navbar-dark"
-      style={{ background: "#B29051" }}
+      className={`navbar fixed-top navbar-expand-lg navbar-dark ${classes.navRoot}`}
     >
       <div className="container-fluid">
-        <Link style={{ padding: "0 10px" }} to="/">
+        <Link className={classes.logo} to="/">
           <img
             width="40"
             src={
@@ -100,8 +117,7 @@ function Navbar() {
             </li>
           </ul>
           <button
-            className="d-flex btn btn-lg btn-outline-light btn-rounded"
-            style={{ borderRadius: "20px" }}
+            className={`d-flex btn btn-lg btn-outline-light btn-rounded ${classes.actionBtn}`}
           >
             {token ? (
               <span onClick={showProfile}>
@@ -112,7 +128,7 @@ function Navbar() {
                 <img
                   src="assets/login.png"
                   width="20"
-                  style={{ marginRight: "5px" }}
+                  className={classes.authImg}
                 />
                 Sign In/Sign Up
               </span>
@@ -121,6 +137,63 @@ function Navbar() {
           <AuthModal open={open} handleClose={handleClose} />
         </div>
       </div>
+      {pendingOrders?.length > 0 && (
+        <>
+          <Badge
+            className={classes.trackOrderRoot}
+            badgeContent={pendingOrders?.length}
+            color="secondary"
+            onClick={handleClickListItem}
+          >
+            <img src={shopingBag} className={classes.shopingBag} />
+            <span>My Orders</span>
+          </Badge>
+          <Menu
+            style={{ border: "1px solid #d3d4d5" }}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            id="lock-menu"
+            anchorEl={anchorEl1}
+            keepMounted
+            open={Boolean(anchorEl1)}
+            onClose={handleClose1}
+          >
+            {pendingOrders.map((order, index) => (
+              <MenuItem
+                key={order?._id}
+                onClick={() => handleMenuItemClick(order?._id)}
+                className={classes.menuItemRoot}
+              >
+                <div>
+                  <span className={classes.orderId}>{order?.orderId}</span>{" "}
+                  &nbsp;{" "}
+                  <span
+                    className={`${classes.statusRoot} ${
+                      order?.status === "pending"
+                        ? classes.pending
+                        : order?.status === "accepted"
+                        ? classes.accepted
+                        : order?.status === "assigned" ||
+                          order?.status === "pickedUp"
+                        ? classes.assigned
+                        : classes.requested
+                    }`}
+                  >
+                    {order?.status}
+                  </span>
+                </div>
+              </MenuItem>
+            ))}
+          </Menu>
+        </>
+      )}
     </nav>
   );
 }

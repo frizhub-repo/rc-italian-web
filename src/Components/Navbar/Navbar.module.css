@@ -1,0 +1,66 @@
+.navRoot {
+  background: #b29051;
+}
+
+.logo {
+  padding: 0 10px;
+}
+
+.actionBtn {
+  border-radius: 20px;
+}
+
+.authImg {
+  margin-right: 5px;
+}
+
+.trackOrderRoot {
+  position: fixed !important;
+  bottom: 20px;
+  right: 25px;
+  z-index: 3;
+  background-color: #f59e0b;
+  border-radius: 30px;
+  padding: 10px 20px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.shopingBag {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.menuItemRoot {
+  padding: 10px 20px;
+}
+
+.orderId {
+  font-weight: 500;
+}
+
+.statusRoot {
+  border-radius: 20px;
+  padding: 4px 10px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.accepted {
+  border: 1px solid #4caf50;
+  color: #4caf50;
+}
+.pending {
+  border: 1px solid #ff9800;
+  color: #f57c00;
+}
+.assigned {
+  color: #007fff;
+  border: 1px solid #007fff;
+}
+.requested {
+  color: #e25985;
+  border: 1px solid #e25985;
+}
