@@ -15,3 +15,11 @@
 .un_active {
   filter: grayscale(100);
 }
+
+.noSection {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}

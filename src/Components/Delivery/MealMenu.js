@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { getDeliverableMenus } from "api/Public";
+import React, { useEffect, useState } from "react";
 import DicountGenre from "./DicountGenre";
 import MealType from "./MealType";
 import MenuOption from "./MenuOption";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 
 const useStyle = () => ({
   container: {
@@ -16,37 +18,62 @@ const useStyle = () => ({
     alignItems: "center",
     padding: "0px 20px",
   },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
+  },
 });
 
 export default function MealMenu() {
   const styles = useStyle();
 
-  const [genreSelected, setGenreSelected] = useState(0);
-  const [optionSelected, setOptionSelected] = useState(2);
+  const [loading, setLoading] = useState(false);
+  const [menus, setMenus] = useState([]);
+  const [selectedMenuIndex, setSelectedMenuIndex] = useState(1);
+  const [activeSection, setActiveSection] = useState(0);
 
-  function handleClickGenre(id) {
-    setGenreSelected(id);
-  }
+  const handleChangeSelectedMenuIndex = (index) => {
+    setSelectedMenuIndex(index);
+    setActiveSection(0);
+  };
 
-  function handleClickOption(id) {
-    setOptionSelected(id);
-  }
+  const fetchDeliverableMenus = async () => {
+    try {
+      setLoading(true);
+      const res = await getDeliverableMenus();
+      setMenus(res?.data?.data);
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDeliverableMenus();
+  }, []);
 
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        <MenuOption selected={optionSelected} handleClick={handleClickOption} />
-        {(optionSelected === 0 || optionSelected === 1) && (
-          <DicountGenre
-            selected={genreSelected}
-            handleClick={setGenreSelected}
+        <MenuOption
+          menus={menus}
+          selected={selectedMenuIndex}
+          handleClick={handleChangeSelectedMenuIndex}
+        />
+        {selectedMenuIndex === 0 ? (
+          <DicountGenre />
+        ) : (
+          <MealType
+            items={menus?.[selectedMenuIndex - 1]?.items}
+            selected={activeSection}
+            setSelected={setActiveSection}
           />
         )}
-        <MealType
-          isDeal={optionSelected === 0 || optionSelected === 1}
-          discountGenre={genreSelected}
-        />
       </div>
+      <Backdrop style={styles.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

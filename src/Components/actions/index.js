@@ -23,3 +23,7 @@ export const removeOrderItems = () => {
 export const addOrderAddress = (payload) => {
   return { type: "ADD_ORDER_ADDRESS", payload };
 };
+
+export const addDeliveryItem = (item) => {
+  return { type: "ADD_DELIVERY_TIME", payload: item };
+};

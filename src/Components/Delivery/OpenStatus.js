@@ -23,7 +23,7 @@ const useStyle = () => ({
   },
 });
 
-export default function OpenStatus() {
+export default function OpenStatus({ openNow }) {
   const styles = useStyle();
 
   return (
@@ -36,7 +36,7 @@ export default function OpenStatus() {
       </div>
       <div style={styles.infoContainer} className="col-9 m-0">
         <div style={styles.info} className="row">
-          <h5>Now Opened</h5>
+          <h5>{openNow ? "Now Opened" : "Now Closed - Opening:"}</h5>
           <h5>From 12:00 - To 15:30</h5>
         </div>
         <div style={styles.buttonContainer} className="row py-2">

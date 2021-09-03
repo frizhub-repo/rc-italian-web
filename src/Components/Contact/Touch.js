@@ -1,3 +1,4 @@
+import { useUserContext } from "Context/userContext";
 import React from "react";
 import ContactForm from "./ContactForm";
 import classes from "./contactForm.module.css";
@@ -31,6 +32,9 @@ const useStyle = () => ({
 
 export default function Touch() {
   const styles = useStyle();
+  const {
+    restaurant: { placeData },
+  } = useUserContext();
 
   return (
     <div style={styles.container}>
@@ -54,14 +58,15 @@ export default function Touch() {
             ></iframe>
             <div style={styles.contactDetail}>
               <p>
-                <span className={classes.title}>Address: </span>Vis mario rossi
-                Milan Italy
+                <span className={classes.title}>Address: </span>
+                {placeData?.formatted_address}
               </p>
               <p>
                 <span className={classes.title}>Email: </span>starters@cafe.com
               </p>
               <p>
-                <span className={classes.title}>Phone: </span>33344455566
+                <span className={classes.title}>Phone: </span>
+                {placeData?.formatted_phone_number}
               </p>
             </div>
           </div>

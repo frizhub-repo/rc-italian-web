@@ -1,3 +1,4 @@
+import { useUserContext } from "Context/userContext";
 import React from "react";
 import Gallery from "../Body/Gallery";
 import Hero from "../Body/Hero";
@@ -7,6 +8,9 @@ import OptionSelection from "./OptionSelection";
 import Status from "./Status";
 
 export default function TableReservation() {
+  const {
+    restaurant: { placeData },
+  } = useUserContext();
   return (
     <div>
       <section>
@@ -17,7 +21,7 @@ export default function TableReservation() {
         />
       </section>
       <section>
-        <Info />
+        <Info placeData={placeData} />
       </section>
       <section>
         <OptionSelection />

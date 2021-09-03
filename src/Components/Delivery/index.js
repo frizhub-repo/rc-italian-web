@@ -3,8 +3,15 @@ import Hero from "../Body/Hero";
 import ActionBox from "./ActionBox";
 import Testitmonial from "../Body/testimonial";
 import MealMenu from "./MealMenu";
+import { useUserContext } from "Context/userContext";
 
 export default function Delivery() {
+  const {
+    restaurant: {
+      placeData: { reviews, opening_hours: { open_now } = {} } = {},
+    },
+  } = useUserContext();
+
   return (
     <div>
       <section>
@@ -15,13 +22,13 @@ export default function Delivery() {
         />
       </section>
       <section>
-        <ActionBox />
+        <ActionBox openNow={open_now} />
       </section>
       <section>
         <MealMenu />
       </section>
       <section>
-        <Testitmonial />
+        <Testitmonial reviews={reviews} />
       </section>
     </div>
   );
