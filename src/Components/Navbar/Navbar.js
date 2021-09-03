@@ -7,10 +7,12 @@ import { Avatar } from "@material-ui/core";
 function Navbar() {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
-  let { token, setToken } = useUserContext();
+  let { token, setToken, customer } = useUserContext();
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const showProfile = () => history.push("/profile");
 
   React.useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -67,14 +69,21 @@ function Navbar() {
           <button
             className="d-flex btn btn-lg btn-outline-light btn-rounded"
             style={{ borderRadius: "20px" }}
-            onClick={handleClickOpen}
           >
-            <img
-              src="assets/login.png"
-              width="20"
-              style={{ marginRight: "5px" }}
-            />
-            Sign In/Sign Up
+            {token ? (
+              <span onClick={showProfile}>
+                {customer?.firstName} {customer?.lastName}
+              </span>
+            ) : (
+              <span onClick={handleClickOpen} className="d-flex">
+                <img
+                  src="assets/login.png"
+                  width="20"
+                  style={{ marginRight: "5px" }}
+                />
+                Sign In/Sign Up
+              </span>
+            )}
           </button>
           <AuthModal open={open} handleClose={handleClose} />
         </div>
