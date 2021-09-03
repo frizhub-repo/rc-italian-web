@@ -14,11 +14,11 @@ const useStyle = () => ({
 export default function OptionSelector() {
   const styles = useStyle();
   const [selected, setSelected] = useState(1);
-  const [options, setOptions] = useState([
+  const options = [
     { content: "DAILY MENU", icon: "assets/option-menu.png" },
     { content: "PROMOTIONS", icon: "assets/option-promotion.png" },
     { content: "INFORMATIONS", icon: "assets/option-information.png" },
-  ]);
+  ];
 
   function handleClick(id) {
     setSelected(parseInt(id));
