@@ -1,8 +1,10 @@
+import AuthModal from "Components/Auth/authModal";
 import { useUserContext } from "Context/userContext";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { isEmpty } from "utils/common";
 import AllergyAlert from "./AllergyAlert";
 import Billing from "./Billing";
 import OpenStatus from "./OpenStatus";
@@ -38,13 +40,20 @@ export default function ActionBox({ openNow }) {
   const items = useSelector((state) => state.orders);
   const { customer } = useUserContext();
   const history = useHistory();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const orderNow = () => {
     try {
       if (items?.items?.length <= 0) {
         throw new Error("Please provide some products to proceed");
       }
-      if (customer?.addresses?.length) {
+      console.log(isEmpty(customer));
+      if (isEmpty(customer)) {
+        handleClickOpen();
+      } else if (customer?.addresses?.length) {
         history.push("/chooseAddress");
       } else {
         history.push("/deliveryAddress");
@@ -83,6 +92,7 @@ export default function ActionBox({ openNow }) {
           </div>
         </div>
       </div>
+      <AuthModal open={open} handleClose={handleClose} />
     </div>
   );
 }
