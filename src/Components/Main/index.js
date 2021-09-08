@@ -6,8 +6,9 @@ import Story from "./Story";
 import FindUs from "./FindUs";
 import OpeningHours from "./OpeningHours";
 import Gallery from "../Body/Gallery";
-import Testimonial from "../Body/testimonial";
 import { useUserContext } from "Context/userContext";
+import GoogleMap from "Components/Common/GoogleMap";
+import classes from "./index.module.css";
 
 function Main() {
   const {
@@ -28,17 +29,21 @@ function Main() {
           <ReserveTable />
         </section>
         <section>
-          <Story />
+          <Story reviews={placeData?.reviews} />
         </section>
         <section>
           <Gallery />
         </section>
         <Section id="opening-hour">
-          <OpeningHours placeData={placeData} />
+          <div className={classes.openingHoursRoot}>
+            <div>
+              <OpeningHours placeData={placeData} />
+            </div>
+            <div className={classes.mapRoot}>
+              <GoogleMap classname={classes.gogleMap} />
+            </div>
+          </div>
         </Section>
-        <section>
-          <Testimonial reviews={placeData?.reviews} />
-        </section>
         <section>
           <FindUs
             formattedAddress={placeData?.formatted_address}
