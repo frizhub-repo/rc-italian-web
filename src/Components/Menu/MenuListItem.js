@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const useStyle = () => ({
   container: {
@@ -30,14 +30,30 @@ export default function MenuListItem({ header, products }) {
                   <h5 className="mb-1" style={styles.mainText}>
                     {product?.title}
                   </h5>
-                  <p style={styles.allergyTxt}>
-                    {product?.allergies?.map(
-                      (allergy, index) =>
-                        `${allergy}${
-                          product?.allergies?.length === index + 1 ? "" : ", "
-                        }`
-                    )}
-                  </p>
+                  {product?.allergies?.length > 0 && (
+                    <p style={styles.allergyTxt}>
+                      Allergenies:{" "}
+                      {product?.allergies?.map(
+                        (allergy, index) =>
+                          `${allergy}${
+                            product?.allergies?.length === index + 1 ? "" : ", "
+                          }`
+                      )}
+                    </p>
+                  )}
+                  {product?.ingredients?.length > 0 && (
+                    <p style={styles.allergyTxt}>
+                      Ingredients:{" "}
+                      {product?.ingredients?.map(
+                        (allergy, index) =>
+                          `${allergy}${
+                            product?.ingredients?.length === index + 1
+                              ? ""
+                              : ", "
+                          }`
+                      )}
+                    </p>
+                  )}
                 </div>
               </div>
               <div>
