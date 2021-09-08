@@ -24,12 +24,12 @@ const useStyle = () => ({
   },
 });
 
-export default function Testimonial({ reviews }) {
+export default function Testimonial({ reviews, showHeader = true }) {
   const styles = useStyle();
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.header}>Our client says</h1>
+      {showHeader && <h1 style={styles.header}>Our client says</h1>}
       <Carousel interval={1000}>
         {reviews?.length > 0 &&
           reviews.map((review) => {
