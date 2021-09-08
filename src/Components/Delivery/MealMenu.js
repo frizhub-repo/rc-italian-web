@@ -8,7 +8,7 @@ import { Backdrop, CircularProgress } from "@material-ui/core";
 const useStyle = () => ({
   container: {
     background: "#272727",
-    padding: "20px",
+    padding: "30px 15px",
   },
   innerContainer: {
     border: "5px solid #1d1d1d",
