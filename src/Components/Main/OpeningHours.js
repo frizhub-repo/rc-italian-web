@@ -4,7 +4,7 @@ import "./openingHours.css";
 
 const useStyle = () => ({
   container: {
-    padding: "30px 60px",
+    padding: "30px 60px 0 60px",
     background: "#272727",
   },
   header: {

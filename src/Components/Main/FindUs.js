@@ -30,20 +30,6 @@ export default function FindUs({ formattedAddress, phoneNumber }) {
     <div style={styles.container}>
       <h1 style={styles.header}>You can find us here!</h1>
       <div style={styles.contentContainer}>
-        <div style={styles.map}>
-          <iframe
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            title="map"
-            marginHeight="0"
-            marginWidth="0"
-            scrolling="no"
-            src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-            style={{ borderRadius: "20px" }}
-          ></iframe>
-        </div>
-
         <h2 className="my-4">Da Ciccio</h2>
         <p>{phoneNumber}</p>
         <p>{formattedAddress}</p>
