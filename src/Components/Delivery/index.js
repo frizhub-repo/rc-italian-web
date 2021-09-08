@@ -22,10 +22,14 @@ export default function Delivery() {
         />
       </section>
       <section>
-        <ActionBox openNow={open_now} />
-      </section>
-      <section>
-        <MealMenu />
+        <div style={{ display: "flex" }}>
+          <div style={{ width: "70%" }}>
+            <MealMenu />
+          </div>
+          <div style={{ width: "30%", backgroundColor: "rgb(39, 39, 39)" }}>
+            <ActionBox openNow={open_now} />
+          </div>
+        </div>
       </section>
       <section>
         <Testitmonial reviews={reviews} />

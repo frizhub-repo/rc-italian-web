@@ -1,11 +1,14 @@
+import { removeItem } from "Components/actions";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Scrollbar } from "react-scrollbars-custom";
 
 const useStyle = () => ({
   container: {
-    width: "300px",
+    width: "100%",
     color: "white",
     height: "100%",
+    marginTop: "10px",
   },
   innerContainer: {
     width: "100%",
@@ -31,6 +34,11 @@ const useStyle = () => ({
 
 export default function Billing({ items }) {
   const styles = useStyle();
+  const dispatch = useDispatch();
+
+  const removeItemFromCart = (item) => {
+    dispatch(removeItem(item));
+  };
 
   return (
     <div
@@ -46,7 +54,10 @@ export default function Billing({ items }) {
             items?.items?.map((item) => (
               <>
                 <div className="d-flex justify-content-between align-items-center px-2">
-                  <img src="assets/delete.png" />
+                  <img
+                    onClick={() => removeItemFromCart(item)}
+                    src="assets/delete.png"
+                  />
                   <small>
                     {item.quantity}x {item.name}
                   </small>
