@@ -1,9 +1,10 @@
+import GoogleMap from "Components/Common/GoogleMap";
 import React from "react";
 import "./Info.css";
 
 const useStyle = () => ({
   container: {
-    padding: "30px",
+    padding: "5px",
     background: "#272727",
   },
   innerContainer: {
@@ -15,6 +16,7 @@ const useStyle = () => ({
   reserveIconContainer: {
     border: "3px solid #B29051",
     borderRadius: "10px 0px 0px 10px",
+    padding: "5px",
   },
   reserveIcon: {},
   reserveButton: {
@@ -23,6 +25,7 @@ const useStyle = () => ({
     color: "#B29051",
     width: "100%",
     height: "100%",
+    borderRadius: "0 10px 10px 0",
   },
   topRightInfo: {
     color: "white",
@@ -51,6 +54,16 @@ const useStyle = () => ({
   closed: {
     background: "#B91010",
   },
+  resreveTable: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  reserveTableRoot: {
+    display: "flex",
+  },
+  reserveBtn: {
+    width: "100%",
+  },
 });
 
 export default function Info({ placeData }) {
@@ -59,44 +72,19 @@ export default function Info({ placeData }) {
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        <div className="row d-flex justify-content-around">
-          <div className="col-md-12 col-lg-6 row d-none d-sm-flex">
-            <div
-              style={styles.reserveIconContainer}
-              className="col-xs-6 col-sm-6 col-md-4 m-0 d-flex justify-content-center align-items-center"
-            >
+        <div style={styles.resreveTable}>
+          <div style={styles.reserveTableRoot}>
+            <div style={styles.reserveIconContainer}>
               <img
                 style={styles.reserveIcon}
                 src="assets/reservation-icon.png"
               />
             </div>
-            <div className="d-none d-md-block col-md-4 m-0 p-0">
+            <div style={styles.reserveBtn}>
               <button style={styles.reserveButton}>RESERVE A TABLE</button>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-4 p-0 m-0 row">
-              <div
-                style={
-                  (styles.topRightInfo,
-                  {
-                    background: !placeData?.opening_hours?.open_now
-                      ? "#B91010"
-                      : "#B29051",
-                  })
-                }
-                className="row d-flex flex-column justify-content-center align-items-center py-1 px-2 m-0"
-              >
-                <h5>Now Opened</h5>
-                <h5>From 12:00 - To 15:30</h5>
-              </div>
-              <div
-                style={styles.bottomRightInfo}
-                className="row py-1 m-0 d-flex justify-content-center align-items-center"
-              >
-                <h4>Click for Opening Hours</h4>
-              </div>
-            </div>
           </div>
-          <div className="col-sm-12 col-lg-6 d-flex justify-content-around">
+          <div>
             <div className="d-flex flex-column align-items-center justify-content-around m-0">
               <div className="d-flex justify-content-between my-3">
                 <button style={styles.statusButton}>
@@ -118,24 +106,14 @@ export default function Info({ placeData }) {
               </div>
               <div
                 style={styles.address}
-                className="d-flex flex-column align-items-center"
+                className="d-flex flex-column align-items-center py-2"
               >
                 <h5>{placeData?.formatted_address}</h5>
               </div>
             </div>
-            <div className="d-none d-xl-block">
-              <iframe
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                title="map"
-                marginHeight="0"
-                marginWidth="0"
-                scrolling="no"
-                src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-                style={{ width: "100%", height: "20vh" }}
-              ></iframe>
-            </div>
+          </div>
+          <div>
+            <GoogleMap classname="rounded" />
           </div>
         </div>
       </div>

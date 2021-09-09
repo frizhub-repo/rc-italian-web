@@ -21,10 +21,14 @@ export default function TableReservation() {
         />
       </section>
       <section>
-        <Info placeData={placeData} />
-      </section>
-      <section>
-        <OptionSelection />
+        <div style={{ display: "flex" }}>
+          <div style={{ width: "65%" }}>
+            <OptionSelection />
+          </div>
+          <div style={{ width: "35%", backgroundColor: "rgb(39, 39, 39)" }}>
+            <Info placeData={placeData} />
+          </div>
+        </div>
       </section>
       <section>
         <Status placeData={placeData} />
