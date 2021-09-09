@@ -15,6 +15,7 @@ import TableReservation from "./Components/TableReservation";
 import DeliveryAddress from "Components/ExistingAddress";
 import DeliveryTime from "Components/DeliveryTime/DeliveryTime";
 import OrderSummary from "Components/Orders/OrderSummary";
+import FooterItalian from "Components/Common/Footer";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           />
         </Switch>
       </Router>
+      <FooterItalian />
     </div>
   );
 }
