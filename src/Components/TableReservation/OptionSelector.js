@@ -5,9 +5,14 @@ import "./optionSelector.css";
 const useStyle = () => ({
   innerContainer: {
     maxWidth: "80%",
+    color: "white",
   },
   iconStyle: {
     width: "60%",
+  },
+  selectedBtn: {
+    borderRadius: "10px",
+    border: "2px solid",
   },
 });
 
@@ -38,6 +43,7 @@ export default function OptionSelector() {
               className={`d-flex flex-column align-items-center justify-content-center lead col-auto ${
                 selected === index ? "active" : "un-active"
               }`}
+              style={selected === index ? styles.selectedBtn : null}
             >
               <img
                 onClick={() => handleClick(index)}
