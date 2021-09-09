@@ -19,9 +19,9 @@ const useStyle = () => ({
     color: "#B29051",
   },
   menus: {
-    maxHeight: "80vh",
+    maxHeight: "150vh",
     overflowY: "scroll",
-    padding: "10px 10px 10px 95px",
+    padding: "10px 10px 10px 110px",
   },
   groupContainer: {
     display: "flex",
@@ -41,7 +41,7 @@ const useStyle = () => ({
   dealsRoot: {
     position: "absolute",
     top: "50px",
-    left: "-73px",
+    left: "-50px",
     boxShadow: "0px 4px 4px rgb(0 0 0 / 25%)",
     width: "150px",
     color: "#F59E0B",
@@ -111,7 +111,7 @@ export default function OptionContent({ selected }) {
         <div style={styles.menus} className="row">
           {specialMenu?.[activeIndex]?.items?.length > 0 ? (
             specialMenu?.[activeIndex]?.items?.map(({ category, products }) => (
-              <div className="col-sm-12 col-lg-6">
+              <div className="col-sm-12 col-lg-12">
                 <OptionListItem products={products} header={category?.name} />
               </div>
             ))

@@ -4,7 +4,7 @@ import OptionSelector from "./OptionSelector";
 const useStyle = () => ({
   container: {
     background: "#272727",
-    paddingTop: "20px",
+    paddingTop: "40px",
   },
 });
 

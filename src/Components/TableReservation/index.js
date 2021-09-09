@@ -21,23 +21,17 @@ export default function TableReservation() {
         />
       </section>
       <section>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", backgroundColor: "rgb(39, 39, 39)" }}>
           <div style={{ width: "65%" }}>
             <OptionSelection />
           </div>
-          <div style={{ width: "35%", backgroundColor: "rgb(39, 39, 39)" }}>
+          <div style={{ width: "35%", paddingTop: "50px" }}>
             <Info placeData={placeData} />
           </div>
         </div>
       </section>
       <section>
-        <Status placeData={placeData} />
-      </section>
-      <section>
         <Gallery />
-      </section>
-      <section>
-        <Testimonial reviews={placeData?.reviews} />
       </section>
     </div>
   );
