@@ -50,7 +50,6 @@ export default function ActionBox({ openNow }) {
       if (items?.items?.length <= 0) {
         throw new Error("Please provide some products to proceed");
       }
-      console.log(isEmpty(customer));
       if (isEmpty(customer)) {
         handleClickOpen();
       } else if (customer?.addresses?.length) {

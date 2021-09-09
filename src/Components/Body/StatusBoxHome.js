@@ -17,7 +17,7 @@ const useStyles = () => ({
   },
 });
 
-export default function StatusBoxHome({ isOpened }) {
+export default function StatusBoxHome({ isOpened = false }) {
   const styles = useStyles();
   const openingHourSection = useScrollSection("opening-hour");
 

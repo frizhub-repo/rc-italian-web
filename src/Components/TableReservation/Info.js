@@ -1,9 +1,13 @@
+import GoogleMap from "Components/Common/GoogleMap";
 import React from "react";
 import "./Info.css";
+import { Typography } from "@material-ui/core";
+import { useUserContext } from "Context/userContext";
+import Testimonial from "Components/Body/testimonial";
 
 const useStyle = () => ({
   container: {
-    padding: "30px",
+    padding: "5px",
     background: "#272727",
   },
   innerContainer: {
@@ -15,6 +19,7 @@ const useStyle = () => ({
   reserveIconContainer: {
     border: "3px solid #B29051",
     borderRadius: "10px 0px 0px 10px",
+    padding: "5px",
   },
   reserveIcon: {},
   reserveButton: {
@@ -23,6 +28,7 @@ const useStyle = () => ({
     color: "#B29051",
     width: "100%",
     height: "100%",
+    borderRadius: "0 10px 10px 0",
   },
   topRightInfo: {
     color: "white",
@@ -51,52 +57,58 @@ const useStyle = () => ({
   closed: {
     background: "#B91010",
   },
+  resreveTable: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  reserveTableRoot: {
+    display: "flex",
+  },
+  reserveBtn: {
+    width: "100%",
+  },
+  statusStyle: {
+    color: "#B29051",
+  },
+  reputation: {
+    color: "#fff",
+  },
+  avatarStyles: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 20,
+    color: "#EBA73A",
+    fontStyle: "italic",
+    marginTop: "30px",
+  },
+  title2: {
+    marginTop: "5px",
+  },
 });
 
 export default function Info({ placeData }) {
   const styles = useStyle();
+  const { restaurant } = useUserContext();
 
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        <div className="row d-flex justify-content-around">
-          <div className="col-md-12 col-lg-6 row d-none d-sm-flex">
-            <div
-              style={styles.reserveIconContainer}
-              className="col-xs-6 col-sm-6 col-md-4 m-0 d-flex justify-content-center align-items-center"
-            >
+        <div style={styles.resreveTable}>
+          <div style={styles.reserveTableRoot}>
+            <div style={styles.reserveIconContainer}>
               <img
                 style={styles.reserveIcon}
                 src="assets/reservation-icon.png"
               />
             </div>
-            <div className="d-none d-md-block col-md-4 m-0 p-0">
+            <div style={styles.reserveBtn}>
               <button style={styles.reserveButton}>RESERVE A TABLE</button>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-4 p-0 m-0 row">
-              <div
-                style={
-                  (styles.topRightInfo,
-                  {
-                    background: !placeData?.opening_hours?.open_now
-                      ? "#B91010"
-                      : "#B29051",
-                  })
-                }
-                className="row d-flex flex-column justify-content-center align-items-center py-1 px-2 m-0"
-              >
-                <h5>Now Opened</h5>
-                <h5>From 12:00 - To 15:30</h5>
-              </div>
-              <div
-                style={styles.bottomRightInfo}
-                className="row py-1 m-0 d-flex justify-content-center align-items-center"
-              >
-                <h4>Click for Opening Hours</h4>
-              </div>
-            </div>
           </div>
-          <div className="col-sm-12 col-lg-6 d-flex justify-content-around">
+          <div>
             <div className="d-flex flex-column align-items-center justify-content-around m-0">
               <div className="d-flex justify-content-between my-3">
                 <button style={styles.statusButton}>
@@ -118,26 +130,63 @@ export default function Info({ placeData }) {
               </div>
               <div
                 style={styles.address}
-                className="d-flex flex-column align-items-center"
+                className="d-flex flex-column align-items-center py-2"
               >
                 <h5>{placeData?.formatted_address}</h5>
               </div>
             </div>
-            <div className="d-none d-xl-block">
-              <iframe
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                title="map"
-                marginHeight="0"
-                marginWidth="0"
-                scrolling="no"
-                src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-                style={{ width: "100%", height: "20vh" }}
-              ></iframe>
-            </div>
+          </div>
+          <div>
+            <GoogleMap classname="rounded" />
           </div>
         </div>
+      </div>
+      <div>
+        <div style={styles.avatarStyles}>
+          <Typography style={styles.title} color="textSecondary" gutterBottom>
+            {restaurant?.name ?? "Uncle Sammy"}
+          </Typography>
+          <img
+            width={350}
+            src={
+              process.env.REACT_APP_API_BASE_URL +
+              "/" +
+              restaurant?.restaurant?.logoUrl
+            }
+          />
+          <Typography
+            variant="h5"
+            component="h2"
+            style={{ ...styles.title, ...styles.title2 }}
+          >
+            {restaurant?.slogan ?? "The real taste is here!"}
+          </Typography>
+        </div>
+        <div
+          className="d-flex flex-column align-items-center"
+          style={styles.reputation}
+        >
+          <h3>THE RESTAURANT GAINED A REPUTATION OF</h3>
+          <div className="d-flex my-3 align-items-center">
+            <img className="mr-5" src="assets/like.png" />
+            <h5>
+              <span style={styles.statusStyle}>{placeData?.rating}</span>|5
+            </h5>
+          </div>
+          <div className="d-flex align-items-center">
+            <h5>WITH</h5>
+            <img className="mx-4" src="assets/chat.png" />
+            <h5>
+              <span style={styles.statusStyle}>
+                {placeData?.user_ratings_total}
+              </span>{" "}
+              REVIEWS
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div>
+        <Testimonial reviews={placeData?.reviews} showHeader={false} />
       </div>
     </div>
   );

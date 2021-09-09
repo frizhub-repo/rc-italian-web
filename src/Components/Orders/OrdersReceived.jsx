@@ -127,7 +127,6 @@ const OrdersReceived = () => {
     }
     getOrderByIdHandler();
   }, [id]);
-  console.log("order :>> ", order);
 
   return (
     <div>
