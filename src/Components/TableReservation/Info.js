@@ -1,9 +1,14 @@
 import GoogleMap from "Components/Common/GoogleMap";
-import React from "react";
+import * as React from "react";
 import "./Info.css";
 import { Typography } from "@material-ui/core";
 import { useUserContext } from "Context/userContext";
 import Testimonial from "Components/Body/testimonial";
+import Stepper from "./ReservationFlow/Stepper/Stepper";
+import PeopleStep from "./ReservationFlow/Steps/PeopleStep";
+import DateStep from "./ReservationFlow/Steps/DateStep";
+import TimeStep from "./ReservationFlow/Steps/TimeStep";
+import DiscountStep from "./ReservationFlow/Steps/DiscountStep";
 
 const useStyle = () => ({
   container: {
@@ -87,59 +92,172 @@ const useStyle = () => ({
   title2: {
     marginTop: "5px",
   },
+  reservingContainer: {
+    position: "relative",
+  },
+  reservingNextBtn: {
+    position: "absolute",
+    top: "5px",
+    right: "0px",
+    borderRadius: "10px 0px 0px 10px",
+    fontSize: "16px",
+    padding: "5px 10px",
+    backgroundColor: "#b29051",
+    color: "white",
+  },
+  reservingNextBtnDisabled: {
+    position: "absolute",
+    top: "5px",
+    right: "0px",
+    borderRadius: "10px 0px 0px 10px",
+    fontSize: "16px",
+    padding: "5px 10px",
+    border: "2px solid #b29051",
+    backgroundColor: "#272727",
+    color: "#b29051",
+    opacity: 0.5,
+  },
 });
 
 export default function Info({ placeData }) {
   const styles = useStyle();
   const { restaurant } = useUserContext();
 
+  const [reserving, setReserving] = React.useState(false);
+  const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [reservationDetail, setReservationDetail] = React.useState({});
+
+  React.useEffect(() => {
+    if (reservationDetail?.people !== undefined && activeStep === 0)
+      setIsNextBtnDisabled(false);
+    else if (reservationDetail?.date !== undefined && activeStep === 1)
+      setIsNextBtnDisabled(false);
+    else if (reservationDetail?.time !== undefined && activeStep === 2)
+      setIsNextBtnDisabled(false);
+    else if (reservationDetail?.discount !== undefined && activeStep === 3)
+      setIsNextBtnDisabled(false);
+  }, [reservationDetail, isNextBtnDisabled, activeStep]);
+
+  function incrementActive() {
+    if (activeStep < 3) setActiveStep(activeStep + 1);
+    // go for next procedure
+    else {
+    }
+  }
+
+  function getStep(active) {
+    switch (active) {
+      case 0:
+        return (
+          <PeopleStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+      case 1:
+        return (
+          <DateStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+      case 2:
+        return (
+          <TimeStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+      case 3:
+        return (
+          <DiscountStep
+            detail={reservationDetail}
+            setDetail={setReservationDetail}
+          />
+        );
+    }
+  }
+
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        <div style={styles.resreveTable}>
-          <div style={styles.reserveTableRoot}>
-            <div style={styles.reserveIconContainer}>
-              <img
-                style={styles.reserveIcon}
-                src="assets/reservation-icon.png"
-              />
-            </div>
-            <div style={styles.reserveBtn}>
-              <button style={styles.reserveButton}>RESERVE A TABLE</button>
-            </div>
+        <div style={styles.reserveTableRoot}>
+          <div style={styles.reserveIconContainer}>
+            <img style={styles.reserveIcon} src="assets/reservation-icon.png" />
           </div>
-          <div>
-            <div className="d-flex flex-column align-items-center justify-content-around m-0">
-              <div className="d-flex justify-content-between my-3">
-                <button style={styles.statusButton}>
-                  <img className="mr-2" src="assets/like.png" width={30} />
-                  <p className="m-0">{placeData?.rating}|5</p>
-                </button>
-                <button style={styles.statusButton}>
-                  <img className="mr-2" src="assets/chat.png" width={30} />
-                  <p className="m-0">{placeData?.user_ratings_total}</p>
-                </button>
-                <button style={styles.statusButton}>
-                  <img
-                    className="mr-2"
-                    src="assets/active-euro.png"
-                    width={30}
-                  />
-                  <img src="assets/passive-euro.png" width={30} />
-                </button>
-              </div>
-              <div
-                style={styles.address}
-                className="d-flex flex-column align-items-center py-2"
+          <div style={styles.reserveBtn}>
+            {reserving ? (
+              <button style={styles.reserveButton}>
+                YOU'RE RESERVING A TABLE!
+              </button>
+            ) : (
+              <button
+                style={styles.reserveButton}
+                onClick={() => setReserving(true)}
               >
-                <h5>{placeData?.formatted_address}</h5>
-              </div>
-            </div>
-          </div>
-          <div>
-            <GoogleMap classname="rounded" />
+                RESERVE A TABLE
+              </button>
+            )}
           </div>
         </div>
+        {reserving ? (
+          <div>
+            <Stepper active={activeStep} setActive={setActiveStep} />
+            <div style={styles.reservingContainer}>
+              <button
+                className="shadow-md"
+                style={
+                  isNextBtnDisabled
+                    ? styles.reservingNextBtnDisabled
+                    : styles.reservingNextBtn
+                }
+                onClick={() => {
+                  incrementActive();
+                  setIsNextBtnDisabled(true);
+                }}
+                disabled={isNextBtnDisabled}
+              >
+                Next
+              </button>
+              {getStep(activeStep)}
+            </div>
+          </div>
+        ) : (
+          <div style={styles.resreveTable}>
+            <div>
+              <div className="d-flex flex-column align-items-center justify-content-around m-0">
+                <div className="d-flex justify-content-between my-3">
+                  <button style={styles.statusButton}>
+                    <img className="mr-2" src="assets/like.png" width={30} />
+                    <p className="m-0">{placeData?.rating}|5</p>
+                  </button>
+                  <button style={styles.statusButton}>
+                    <img className="mr-2" src="assets/chat.png" width={30} />
+                    <p className="m-0">{placeData?.user_ratings_total}</p>
+                  </button>
+                  <button style={styles.statusButton}>
+                    <img
+                      className="mr-2"
+                      src="assets/active-euro.png"
+                      width={30}
+                    />
+                    <img src="assets/passive-euro.png" width={30} />
+                  </button>
+                </div>
+                <div
+                  style={styles.address}
+                  className="d-flex flex-column align-items-center py-2"
+                >
+                  <h5>{placeData?.formatted_address}</h5>
+                </div>
+              </div>
+            </div>
+            <div>
+              <GoogleMap classname="rounded" />
+            </div>
+          </div>
+        )}
       </div>
       <div>
         <div style={styles.avatarStyles}>

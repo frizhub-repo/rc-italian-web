@@ -2,11 +2,13 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 import ReserveTableForm from "./ReserveTableForm";
 import ReserveTableMenu from "./ReserveTableMenu";
+import "./reserveTableCard.css";
 
 const useStyle = () => ({
   container: {
     backgroundColor: "white",
   },
+  carousel: {},
 });
 
 export default function ReserveTableCard() {
@@ -15,11 +17,11 @@ export default function ReserveTableCard() {
   return (
     <div style={styles.container} className="row">
       {/* left */}
-      <div className="col-12 col-lg-6 pl-0">
+      <div className="col-12 col-lg-6 px-0">
         {/* carousel */}
-        <div className="row">
-          <Carousel className="p-0" interval={5000}>
-            <Carousel.Item>
+        <div className="row m-0">
+          <Carousel style={styles.carousel} className="p-0 bg-dark">
+            <Carousel.Item interval={5000}>
               <img className="d-block w-100" src="assets/carousel-img1.png" />
             </Carousel.Item>
             <Carousel.Item>

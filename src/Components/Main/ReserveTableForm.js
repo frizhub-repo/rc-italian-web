@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const useStyle = () => ({
   container: {
-    padding: "10px 20px",
+    padding: "10px",
   },
   nameContainer: {},
   nameInput: {
@@ -79,7 +79,7 @@ export default function ReserveTableForm() {
     <div style={styles.container}>
       <h1>Reserve your table</h1>
       <form>
-        <div className="d-flex justify-content-between mt-4">
+        <div className="d-flex justify-content-around mt-4">
           <input
             style={styles.nameInput}
             className="shadow-md"
@@ -97,7 +97,7 @@ export default function ReserveTableForm() {
         <div className="row">
           {people.map((p, index) => {
             return (
-              <div className="col-sm-6 col-md-3">
+              <div className="col-6 col-md-3">
                 <button
                   id={index}
                   className="btn btn-lg btn-outline"

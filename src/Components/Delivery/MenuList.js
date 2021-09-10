@@ -5,9 +5,13 @@ const useStyle = () => ({
   container: {
     marginTop: "30px",
     background: "white",
-    padding: "10px",
     borderRadius: "20px",
     width: "100%",
+  },
+  itemContainer: {
+    padding: "20px",
+    maxHeight: "60vh",
+    overflowY: "scroll",
   },
 });
 

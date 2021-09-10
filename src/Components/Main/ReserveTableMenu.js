@@ -8,6 +8,7 @@ import { Backdrop, CircularProgress } from "@material-ui/core";
 const useStyle = () => ({
   container: {
     padding: "0px",
+    margin: "0px",
   },
   tabStyle: {
     color: "white",
