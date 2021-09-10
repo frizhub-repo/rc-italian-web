@@ -3,7 +3,7 @@ import "./orderPickup.css";
 
 const useStyle = () => ({
   container: {
-    marginTop: "5px",
+    marginTop: "10px",
     background: "#B29051",
     borderRadius: "20px",
     display: "flex",

@@ -1,3 +1,4 @@
+import Testimonial from "Components/Body/testimonial";
 import React from "react";
 
 const useStyle = () => ({
@@ -15,7 +16,7 @@ const useStyle = () => ({
   },
 });
 
-export default function Story() {
+export default function Story({ reviews }) {
   const styles = useStyle();
 
   return (
@@ -23,7 +24,7 @@ export default function Story() {
       <h1 style={styles.header}>Our Story</h1>
       <div className="row mt-5">
         <div className="d-none d-md-block col-md-6">
-          <img src="assets/hero-logo.png" width={500} />
+          <Testimonial reviews={reviews} showHeader={false} />
         </div>
         <div className="col col-md-6" style={styles.storyText}>
           <h2 className="mb-4">

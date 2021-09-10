@@ -5,20 +5,25 @@ import "./optionSelector.css";
 const useStyle = () => ({
   innerContainer: {
     maxWidth: "80%",
+    color: "white",
   },
   iconStyle: {
     width: "60%",
+  },
+  selectedBtn: {
+    borderRadius: "10px",
+    border: "2px solid",
   },
 });
 
 export default function OptionSelector() {
   const styles = useStyle();
   const [selected, setSelected] = useState(1);
-  const [options, setOptions] = useState([
+  const options = [
     { content: "DAILY MENU", icon: "assets/option-menu.png" },
     { content: "PROMOTIONS", icon: "assets/option-promotion.png" },
     { content: "INFORMATIONS", icon: "assets/option-information.png" },
-  ]);
+  ];
 
   function handleClick(id) {
     setSelected(parseInt(id));
@@ -38,6 +43,7 @@ export default function OptionSelector() {
               className={`d-flex flex-column align-items-center justify-content-center lead col-auto ${
                 selected === index ? "active" : "un-active"
               }`}
+              style={selected === index ? styles.selectedBtn : null}
             >
               <img
                 onClick={() => handleClick(index)}

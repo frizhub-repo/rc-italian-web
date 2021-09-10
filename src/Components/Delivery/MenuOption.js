@@ -4,7 +4,6 @@ import classes from "./mealOption.module.css";
 const useStyle = () => ({
   optionsContainer: {
     width: "100%",
-    maxWidth: "800px",
     minWidth: "250px",
     color: "white",
     background: "#272727",
@@ -17,34 +16,40 @@ const useStyle = () => ({
   },
 });
 
-export default function MenuOption({ selected, handleClick }) {
+export default function MenuOption({ menus, selected, handleClick }) {
   const styles = useStyle();
-
-  const [options, setOptions] = useState([
-    { name: "Hot Deals", image: "assets/flames.png" },
-    { name: "Newest Deals", image: "assets/hot-deal.png" },
-    { name: "Menu 1", image: "assets/menu.png" },
-    { name: "Menu 2", image: "assets/menu.png" },
-    { name: "Menu 3", image: "assets/menu.png" },
-  ]);
 
   return (
     <div
       className="d-flex justify-content-around align-items-center"
       style={styles.optionsContainer}
     >
-      {options.map((option, index) => (
-        <div
-          style={styles.optionContainer}
-          onClick={(e) => handleClick(index)}
-          className={`d-flex flex-column align-items-center justify-content-center ${
-            selected === index ? classes.active : classes.un_active
-          }`}
-        >
-          <img src={option.image} width={50} />
-          <p className="m-0">{option.name}</p>
-        </div>
-      ))}
+      <div
+        style={styles.optionContainer}
+        onClick={(e) => handleClick(0)}
+        className={`d-flex flex-column align-items-center justify-content-center ${
+          selected === 0 ? classes.active : classes.un_active
+        }`}
+      >
+        <img src={`assets/flames.png`} width={50} />
+        <p className="m-0">Hot Deals</p>
+      </div>
+      {menus?.length > 0 &&
+        menus?.map((menu, index) => (
+          <div
+            style={styles.optionContainer}
+            onClick={(e) => handleClick(index + 1)}
+            className={`d-flex flex-column align-items-center justify-content-center ${
+              selected === index + 1 ? classes.active : classes.un_active
+            }`}
+          >
+            <img
+              src={`${process.env.REACT_APP_API_BASE_URL}/${menu?.imageUrl}`}
+              width={50}
+            />
+            <p className="m-0">{menu?.title}</p>
+          </div>
+        ))}
     </div>
   );
 }

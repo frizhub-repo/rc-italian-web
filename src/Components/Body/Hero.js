@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { fetchAllResInfo } from "../../actions/appActions";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import StatusBoxHome from "./StatusBoxHome";
 import StatusBoxMenu from "./StatusBoxMenu";
 
-function Hero({ heroImage, showStatusBox, statusBoxFormat, height }) {
+function Hero({
+  heroImage,
+  showStatusBox,
+  statusBoxFormat,
+  height,
+  placeData,
+}) {
   const dispatch = useDispatch();
-  const { restaurant } = useSelector((state) => state.appReducer);
-  const { loading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
     dispatch(fetchAllResInfo());
   }, [dispatch]);
@@ -33,9 +37,9 @@ function Hero({ heroImage, showStatusBox, statusBoxFormat, height }) {
         />
         {showStatusBox &&
           (statusBoxFormat === "home" ? (
-            <StatusBoxHome isOpened={true} />
+            <StatusBoxHome isOpened={placeData?.opening_hours?.open_now} />
           ) : (
-            <StatusBoxMenu isOpened={true} />
+            <StatusBoxMenu />
           ))}
       </div>
     </section>

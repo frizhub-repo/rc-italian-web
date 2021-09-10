@@ -6,9 +6,14 @@ import Story from "./Story";
 import FindUs from "./FindUs";
 import OpeningHours from "./OpeningHours";
 import Gallery from "../Body/Gallery";
-import Testimonial from "../Body/testimonial";
+import { useUserContext } from "Context/userContext";
+import GoogleMap from "Components/Common/GoogleMap";
+import classes from "./index.module.css";
 
 function Main() {
+  const {
+    restaurant: { placeData },
+  } = useUserContext();
   return (
     <div>
       <ScrollingProvider>
@@ -17,25 +22,33 @@ function Main() {
             heroImage="assets/hero.png"
             showStatusBox={true}
             statusBoxFormat={"home"}
+            placeData={placeData}
           />
         </section>
         <section>
           <ReserveTable />
         </section>
         <section>
-          <Story />
+          <Story reviews={placeData?.reviews} />
         </section>
         <section>
           <Gallery />
         </section>
         <Section id="opening-hour">
-          <OpeningHours />
+          <div className={classes.openingHoursRoot}>
+            <div>
+              <OpeningHours placeData={placeData} />
+            </div>
+            <div className={classes.mapRoot}>
+              <GoogleMap classname={classes.gogleMap} />
+            </div>
+          </div>
         </Section>
         <section>
-          <Testimonial />
-        </section>
-        <section>
-          <FindUs />
+          <FindUs
+            formattedAddress={placeData?.formatted_address}
+            phoneNumber={placeData?.formatted_phone_number}
+          />
         </section>
       </ScrollingProvider>
     </div>

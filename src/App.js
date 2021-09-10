@@ -12,6 +12,10 @@ import Custom from "./Components/Account/CustomHeader";
 import OrdersReceived from "./Components/Orders/OrdersReceived";
 import Navbar from "./Components/Navbar/Navbar";
 import TableReservation from "./Components/TableReservation";
+import DeliveryAddress from "Components/ExistingAddress";
+import DeliveryTime from "Components/DeliveryTime/DeliveryTime";
+import OrderSummary from "Components/Orders/OrderSummary";
+import FooterItalian from "Components/Common/Footer";
 
 function App() {
   return (
@@ -27,7 +31,10 @@ function App() {
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/customer/reservation" exact component={Reservation} />
           <Route path="/customer/order" exact component={Order} />
-          <Route path="/ordersreceived" exact component={OrdersReceived} />
+          <Route path="/chooseAddress" exact component={DeliveryAddress} />
+          <Route path="/deliveryTime" exact component={DeliveryTime} />
+          <Route path="/order/summary" exact component={OrderSummary} />
+          <Route path="/ordersreceived/:id" exact component={OrdersReceived} />
           <Route
             path="*"
             render={() => (
@@ -39,6 +46,7 @@ function App() {
           />
         </Switch>
       </Router>
+      <FooterItalian />
     </div>
   );
 }

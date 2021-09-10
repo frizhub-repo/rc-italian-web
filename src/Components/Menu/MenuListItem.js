@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const useStyle = () => ({
   container: {
@@ -9,53 +9,61 @@ const useStyle = () => ({
     color: "#B29051",
     fontWeight: "bold",
   },
+  allergyTxt: {
+    textAlign: "left",
+  },
 });
 
-export default function MenuListItem({ header }) {
+export default function MenuListItem({ header, products }) {
   const styles = useStyle();
-  const [items, setItems] = useState([
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-    {
-      name: "Linguine ai frutti di mare",
-      detail: "Pasta di grano, cozze, vongole, calamari",
-      price: "15€",
-    },
-  ]);
 
   return (
     <div style={styles.container}>
       <bold className="h1">{header}</bold>
       <ul>
-        {items.map((item) => (
-          <li className="d-flex justify-content-between px-4 pt-2">
-            <div className="d-flex align-items-start">
-              <img className="mr-2" src="assets/list-style.png" />
-              <div className="d-flex flex-column align-items-start">
-                <h5 className="mb-1" style={styles.mainText}>
-                  {item.name}
-                </h5>
-                <p>{item.detail}</p>
+        {products?.length > 0 ? (
+          products.map((product) => (
+            <li className="d-flex justify-content-between px-4 pt-2">
+              <div className="d-flex align-items-start">
+                <img className="mr-2" src="assets/list-style.png" />
+                <div className="d-flex flex-column align-items-start">
+                  <h5 className="mb-1" style={styles.mainText}>
+                    {product?.title}
+                  </h5>
+                  {product?.allergies?.length > 0 && (
+                    <p style={styles.allergyTxt}>
+                      Allergenies:{" "}
+                      {product?.allergies?.map(
+                        (allergy, index) =>
+                          `${allergy}${
+                            product?.allergies?.length === index + 1 ? "" : ", "
+                          }`
+                      )}
+                    </p>
+                  )}
+                  {product?.ingredients?.length > 0 && (
+                    <p style={styles.allergyTxt}>
+                      Ingredients:{" "}
+                      {product?.ingredients?.map(
+                        (allergy, index) =>
+                          `${allergy}${
+                            product?.ingredients?.length === index + 1
+                              ? ""
+                              : ", "
+                          }`
+                      )}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-            <div>
-              <h5 style={styles.mainText}>{item.price}</h5>
-            </div>
-          </li>
-        ))}
+              <div>
+                <h5 style={styles.mainText}>{product?.sizes?.[0]?.price}</h5>
+              </div>
+            </li>
+          ))
+        ) : (
+          <span>This section don't have any products</span>
+        )}
       </ul>
     </div>
   );

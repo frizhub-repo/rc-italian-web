@@ -13,6 +13,9 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import Footer from "../Footer";
 import { useSelector } from "react-redux";
+import { getOrderById } from "api/Order";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -104,6 +107,27 @@ const OrdersReceived = () => {
   const items = useSelector((state) => state.orders).items;
   const address = useSelector((state) => state.orders).address;
 
+  const [order, setOrder] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
+
+  const { id } = useParams();
+
+  React.useEffect(() => {
+    async function getOrderByIdHandler() {
+      setLoading(true);
+      try {
+        const res = await getOrderById(id);
+        setOrder(res?.data?.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        toast.error("Error occured while fetching order");
+        console.log({ error });
+      }
+    }
+    getOrderByIdHandler();
+  }, [id]);
+
   return (
     <div>
       <Header />
@@ -180,10 +204,13 @@ const OrdersReceived = () => {
                     }}
                   >
                     <label>North Fork Table & Inn</label>
-                    <label>57225 Main Rd, Southold, Ny</label>
+                    <label>
+                      {order?.address?.zipOrPostalCode}{" "}
+                      {order?.address?.addressLine1}, {order?.address?.country}
+                    </label>
                     <label>11971</label>
                     <label>info@north.com</label>
-                    <label>(917) 555-1234</label>
+                    <label>{order?.address?.phoneNumber}</label>
                   </div>
                 </div>
               </Card>
@@ -205,9 +232,9 @@ const OrdersReceived = () => {
                   }}
                 >
                   <label>
-                    {address?.addressLine1} {address?.city},{" "}
-                    {address?.zipOrPostalCode} {address?.stateOrProvince},{" "}
-                    {address?.country}
+                    {order?.address?.addressLine1} {order?.address?.city},{" "}
+                    {order?.address?.zipOrPostalCode}{" "}
+                    {order?.address?.stateOrProvince}, {order?.address?.country}
                   </label>
                 </div>
               </Card>
@@ -228,9 +255,7 @@ const OrdersReceived = () => {
                     lineHeight: "10px",
                   }}
                 >
-                  <label>North Fork Table & Inn 57225 Main Rd.</label>
-                  <label>Southold, NY 119717</label>
-                  <label>Fried Brussels + Apple</label>
+                  <label>{order?.note}</label>
                 </div>
               </Card>
             </Paper>
@@ -282,7 +307,7 @@ const OrdersReceived = () => {
                     fontSize: "1.2rem",
                   }}
                 >
-                  € {total}
+                  € {order?.total}
                 </label>
                 <div>
                   <ShoppingBasketIcon htmlColor="#656565" />
@@ -316,7 +341,7 @@ const OrdersReceived = () => {
                   fontSize: "10px",
                 }}
               >
-                {items.map((item, i) => (
+                {order?.products?.map((item, i) => (
                   <>
                     <Box
                       style={{
@@ -335,7 +360,7 @@ const OrdersReceived = () => {
                           }}
                         >
                           <label style={{ marginBottom: "0px" }}>
-                            {item?.name}
+                            {item?.product?.title}
                           </label>
                           {/* <label style={{ marginBottom: "0px" }}>
                             Made for lunch
@@ -380,9 +405,9 @@ const OrdersReceived = () => {
                   <label>Total</label>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <label>€ {total}</label>
+                  <label>€ {order?.total}</label>
                   <label>€ .0</label>
-                  <label>€ {total}</label>
+                  <label>€ {order?.total}</label>
                 </div>
               </Box>
             </Paper>

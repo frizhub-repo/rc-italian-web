@@ -1,0 +1,14 @@
+.openingHoursRoot {
+  display: flex;
+  align-items: flex-end;
+  background-color: #272727;
+}
+
+.mapRoot {
+  width: 40%;
+}
+
+.gogleMap {
+  border-radius: 30px;
+  height: 430px;
+}
