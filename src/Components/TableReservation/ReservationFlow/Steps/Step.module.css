@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.contentContainer {
+  height: 500px;
+}
+
+.header {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.item {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #b29051;
+  color: #b29051;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.discountContainer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15px;
+  background-color: #b29051;
+  padding: 8px;
+  color: white;
+  border-radius: 30px;
+}
+
+.active_discount {
+  background-color: #272727;
+}
+
+.active_item {
+  background-color: #b29051;
+  border-color: #b29051;
+  color: white;
+}
+
+.secondaryHeader {
+  color: #b29051;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 25px;
+  text-decoration: underline;
+}
+
+.detailsCardContainer {
+  display: flex;
+  justify-content: space-between;
+  color: #b29051;
+  border: 2px solid #b29051;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.detailsCardContainer:hover {
+  background-color: rgba(178, 144, 81, 0.2);
+}
+
+.detailsCardContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detailsCardHeaderContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.detailsCardNameContainer {
+  background-color: #b29051;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.detailsCardSelector {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #b29051;
+}
+
+.detailsCardSelector_active {
+  background-color: #b29051;
+}
+
+.dateDiscount {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #b29051;
+  color: white;
+  border-radius: 5px;
+  padding: 0px 5px;
+  display: flex;
+  font-size: 10px;
+}
+
+.dateDiscount_active {
+  background: #1d1d1d;
+}
