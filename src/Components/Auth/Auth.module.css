@@ -1,0 +1,186 @@
+.root {
+  background-color: #272727;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  padding-top: 74px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.header {
+  font-family: "Clicker Script";
+  color: #b29051;
+  font-size: 100px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.inputContainer {
+  width: 60%;
+  padding: 10px;
+}
+
+.authInput {
+  border: 2px solid #b29051;
+  background-color: #1a1b20;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.authInput:focus {
+  background-color: transparent;
+  outline: none;
+}
+
+.passwordContainer {
+  display: flex;
+}
+
+.iconContainer {
+  background-color: transparent;
+  color: #b29051;
+  padding: 5px !important;
+  border-radius: 50%;
+  margin-left: -45px;
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconContainer:hover {
+  background-color: #b29051;
+  color: #1a1b20;
+}
+
+.submitBtn {
+  background-color: #b29051;
+  color: white;
+  text-transform: uppercase;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.submitBtn:hover {
+  background-color: rgba(178, 144, 81, 0.9);
+}
+
+.submitBtn:focus {
+  outline: none;
+}
+
+.forgotPassContainer {
+  margin-top: -5px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.forgotPass {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: underline;
+}
+
+.forgotPass:hover {
+  color: white;
+}
+
+.socialAuthBtn {
+  border: 2px solid #b29051;
+  background-color: #1a1b20;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  color: #b29051;
+  transition: all 0.1s ease-in;
+  margin-bottom: 10px;
+}
+
+.socialAuthBtn:hover {
+  background-color: #b29051;
+  color: #1a1b20;
+}
+
+.socialAuthBtn:focus {
+  outline: none;
+}
+
+.socialAuthBtnsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.secondaryText {
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 10px;
+}
+
+.redirectBtn {
+  color: white;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.redirectBtn:hover {
+  text-decoration: underline;
+}
+
+.redirectBtn:focus {
+  outline: none;
+}
+
+.emailContainer {
+  width: 50%;
+  background-color: #b29051;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 40px;
+  color: #1a1b20;
+}
+
+.emailContainer > form > .authInput {
+  background-color: #1a1b20;
+}
+
+.divider {
+  background: #1a1b20;
+  border: none;
+  height: 1px;
+  margin: 10px 0px;
+}
+
+@media screen and (max-width: 700px) {
+  .inputContainer {
+    width: 100%;
+  }
+  .emailContainer {
+    width: 100%;
+  }
+  .header {
+    font-size: 60px;
+  }
+  .socialAuthBtn {
+    font-size: 16px;
+  }
+}

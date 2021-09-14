@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
 import Home from "./Components/Home";
 import Main from "./Components/Main";
 import Contact from "./Components/Contact";
@@ -16,6 +16,15 @@ import DeliveryAddress from "Components/ExistingAddress";
 import DeliveryTime from "Components/DeliveryTime/DeliveryTime";
 import OrderSummary from "Components/Orders/OrderSummary";
 import FooterItalian from "Components/Common/Footer";
+import SignIn from "Components/Auth/signIn";
+import SignUp from "Components/Auth/signUp";
+import ForgotPassword from "Components/Auth/ForgotPassword"
+
+function FooterWrapper({ location }) {
+  if (location.pathname.match('/signIn') || location.pathname.match('signUp') || location.pathname.match('forgotPassword'))
+    return null;
+  return <FooterItalian />
+}
 
 function App() {
   return (
@@ -35,6 +44,9 @@ function App() {
           <Route path="/deliveryTime" exact component={DeliveryTime} />
           <Route path="/order/summary" exact component={OrderSummary} />
           <Route path="/ordersreceived/:id" exact component={OrdersReceived} />
+          <Route path="/signIn" exact component={SignIn} />
+          <Route path="/signUp" exact component={SignUp} />
+          <Route path="/forgotPassword" exact component={ForgotPassword} />
           <Route
             path="*"
             render={() => (
@@ -45,10 +57,11 @@ function App() {
             )}
           />
         </Switch>
+        <WrappedFooter />
       </Router>
-      <FooterItalian />
     </div>
   );
 }
 
+const WrappedFooter = withRouter(FooterWrapper);
 export default App;

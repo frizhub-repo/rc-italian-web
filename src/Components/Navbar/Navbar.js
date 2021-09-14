@@ -68,9 +68,8 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 to="/"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/" && "activeNavbar"
-                }`}
+                className={`nav-link hoverNavBar ${location.pathname === "/" && "activeNavbar"
+                  }`}
               >
                 HOME
               </Link>
@@ -78,9 +77,8 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 to="/menu"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/menu" && "activeNavbar"
-                }`}
+                className={`nav-link hoverNavBar ${location.pathname === "/menu" && "activeNavbar"
+                  }`}
               >
                 MENU
               </Link>
@@ -88,9 +86,8 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 to="/tableReservation"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/tableReservation" && "activeNavbar"
-                }`}
+                className={`nav-link hoverNavBar ${location.pathname === "/tableReservation" && "activeNavbar"
+                  }`}
               >
                 TABLE RESERVATION
               </Link>
@@ -98,9 +95,8 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 to="/delivery"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/delivery" && "activeNavbar"
-                }`}
+                className={`nav-link hoverNavBar ${location.pathname === "/delivery" && "activeNavbar"
+                  }`}
               >
                 DELIVERY
               </Link>
@@ -108,9 +104,8 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 to="/contact"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/contact" && "activeNavbar"
-                }`}
+                className={`nav-link hoverNavBar ${location.pathname === "/contact" && "activeNavbar"
+                  }`}
               >
                 CONTACT
               </Link>
@@ -124,7 +119,7 @@ function Navbar() {
                 {customer?.firstName} {customer?.lastName}
               </span>
             ) : (
-              <span onClick={handleClickOpen} className="d-flex">
+              <span onClick={() => history.push('signIn')} className="d-flex">
                 <img
                   src="assets/login.png"
                   width="20"
@@ -175,16 +170,15 @@ function Navbar() {
                   <span className={classes.orderId}>{order?.orderId}</span>{" "}
                   &nbsp;{" "}
                   <span
-                    className={`${classes.statusRoot} ${
-                      order?.status === "pending"
+                    className={`${classes.statusRoot} ${order?.status === "pending"
                         ? classes.pending
                         : order?.status === "accepted"
-                        ? classes.accepted
-                        : order?.status === "assigned" ||
-                          order?.status === "pickedUp"
-                        ? classes.assigned
-                        : classes.requested
-                    }`}
+                          ? classes.accepted
+                          : order?.status === "assigned" ||
+                            order?.status === "pickedUp"
+                            ? classes.assigned
+                            : classes.requested
+                      }`}
                   >
                     {order?.status}
                   </span>
