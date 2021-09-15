@@ -3,16 +3,39 @@ import { IconButton } from "rsuite";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import classes from "./Auth.module.css";
-import SocialAuth from "./SocialAuth"
-import FieldError from "Components/Common/FieldError"
+import SocialAuth from "./SocialAuth";
+import FieldError from "Components/Common/FieldError";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import { toast } from "react-toastify";
+import { customerSignUp } from "api/customer";
+import { useUserContext } from "Context/userContext";
+import axiosIntance from "utils/axios-configured";
 
 export default function SignUp({ check1, handleClose, setOpenDelivery }) {
   const { register, handleSubmit, errors, watch } = useForm();
   const [isPassVisible, setIsPassVisible] = React.useState(false);
   const [isRePassVisible, setIsRePassVisible] = React.useState(false);
+  const { setToken, refetchCustomerHandler } = useUserContext();
   const history = useHistory();
+
+  async function signUpWithPayload(data) {
+    try {
+      const res = await customerSignUp(data);
+      if (res.status === 200) {
+        axiosIntance.defaults.headers.common["Authorization"] =
+          res?.data?.data?.token;
+      }
+      localStorage.setItem("token", res?.data?.data?.token);
+      setToken(res?.data?.data?.token);
+      refetchCustomerHandler();
+      toast.success("Your account has been created successfully");
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+      toast.error("Sign Up not successful");
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -20,7 +43,7 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
         <h1 className={classes.header}>Sign Up</h1>
       </div>
       <div className={classes.inputContainer}>
-        <form onSubmit={handleSubmit(e => e.preventDefault())}>
+        <form onSubmit={handleSubmit(signUpWithPayload)}>
           <input
             name="firstName"
             className={classes.authInput}
@@ -28,7 +51,9 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
             placeholder="First Name"
             ref={register({ required: "First Name is required" })}
           />
-          {errors?.firstName?.message && <FieldError message={errors?.firstName?.message} />}
+          {errors?.firstName?.message && (
+            <FieldError message={errors?.firstName?.message} />
+          )}
           <input
             name="lastName"
             className={classes.authInput}
@@ -36,30 +61,42 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
             placeholder="Last Name"
             ref={register({ required: "Last Name is required" })}
           />
-          {errors?.lastName?.message && <FieldError message={errors?.lastName?.message} />}
+          {errors?.lastName?.message && (
+            <FieldError message={errors?.lastName?.message} />
+          )}
           <input
-            name="phone"
+            name="phoneNumber"
             className={classes.authInput}
             type="text"
             placeholder="Phone Number"
             ref={register({ required: "Phone number is required" })}
           />
-          {errors?.phone?.message && <FieldError message={errors?.phone?.message} />}
+          {errors?.phoneNumber?.message && (
+            <FieldError message={errors?.phoneNumber?.message} />
+          )}
           <input
             name="email"
             className={classes.authInput}
             type="text"
             placeholder="Email"
-            ref={register({ required: "Email is required" })}
+            ref={register({
+              required: "Email is required",
+              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            })}
           />
-          {errors?.email?.message && <FieldError message={errors?.email?.message} />}
+          {errors.email?.type === "pattern" && (
+            <FieldError message={"Email is not valid."} />
+          )}
+          {errors?.email?.message && (
+            <FieldError message={errors?.email?.message} />
+          )}
           <div className={classes.passwordContainer}>
             <input
               name="password"
               className={classes.authInput}
               type={isPassVisible ? "text" : "password"}
               placeholder="Password"
-              ref={register({ required: "Password is required" })}
+              ref={register({ required: "Password is required", minLength: 8 })}
             />
             <IconButton
               className={classes.iconContainer}
@@ -68,7 +105,12 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
               {isPassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
           </div>
-          {errors?.password?.message && <FieldError message={errors?.password?.message} />}
+          {errors?.password?.type === "minLength" && (
+            <FieldError message={"Password must be 8 characters long"} />
+          )}
+          {errors?.password?.message && (
+            <FieldError message={errors?.password?.message} />
+          )}
           <div className={classes.passwordContainer}>
             <input
               name="rePassword"
@@ -76,8 +118,10 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
               type={isRePassVisible ? "text" : "password"}
               placeholder="Confirm Password"
               ref={register({
-                required: "Please re-type your password", validate: (value) =>
-                  value === watch("password") || "Password does not match"
+                required: "Please re-type your password",
+                minLength: 8,
+                validate: (value) =>
+                  value === watch("password") || "Password does not match",
               })}
             />
             <IconButton
@@ -87,7 +131,9 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
               {isRePassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
           </div>
-          {errors?.rePassword?.message && <FieldError message={errors?.rePassword?.message} />}
+          {errors?.rePassword?.message && (
+            <FieldError message={errors?.rePassword?.message} />
+          )}
           <div style={{ marginBottom: "20px" }}></div>
           <button type="submit" className={classes.submitBtn}>
             Sign Up
@@ -110,6 +156,5 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
         </button>
       </div>
     </div>
-  )
-    ;
+  );
 }

@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  withRouter,
+} from "react-router-dom";
 import Home from "./Components/Home";
 import Main from "./Components/Main";
 import Contact from "./Components/Contact";
@@ -18,12 +23,16 @@ import OrderSummary from "Components/Orders/OrderSummary";
 import FooterItalian from "Components/Common/Footer";
 import SignIn from "Components/Auth/signIn";
 import SignUp from "Components/Auth/signUp";
-import ForgotPassword from "Components/Auth/ForgotPassword"
+import ForgotPassword from "Components/Auth/ForgotPassword";
 
 function FooterWrapper({ location }) {
-  if (location.pathname.match('/signIn') || location.pathname.match('signUp') || location.pathname.match('forgotPassword'))
+  if (
+    location.pathname.match("/signIn") ||
+    location.pathname.match("signUp") ||
+    location.pathname.match("forgotPassword")
+  )
     return null;
-  return <FooterItalian />
+  return <FooterItalian />;
 }
 
 function App() {
