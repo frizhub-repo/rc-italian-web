@@ -101,6 +101,12 @@
   background-color: #b29051;
 }
 
+.calenderArrow {
+  border: 2px solid #b29051;
+  border-radius: 30px;
+  padding: 0 8px;
+}
+
 .dateDiscount {
   position: absolute;
   bottom: -5px;
