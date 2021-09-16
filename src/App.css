@@ -142,3 +142,27 @@
 .custom-scroll p:last-child {
   border: none;
 }
+
+.custom-scroll-secondary {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.custom-scroll-secondary::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll-secondary::-webkit-scrollbar-track {
+  background: #b29051 !important;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.custom-scroll-secondary::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 5px;
+}
+
+.custom-scroll-secondary p:last-child {
+  border: none;
+}

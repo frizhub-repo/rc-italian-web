@@ -117,3 +117,20 @@
 .dateDiscount_active {
   background: #1d1d1d;
 }
+
+.disableTitle {
+  background-color: #636363;
+  border-radius: 10px;
+}
+
+.createReservationBtnRoot {
+  border-radius: 30px;
+  background-color: #b29051;
+  color: white;
+}
+
+.createReservationBtn {
+  padding: 10px 0;
+  font-size: 20px;
+  text-transform: uppercase;
+}

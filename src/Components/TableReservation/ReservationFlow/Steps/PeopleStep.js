@@ -1,21 +1,58 @@
 import * as React from "react";
+import { getMaxValue } from "utils/common";
 import classes from "./Step.module.css";
 
-function Discount({ total, isActive }) {
+function Discount({ offers, isActive }) {
+  const maxOffer = getMaxValue(offers, "discountPrice");
   return (
-    <div
-      className={`${classes.discountContainer} ${
-        isActive && classes.active_discount
-      } shadow-md`}
-    >
-      <small>-{total}%</small>
-    </div>
+    <>
+      {maxOffer?.count > 0 && (
+        <div
+          className={`${classes.discountContainer} ${
+            isActive && classes.active_discount
+          } shadow-md`}
+        >
+          <small>-{maxOffer?.count}%</small>
+        </div>
+      )}
+    </>
   );
 }
 
-export default function PeopleStep({ discounts, detail, setDetail }) {
-  function updatePeople(id) {
-    setDetail({ ...detail, people: id });
+export default function PeopleStep({
+  reservationDetail,
+  parameters,
+  setParameters,
+  offers,
+  setReservationDetail,
+}) {
+  React.useEffect(() => {
+    const peopleOffer = { ...reservationDetail?.choosePeople };
+    for (const offer of offers) {
+      if (offer?.peopleGreaterThanSix) {
+        for (
+          let index = 6;
+          index <= Object.entries(reservationDetail?.choosePeople)?.length;
+          index++
+        ) {
+          peopleOffer[index] = [...peopleOffer[index], offer];
+        }
+      }
+      offer?.numberOfPeople.forEach((count) => {
+        peopleOffer[count] = [...peopleOffer[count], offer];
+      });
+    }
+    setReservationDetail({
+      ...reservationDetail,
+      choosePeople: peopleOffer,
+    });
+  }, [offers]);
+  function updatePeople({ count, value }) {
+    const maxOffer = getMaxValue(value, "discountPrice");
+    setParameters({
+      ...parameters,
+      people: { count, offer: maxOffer?.obj },
+    });
   }
 
   return (
@@ -23,24 +60,25 @@ export default function PeopleStep({ discounts, detail, setDetail }) {
       <h4 className={classes.header}>Choose number of People</h4>
       <div className={`${classes.contentContainer} custom-scroll`}>
         <div className="row mx-2">
-          {Array(25)
-            .fill()
-            .map((_, index) => (
+          {Object.entries(reservationDetail?.choosePeople)?.map(
+            ([count, value], index) => (
               <div key={index} className="col-4 my-2">
                 <div
                   className={`${classes.item} ${
-                    detail?.people === index + 1 && classes.active_item
+                    parameters?.people?.count === count && classes.active_item
                   } shadow-md`}
-                  onClick={() => updatePeople(index + 1)}
+                  onClick={() => updatePeople({ count, value })}
                 >
-                  <h4>{index + 1}</h4>
+                  <h4>{count}</h4>
                   <Discount
-                    isActive={detail?.people === index + 1}
-                    total={"20"}
+                    isActive={parameters?.people?.count === count}
+                    offers={value}
+                    S
                   />
                 </div>
               </div>
-            ))}
+            )
+          )}
         </div>
       </div>
     </div>
