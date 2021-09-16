@@ -1,0 +1,52 @@
+.root {
+  position: relative;
+}
+
+.container {
+  position: fixed;
+  top: 25%;
+  border-radius: 10px;
+  margin-left: 40px;
+  box-shadow: 0px 0px 36px -8px rgba(178, 144, 81, 0.75);
+  overflow: hidden;
+  border: 1px solid #1d1d1d;
+}
+
+.item {
+  color: rgb(87, 87, 87);
+  padding: 10px 30px;
+  font-size: 18px;
+  background-color: white;
+  border: 1px solid #1d1d1d;
+  transition: all 0.1s ease-in;
+}
+
+.item:hover {
+  cursor: pointer;
+  color: black;
+}
+
+.item_active {
+  background-color: #b29051;
+  color: white;
+}
+
+.item_active:hover {
+  color: white;
+}
+
+.first {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.last {
+  border-radius: 0px 0px 10px 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    position: relative;
+    margin: 0px;
+    margin-top: 20px;
+  }
+}

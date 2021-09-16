@@ -3,6 +3,11 @@ import { isEmpty } from "utils/common";
 import "./openingHours.css";
 
 const useStyle = () => ({
+  cell: {
+    padding: "10px 0px",
+    width: "50%",
+    border: "2px solid #997b44",
+  },
   container: {
     padding: "30px 60px 0 60px",
     background: "#272727",
@@ -67,14 +72,14 @@ export default function OpeningHours({ placeData }) {
       <h1 style={styles.header}>Opening Hours</h1>
       <table style={styles.table}>
         <thead>
-          <th colSpan="2">
+          <th style={styles.cell} colSpan="2">
             <img style={styles.headerImage} src="assets/clock.png" />
           </th>
         </thead>
         {openingHours.map((timing) => (
           <tr className={`${timing?.openTime ? null : "closed"}`}>
-            <td>{timing?.openDay}</td>
-            <td>
+            <td style={styles.cell}>{timing?.openDay}</td>
+            <td style={styles.cell}>
               {timing?.openTime || timing?.closeTime
                 ? timing?.openTime + " - " + timing?.closeTime
                 : "Closed"}

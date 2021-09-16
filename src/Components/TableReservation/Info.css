@@ -1,4 +1,0 @@
-#root > div.App > div > section:nth-child(2) > div > div {
-  position: sticky;
-  top: 30%;
-}
