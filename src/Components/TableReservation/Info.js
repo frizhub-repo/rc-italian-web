@@ -264,21 +264,23 @@ export default function Info({ placeData }) {
               />
             ) : (
               <div style={styles.reservingContainer}>
-                <button
-                  className="shadow-md"
-                  style={
-                    isNextBtnDisabled
-                      ? styles.reservingNextBtnDisabled
-                      : styles.reservingNextBtn
-                  }
-                  onClick={() => {
-                    incrementActive();
-                    setIsNextBtnDisabled(true);
-                  }}
-                  disabled={isNextBtnDisabled}
-                >
-                  Next
-                </button>
+                {activeStep !== 3 && (
+                  <button
+                    className="shadow-md"
+                    style={
+                      isNextBtnDisabled
+                        ? styles.reservingNextBtnDisabled
+                        : styles.reservingNextBtn
+                    }
+                    onClick={() => {
+                      incrementActive();
+                      setIsNextBtnDisabled(true);
+                    }}
+                    disabled={isNextBtnDisabled}
+                  >
+                    Next
+                  </button>
+                )}
                 {getStep(activeStep)}
               </div>
             )}
