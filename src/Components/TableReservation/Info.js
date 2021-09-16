@@ -9,6 +9,8 @@ import PeopleStep from "./ReservationFlow/Steps/PeopleStep";
 import DateStep from "./ReservationFlow/Steps/DateStep";
 import TimeStep from "./ReservationFlow/Steps/TimeStep";
 import DiscountStep from "./ReservationFlow/Steps/DiscountStep";
+import { getReservationOffers } from "api/Public";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyle = () => ({
   container: {
@@ -117,27 +119,67 @@ const useStyle = () => ({
     color: "#b29051",
     opacity: 0.5,
   },
+  skeletonSpacing: {
+    margin: "15px 20px 0",
+    borderRadius: "30px",
+    backgroundColor: "rgb(178, 144, 81)",
+  },
 });
 
 export default function Info({ placeData }) {
   const styles = useStyle();
   const { restaurant } = useUserContext();
-
+  const [loading, setLoading] = React.useState(false);
   const [reserving, setReserving] = React.useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
   const [activeStep, setActiveStep] = React.useState(0);
-  const [reservationDetail, setReservationDetail] = React.useState({});
+  const [parameters, setParameters] = React.useState({});
+  const [offers, setOffers] = React.useState([]);
+  const [reservationDetail, setReservationDetail] = React.useState({
+    choosePeople: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+      8: [],
+      9: [],
+      10: [],
+      11: [],
+      12: [],
+      13: [],
+      14: [],
+      15: [],
+      16: [],
+    },
+  });
 
   React.useEffect(() => {
-    if (reservationDetail?.people !== undefined && activeStep === 0)
+    setLoading(true);
+    try {
+      (async function () {
+        const res = await getReservationOffers();
+        setOffers(res?.data?.data);
+        setLoading(false);
+      })();
+    } catch (error) {
+      console.log({ error });
+      setLoading(false);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (parameters?.people !== undefined && activeStep === 0)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.date !== undefined && activeStep === 1)
+    else if (parameters?.date !== undefined && activeStep === 1)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.time !== undefined && activeStep === 2)
+    else if (parameters?.time !== undefined && activeStep === 2)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.discount !== undefined && activeStep === 3)
+    else if (parameters?.discount !== undefined && activeStep === 3)
       setIsNextBtnDisabled(false);
-  }, [reservationDetail, isNextBtnDisabled, activeStep]);
+  }, [parameters, isNextBtnDisabled, activeStep]);
 
   function incrementActive() {
     if (activeStep < 3) setActiveStep(activeStep + 1);
@@ -151,20 +193,29 @@ export default function Info({ placeData }) {
       case 0:
         return (
           <PeopleStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            offers={offers}
+            reservationDetail={reservationDetail}
+            setReservationDetail={setReservationDetail}
+            parameters={parameters}
+            setParameters={setParameters}
           />
         );
       case 1:
         return (
           <DateStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
+            reservationDetail={reservationDetail}
+            setReservationDetail={setReservationDetail}
           />
         );
       case 2:
         return (
           <TimeStep
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
             detail={reservationDetail}
             setDetail={setReservationDetail}
           />
@@ -172,8 +223,9 @@ export default function Info({ placeData }) {
       case 3:
         return (
           <DiscountStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
           />
         );
     }
@@ -204,24 +256,32 @@ export default function Info({ placeData }) {
         {reserving ? (
           <div>
             <Stepper active={activeStep} setActive={setActiveStep} />
-            <div style={styles.reservingContainer}>
-              <button
-                className="shadow-md"
-                style={
-                  isNextBtnDisabled
-                    ? styles.reservingNextBtnDisabled
-                    : styles.reservingNextBtn
-                }
-                onClick={() => {
-                  incrementActive();
-                  setIsNextBtnDisabled(true);
-                }}
-                disabled={isNextBtnDisabled}
-              >
-                Next
-              </button>
-              {getStep(activeStep)}
-            </div>
+            {loading ? (
+              <Skeleton
+                variant="rect"
+                height={350}
+                style={styles.skeletonSpacing}
+              />
+            ) : (
+              <div style={styles.reservingContainer}>
+                <button
+                  className="shadow-md"
+                  style={
+                    isNextBtnDisabled
+                      ? styles.reservingNextBtnDisabled
+                      : styles.reservingNextBtn
+                  }
+                  onClick={() => {
+                    incrementActive();
+                    setIsNextBtnDisabled(true);
+                  }}
+                  disabled={isNextBtnDisabled}
+                >
+                  Next
+                </button>
+                {getStep(activeStep)}
+              </div>
+            )}
           </div>
         ) : (
           <div style={styles.resreveTable}>
