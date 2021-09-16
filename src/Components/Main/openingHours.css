@@ -2,13 +2,6 @@ table {
   margin-top: 30px;
 }
 
-td,
-th {
-  padding: 10px 0px;
-  width: 50%;
-  border: 2px solid #997b44;
-}
-
 .closed {
   background-color: #b91010;
 }

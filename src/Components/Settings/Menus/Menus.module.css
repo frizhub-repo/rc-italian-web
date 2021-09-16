@@ -1,0 +1,140 @@
+.root {
+  width: 50%;
+}
+
+.header {
+  color: #b29051;
+  font-family: "Clicker Script";
+  margin: 20px 0px;
+  text-transform: capitalize;
+  font-size: 70px;
+}
+
+.customBtn {
+  background-color: #b29051;
+  color: white;
+  text-transform: uppercase;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.customBtn:hover {
+  background-color: rgba(178, 144, 81, 0.9);
+}
+
+.customBtn:focus {
+  outline: none;
+}
+
+.recordDate {
+  color: white;
+}
+
+.historyContainer {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.orderContainerWrapper {
+  border-radius: 10px;
+  border: 1px solid #b29051;
+  background: #b29051;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.orderContainer {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  margin: 0px;
+}
+
+.orderHeader {
+  background-color: #b29051;
+}
+
+.columnName {
+  padding: 10px 20px;
+  color: white;
+  font-size: 18px;
+  margin: 0px;
+  border-right: 1px solid white;
+}
+
+.border_none {
+  border: none;
+}
+
+.productContainer {
+  width: 100%;
+  background-color: #1a1b20;
+  border-bottom: 1px dashed grey;
+}
+
+.plateContainer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.productText {
+  color: white;
+  font-size: 18px;
+}
+
+.orderImage {
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.detailText {
+  color: white;
+  font-size: 16px;
+}
+
+.actionBtn {
+  border: 1px solid #b29051;
+  padding: 5px;
+  border-radius: 10px;
+  color: #b29051;
+  max-width: 120px;
+  width: 100%;
+  margin-bottom: 5px;
+  transition: all 0.05s ease-in;
+}
+
+.actionBtn:active {
+  outline: none;
+}
+
+.actionBtn:hover {
+  color: #1a1b20;
+  background-color: #b29051;
+}
+
+.divider {
+  border: 1px dashed grey;
+  width: 100%;
+}
+
+.actionsRow {
+  background-color: #1a1b20;
+}
+
+.btnsColumn {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .root {
+    width: 100%;
+    padding: 20px;
+  }
+}

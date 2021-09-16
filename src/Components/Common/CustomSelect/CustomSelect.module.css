@@ -1,0 +1,63 @@
+.menu {
+  border: 2px solid #b29051;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+  margin-bottom: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+.menu:hover {
+  cursor: pointer;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.expandIcon {
+  color: rgb(87, 87, 87);
+  transition: transform 0.2s ease-in !important;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.optionsContainer {
+  max-height: 0px;
+  transition: all 0.2s ease-in;
+  overflow: hidden;
+}
+
+.opened {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.option {
+  display: flex;
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #1a1b20;
+  color: rgb(87, 87, 87);
+  transition: all 0.05s ease-in;
+}
+
+.option:hover {
+  cursor: pointer;
+  background-color: rgba(178, 144, 81, 0.7);
+  border-radius: 5px;
+  color: white;
+}
+
+.selected {
+  color: white;
+}
