@@ -1,11 +1,23 @@
-import * as React from 'react'
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import * as React from "react";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { IconButton } from "rsuite";
 import classes from "./CustomText.module.css";
 
-export default function CustomText({ name, placeholder, register, validationRule, isPassword = false, isVisible = true, setIsVisible, type = null, value, minValue }) {
-
+export default function CustomText({
+  name,
+  placeholder,
+  register = () => {},
+  validationRule,
+  isPassword = false,
+  isVisible = true,
+  setIsVisible,
+  type = null,
+  value,
+  defaultValue = "",
+  minValue,
+  isDisabled = false,
+}) {
   return (
     <div className={classes.passwordContainer}>
       <input
@@ -15,15 +27,17 @@ export default function CustomText({ name, placeholder, register, validationRule
         placeholder={placeholder}
         ref={register(validationRule)}
         min={minValue}
+        disabled={isDisabled}
+        defaultValue={defaultValue}
       />
-      {isPassword &&
+      {isPassword && (
         <IconButton
           className={classes.iconContainer}
           onClick={() => setIsVisible((prev) => !prev)}
         >
           {isVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
         </IconButton>
-      }
+      )}
     </div>
-  )
+  );
 }

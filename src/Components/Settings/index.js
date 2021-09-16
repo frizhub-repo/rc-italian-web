@@ -21,7 +21,9 @@ export default function Settings() {
     <div className={classes.root}>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className={`${classes.modalStyle} shadow-lg`}>
-          <h5 className={classes.modalText}>Are you sure?</h5>
+          <h5 className={classes.modalText}>
+            Are you sure you want to logout?
+          </h5>
           <div className={classes.btnsContainer}>
             <button
               className={`${classes.cancelBtn} shadow-md`}
