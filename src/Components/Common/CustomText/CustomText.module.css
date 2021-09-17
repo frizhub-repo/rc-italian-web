@@ -15,7 +15,6 @@
 }
 
 .authInput:focus {
-  background-color: transparent;
   outline: none;
 }
 
