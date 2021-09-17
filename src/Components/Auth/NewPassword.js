@@ -1,31 +1,15 @@
 import React from "react";
 import FieldError from "Components/Common/FieldError";
+import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { CircularProgress } from "@material-ui/core";
 import { useHistory } from "react-router";
+import { resetPassword } from "api/customer";
+import CustomText from "Components/Common/CustomText/CustomText";
 import classes from "./Auth.module.css";
+import { toast } from "react-toastify";
 
 const styles = {
-  inputStyle: {
-    background: "#1a1b20",
-    padding: "10px",
-    fontSize: "18px",
-    borderRadius: "5px",
-    width: "100%",
-    margin: "10px",
-    color: "white",
-  },
-  containerStyle: {
-    justifyContent: "space-between",
-  },
-  cancelBtn: {
-    border: "1px solid #1a1b20",
-    fontSize: "18px",
-    color: "#1a1b20",
-    padding: "8px",
-    borderRadius: "5px",
-    marginRight: "10px",
-  },
   searchBtn: {
     background: "#1a1b20",
     color: "#b29051",
@@ -40,14 +24,29 @@ const styles = {
 
 export default function NewPassword() {
   const [isWaiting, setIsWaiting] = React.useState(false);
+  const [isPassVisible, setIsPassVisible] = React.useState(false);
+  const [isRePassVisible, setIsRePassVisible] = React.useState(false);
   const { errors, handleSubmit, register, watch } = useForm();
   const history = useHistory();
+  const { id, code } = useParams();
 
   React.useEffect(() => {
     if (history?.location?.state?.from !== "resetPassword") history.goBack();
   }, []);
 
-  React.useEffect(() => console.log(errors), [errors]);
+  async function updatePassword(data) {
+    try {
+      data.code = parseInt(code);
+      const res = await resetPassword({ id, data });
+      if (res?.status === 200) {
+        toast.success("Password updated successfully");
+        history.push("/signIn");
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Password cannot be updated");
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -57,16 +56,18 @@ export default function NewPassword() {
           <hr className={classes.divider} />
           <h5>Please enter a new password (at least 8 characters long)</h5>
         </div>
-        <form onSubmit={handleSubmit((e) => e.preventDefault())}>
-          <input
-            name="password"
-            className={classes.authInput}
-            type="text"
+        <form onSubmit={handleSubmit(updatePassword)}>
+          <CustomText
             placeholder="New Password"
-            ref={register({
+            name="password"
+            register={register}
+            isPassword={true}
+            isVisible={isPassVisible}
+            setIsVisible={setIsPassVisible}
+            validationRule={{
               required: true,
               minLength: 8,
-            })}
+            }}
           />
           {errors?.password?.type === "required" && (
             <FieldError message={"New password is required"} />
@@ -74,15 +75,17 @@ export default function NewPassword() {
           {errors?.password?.type === "minLength" && (
             <FieldError message={"Password must be 8 characters long"} />
           )}
-          <input
-            name="rePassword"
-            className={classes.authInput}
-            type="text"
+          <CustomText
             placeholder="Re-type Password"
-            ref={register({
+            name="rePassword"
+            register={register}
+            isPassword={true}
+            isVisible={isRePassVisible}
+            setIsVisible={setIsRePassVisible}
+            validationRule={{
               required: true,
-              validate: (value) => watch("password") === value,
-            })}
+              validate: (value) => value === watch("password"),
+            }}
           />
           {errors?.rePassword?.type === "required" && (
             <FieldError message={"Re-typing password is required"} />
@@ -92,11 +95,8 @@ export default function NewPassword() {
           )}
           <hr className={classes.divider} />
           <div className="d-flex justify-content-end">
-            <button style={styles.cancelBtn} onClick={() => history.goBack()}>
-              Cancel
-            </button>
             <button style={styles.searchBtn} type="submit">
-              Search
+              Update
               {isWaiting && (
                 <CircularProgress
                   color="inherit"

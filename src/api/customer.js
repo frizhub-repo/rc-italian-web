@@ -33,7 +33,7 @@ export const forgotPassword = (payload) => {
 
 export const resetPassword = ({ id, data }) => {
   return axiosIntance.patch(
-    `/api/v1/customers/auth/reset-password/:${id}`,
+    `/api/v1/customers/auth/reset-password/${id}`,
     data
   );
 };

@@ -52,10 +52,12 @@ export default function ResetPassword() {
       setIsWaiting(true);
       const data = { code: parseInt(code) };
       const res = await verifyResetPassCode({ id, data });
-      console.log(res);
-      // history.push(`/newPassword`, { from: "resetPassword" });
+      if (res?.status === 200)
+        history.push(`/newPassword/${id}/${code}`, { from: "resetPassword" });
+      setIsWaiting(false);
     } catch (e) {
       console.log(e);
+      setIsWaiting(false);
     }
   }
 
