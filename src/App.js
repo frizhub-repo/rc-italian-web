@@ -31,8 +31,10 @@ function FooterWrapper({ location }) {
   if (
     location.pathname.match("/signIn") ||
     location.pathname.match("signUp") ||
-    location.pathname.match("forgotPassword") ||
-    location.pathname.match("profile")
+    location.pathname.match("/forgotPassword") ||
+    location.pathname.match("/profile") ||
+    location.pathname.match("/newPassword.*") ||
+    location.pathname.match("/resetPassword.*")
   )
     return null;
   return <FooterItalian />;
