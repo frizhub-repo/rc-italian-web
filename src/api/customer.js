@@ -15,3 +15,25 @@ export const reserveTable = (payload) => {
 export const updateCustomerInfo = (payload) => {
   return axiosIntance.patch("/api/v1/customers", payload);
 };
+
+export const changePassword = (payload) => {
+  return axiosIntance.patch("/api/v1/customers/change-password", payload);
+};
+
+export const verifyResetPassCode = ({ data, id }) => {
+  return axiosIntance.patch(
+    `/api/v1/customers/auth/verify-reset-password-code/${id}`,
+    data
+  );
+};
+
+export const forgotPassword = (payload) => {
+  return axiosIntance.patch("/api/v1/customers/auth/forgot-password", payload);
+};
+
+export const resetPassword = ({ id, data }) => {
+  return axiosIntance.patch(
+    `/api/v1/customers/auth/reset-password/:${id}`,
+    data
+  );
+};

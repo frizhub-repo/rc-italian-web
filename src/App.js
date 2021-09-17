@@ -1,31 +1,31 @@
-import "./App.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-  Redirect,
-} from "react-router-dom";
-import Home from "./Components/Home";
-import Main from "./Components/Main";
-import Contact from "./Components/Contact";
-import Menu from "./Components/Menu";
-import Delivery from "./Components/Delivery/index";
-import Reservation from "./Components/Lists/Reservations";
-import Order from "./Components/Lists/Order";
-import Custom from "./Components/Account/CustomHeader";
-import OrdersReceived from "./Components/Orders/OrdersReceived";
-import Navbar from "./Components/Navbar/Navbar";
-import TableReservation from "./Components/TableReservation";
-import DeliveryAddress from "Components/ExistingAddress";
-import DeliveryTime from "Components/DeliveryTime/DeliveryTime";
-import OrderSummary from "Components/Orders/OrderSummary";
-import FooterItalian from "Components/Common/Footer";
+import ForgotPassword from "Components/Auth/ForgotPassword";
+import NewPassword from "Components/Auth/NewPassword";
+import ResetPassword from "Components/Auth/ResetPassword";
 import SignIn from "Components/Auth/signIn";
 import SignUp from "Components/Auth/signUp";
-import ForgotPassword from "Components/Auth/ForgotPassword";
+import FooterItalian from "Components/Common/Footer";
+import DeliveryTime from "Components/DeliveryTime/DeliveryTime";
+import DeliveryAddress from "Components/ExistingAddress";
+import OrderSummary from "Components/Orders/OrderSummary";
 import Settings from "Components/Settings";
 import { useUserContext } from "Context/userContext";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+  withRouter,
+} from "react-router-dom";
+import "./App.css";
+import Contact from "./Components/Contact";
+import Delivery from "./Components/Delivery/index";
+import Order from "./Components/Lists/Order";
+import Reservation from "./Components/Lists/Reservations";
+import Main from "./Components/Main";
+import Menu from "./Components/Menu";
+import Navbar from "./Components/Navbar/Navbar";
+import OrdersReceived from "./Components/Orders/OrdersReceived";
+import TableReservation from "./Components/TableReservation";
 
 function FooterWrapper({ location }) {
   if (
@@ -56,6 +56,8 @@ function App() {
           <Route path="/signIn" exact component={SignIn} />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/forgotPassword" exact component={ForgotPassword} />
+          <Route path="/resetPassword/:id" exact component={ResetPassword} />
+          <Route path="/newPassword" exact component={NewPassword} />
           {token ? (
             <>
               <Route path="/profile" exact component={Settings} />
