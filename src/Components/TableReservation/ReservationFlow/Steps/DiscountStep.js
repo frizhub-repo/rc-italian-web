@@ -64,7 +64,19 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
       ) {
         isSlotExist = true;
       }
-      if (isPeopleExist && isDateExist && isSlotExist) {
+      // Set offers based on discount type
+      if (offer?.discountType === "bundle" && isDateExist) {
+        setChooseOffer((prevOffer) => [...prevOffer, offer]);
+      }
+      if (
+        offer?.discountType === "group" &&
+        isPeopleExist &&
+        isDateExist &&
+        isSlotExist
+      ) {
+        setChooseOffer((prevOffer) => [...prevOffer, offer]);
+      }
+      if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
         setChooseOffer((prevOffer) => [...prevOffer, offer]);
       }
     }
