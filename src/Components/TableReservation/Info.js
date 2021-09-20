@@ -126,7 +126,7 @@ const useStyle = () => ({
   },
 });
 
-export default function Info({ placeData }) {
+export default function Info({ placeData, specialMenu }) {
   const styles = useStyle();
   const { restaurant } = useUserContext();
   const [loading, setLoading] = React.useState(false);
@@ -226,8 +226,11 @@ export default function Info({ placeData }) {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            specialMenu={specialMenu}
           />
         );
+      default:
+        return 0;
     }
   }
 
@@ -236,7 +239,11 @@ export default function Info({ placeData }) {
       <div style={styles.innerContainer}>
         <div style={styles.reserveTableRoot}>
           <div style={styles.reserveIconContainer}>
-            <img style={styles.reserveIcon} src="assets/reservation-icon.png" />
+            <img
+              style={styles.reserveIcon}
+              alt="reservation"
+              src="assets/reservation-icon.png"
+            />
           </div>
           <div style={styles.reserveBtn}>
             {reserving ? (
@@ -291,11 +298,21 @@ export default function Info({ placeData }) {
               <div className="d-flex flex-column align-items-center justify-content-around m-0">
                 <div className="d-flex justify-content-between my-3">
                   <button style={styles.statusButton}>
-                    <img className="mr-2" src="assets/like.png" width={30} />
+                    <img
+                      className="mr-2"
+                      alt="Like"
+                      src="assets/like.png"
+                      width={30}
+                    />
                     <p className="m-0">{placeData?.rating}|5</p>
                   </button>
                   <button style={styles.statusButton}>
-                    <img className="mr-2" src="assets/chat.png" width={30} />
+                    <img
+                      className="mr-2"
+                      alt="Chat"
+                      src="assets/chat.png"
+                      width={30}
+                    />
                     <p className="m-0">{placeData?.user_ratings_total}</p>
                   </button>
                   <button style={styles.statusButton}>
@@ -303,8 +320,10 @@ export default function Info({ placeData }) {
                       className="mr-2"
                       src="assets/active-euro.png"
                       width={30}
+                      alt=""
+                      Euro
                     />
-                    <img src="assets/passive-euro.png" width={30} />
+                    <img src="assets/passive-euro.png" alt="Euro" width={30} />
                   </button>
                 </div>
                 <div
@@ -327,6 +346,7 @@ export default function Info({ placeData }) {
             {restaurant?.name ?? "Uncle Sammy"}
           </Typography>
           <img
+            alt="Logo"
             width={350}
             src={
               process.env.REACT_APP_API_BASE_URL +
@@ -348,14 +368,14 @@ export default function Info({ placeData }) {
         >
           <h3>THE RESTAURANT GAINED A REPUTATION OF</h3>
           <div className="d-flex my-3 align-items-center">
-            <img className="mr-5" src="assets/like.png" />
+            <img className="mr-5" src="assets/like.png" alt="Like" />
             <h5>
               <span style={styles.statusStyle}>{placeData?.rating}</span>|5
             </h5>
           </div>
           <div className="d-flex align-items-center">
             <h5>WITH</h5>
-            <img className="mx-4" src="assets/chat.png" />
+            <img className="mx-4" src="assets/chat.png" alt="Chat" />
             <h5>
               <span style={styles.statusStyle}>
                 {placeData?.user_ratings_total}

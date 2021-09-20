@@ -31,7 +31,12 @@ function DiscountCard({ content, isActive, handleClick }) {
   );
 }
 
-export default function DiscountStep({ offers, parameters, setParameters }) {
+export default function DiscountStep({
+  offers,
+  parameters,
+  setParameters,
+  specialMenu,
+}) {
   const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const { token } = useUserContext();
@@ -46,7 +51,8 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
       let isDateExist = false;
       for (
         let date = new Date(offer?.startDate);
-        date <= new Date(offer?.endDate);
+        new Date(date.toLocaleDateString()) <=
+        new Date(new Date(offer?.endDate).toLocaleDateString());
         date.setDate(date.getDate() + 1)
       ) {
         if (
@@ -99,6 +105,8 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
         history.push("/signIn");
       } else if (!parameters?.discount) {
         toast.error("Please choose discount");
+      } else if (!parameters?.menu) {
+        toast.error("Please choose special menu");
       } else {
         const payload = {
           startTime: parameters?.date?.value,
@@ -106,8 +114,9 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
           timeSlot: parameters?.time?.slot,
           services: parameters?.time?.name,
           offer: parameters?.discount === -1 ? null : parameters?.discount,
+          specialMenu: parameters?.menu,
         };
-        const res = await reserveTable(payload);
+        await reserveTable(payload);
         toast.success("Reservation has been created successfully");
       }
       setLoading(false);
@@ -117,6 +126,10 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
       setLoading(false);
     }
   };
+
+  function updateSpecialMenu(menu) {
+    setParameters({ ...parameters, menu });
+  }
 
   return (
     <div className={classes.container}>
@@ -141,6 +154,22 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
             handleClick={() => updateDiscount(-1)}
           />
         </div>
+        {specialMenu?.length > 0 && (
+          <>
+            <h3 className={classes.header}>Choose a Discount</h3>
+            <div className={`custom-scroll-secondary`}>
+              <div className="mx-2">
+                {specialMenu?.map((menu) => (
+                  <DiscountCard
+                    content={menu}
+                    isActive={parameters?.menu === menu?._id}
+                    handleClick={() => updateSpecialMenu(menu?._id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className={classes.createReservationBtnRoot}>
         <button

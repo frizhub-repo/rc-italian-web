@@ -47,6 +47,7 @@ export default function PeopleStep({
       choosePeople: peopleOffer,
     });
   }, [offers]);
+
   function updatePeople({ count, value }) {
     const maxOffer = getMaxValue(value, "discountPrice");
     setParameters({

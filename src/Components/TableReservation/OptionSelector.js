@@ -16,7 +16,7 @@ const useStyle = () => ({
   },
 });
 
-export default function OptionSelector() {
+export default function OptionSelector({ specialMenu }) {
   const styles = useStyle();
   const [selected, setSelected] = useState(1);
   const options = [
@@ -56,7 +56,10 @@ export default function OptionSelector() {
           ))}
         </div>
       </div>
-      <OptionContent selected={options[selected].content} />
+      <OptionContent
+        specialMenu={specialMenu}
+        selected={options[selected].content}
+      />
     </div>
   );
 }
