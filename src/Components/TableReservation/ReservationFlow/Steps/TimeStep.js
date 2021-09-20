@@ -75,10 +75,9 @@ export default function TimeStep({ offers, parameters, setParameters }) {
   }, []);
 
   function updateTime(name, slot, value) {
-    const maxValue = getMaxValue(value, "discountPrice");
     setParameters({
       ...parameters,
-      time: { name, slot, offer: maxValue?.obj },
+      time: { name, slot },
     });
   }
 

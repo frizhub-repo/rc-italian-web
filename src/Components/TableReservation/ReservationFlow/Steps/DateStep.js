@@ -36,7 +36,9 @@ export default function DateStep({
         d <= new Date(offer?.endDate);
         d.setDate(d.getDate() + 1)
       ) {
-        const index = days.findIndex((value) => value.day === d);
+        const index = days.findIndex(
+          (value) => value.day === d.toLocaleDateString()
+        );
         index === -1
           ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
           : (days[index] = {
@@ -46,25 +48,13 @@ export default function DateStep({
       }
     }
     setReservationDetail({ ...reservationDetail, days });
-  }, [offers]);
+  }, []);
 
   function updateDate(e) {
     if (reservationDetail?.days?.length > 0) {
-      const reserDetail = reservationDetail?.days?.sort(
-        (a, b) => a.day - b.day
-      );
-      const dateIndex = reserDetail?.findIndex(
-        (value) =>
-          new Date(value?.day).toLocaleDateString() ===
-          new Date(e).toLocaleDateString()
-      );
-      const maxOffer = getMaxValue(
-        reserDetail?.[dateIndex]?.offers,
-        "discountPrice"
-      );
       setParameters({
         ...parameters,
-        date: { value: e, offer: maxOffer?.obj },
+        date: { value: e },
       });
     }
   }

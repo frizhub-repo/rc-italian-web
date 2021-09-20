@@ -37,10 +37,11 @@ export default function PeopleStep({
         ) {
           peopleOffer[index] = [...peopleOffer[index], offer];
         }
+      } else {
+        offer?.numberOfPeople.forEach((count) => {
+          peopleOffer[count] = [...peopleOffer[count], offer];
+        });
       }
-      offer?.numberOfPeople.forEach((count) => {
-        peopleOffer[count] = [...peopleOffer[count], offer];
-      });
     }
     setReservationDetail({
       ...reservationDetail,
@@ -49,10 +50,9 @@ export default function PeopleStep({
   }, [offers]);
 
   function updatePeople({ count, value }) {
-    const maxOffer = getMaxValue(value, "discountPrice");
     setParameters({
       ...parameters,
-      people: { count, offer: maxOffer?.obj },
+      people: { count },
     });
   }
 
