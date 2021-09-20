@@ -8,12 +8,12 @@ const useStyle = () => ({
   },
 });
 
-export default function OptionSelection() {
+export default function OptionSelection({ specialMenu }) {
   const styles = useStyle();
 
   return (
     <div style={styles.container}>
-      <OptionSelector />
+      <OptionSelector specialMenu={specialMenu} />
     </div>
   );
 }

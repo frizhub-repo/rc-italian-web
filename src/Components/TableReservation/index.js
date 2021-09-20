@@ -1,16 +1,30 @@
+import { getSpecialMenus } from "api/Public";
 import { useUserContext } from "Context/userContext";
 import React from "react";
 import Gallery from "../Body/Gallery";
 import Hero from "../Body/Hero";
-import Testimonial from "../Body/testimonial";
 import Info from "./Info";
 import OptionSelection from "./OptionSelection";
-import Status from "./Status";
 
 export default function TableReservation() {
   const {
     restaurant: { placeData },
   } = useUserContext();
+
+  const [specialMenu, setSpecialMenus] = React.useState([]);
+
+  React.useEffect(() => {
+    async function getSpecialMenuHandler() {
+      try {
+        const res = await getSpecialMenus();
+        setSpecialMenus(res?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getSpecialMenuHandler();
+  }, []);
+
   return (
     <div>
       <section>
@@ -23,10 +37,10 @@ export default function TableReservation() {
       <section>
         <div style={{ display: "flex", backgroundColor: "rgb(39, 39, 39)" }}>
           <div style={{ width: "65%" }}>
-            <OptionSelection />
+            <OptionSelection specialMenu={specialMenu} />
           </div>
           <div style={{ width: "35%", paddingTop: "50px" }}>
-            <Info placeData={placeData} />
+            <Info placeData={placeData} specialMenu={specialMenu} />
           </div>
         </div>
       </section>

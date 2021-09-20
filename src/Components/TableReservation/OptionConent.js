@@ -60,23 +60,10 @@ const useStyle = () => ({
   },
 });
 
-export default function OptionContent({ selected }) {
+export default function OptionContent({ selected, specialMenu }) {
   const styles = useStyle();
   const history = useHistory();
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const [specialMenu, setSpecialMenus] = React.useState([]);
-
-  React.useEffect(() => {
-    async function getSpecialMenuHandler() {
-      try {
-        const res = await getSpecialMenus();
-        setSpecialMenus(res?.data?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getSpecialMenuHandler();
-  }, []);
 
   const showMenuPage = () => history.push("/menu");
 
