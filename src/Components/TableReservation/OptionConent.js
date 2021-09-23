@@ -1,4 +1,4 @@
-import { getSpecialMenus } from "api/Public";
+import DiscountCarousel from "Components/Common/DiscountCarousel";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import InformationOption from "./InformationOption";
@@ -60,7 +60,12 @@ const useStyle = () => ({
   },
 });
 
-export default function OptionContent({ selected, specialMenu }) {
+export default function OptionContent({
+  selected,
+  specialMenu,
+  setSelectedOffer,
+  selectedOffer,
+}) {
   const styles = useStyle();
   const history = useHistory();
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -72,6 +77,16 @@ export default function OptionContent({ selected, specialMenu }) {
       <div style={styles.container}>
         <h1 style={styles.header}>{selected}</h1>
         <InformationOption />
+      </div>
+    );
+  else if (selected === "PROMOTIONS")
+    return (
+      <div style={styles.container}>
+        <h1 style={styles.header}>{selected}</h1>
+        <DiscountCarousel
+          setSelectedOffer={setSelectedOffer}
+          selectedOffer={selectedOffer}
+        />
       </div>
     );
   else

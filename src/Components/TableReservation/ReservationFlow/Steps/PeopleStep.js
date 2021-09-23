@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getMaxValue } from "utils/common";
+import { getMaxValue, isEmpty } from "utils/common";
 import classes from "./Step.module.css";
 
 function Discount({ offers, isActive }) {
@@ -25,29 +25,48 @@ export default function PeopleStep({
   setParameters,
   offers,
   setReservationDetail,
+  selectedOffer,
 }) {
   React.useEffect(() => {
-    const peopleOffer = { ...reservationDetail?.choosePeople };
-    for (const offer of offers) {
-      if (offer?.peopleGreaterThanSix) {
-        for (
-          let index = 6;
-          index <= Object.entries(reservationDetail?.choosePeople)?.length;
-          index++
-        ) {
-          peopleOffer[index] = [...peopleOffer[index], offer];
+    if (!isEmpty(selectedOffer)) {
+      const peopleOffer = { ...reservationDetail?.choosePeople };
+      for (const [count, offer] of Object.entries(peopleOffer)) {
+        if (selectedOffer?.peopleGreaterThanSix && count >= 6) {
+          peopleOffer[count] = [selectedOffer];
+        } else {
+          peopleOffer[count] = [];
         }
-      } else {
-        offer?.numberOfPeople.forEach((count) => {
-          peopleOffer[count] = [...peopleOffer[count], offer];
-        });
       }
+      selectedOffer?.numberOfPeople.forEach((count) => {
+        peopleOffer[count] = [selectedOffer];
+      });
+      setReservationDetail({
+        ...reservationDetail,
+        choosePeople: peopleOffer,
+      });
+    } else {
+      const peopleOffer = { ...reservationDetail?.choosePeople };
+      for (const offer of offers) {
+        if (offer?.peopleGreaterThanSix) {
+          for (
+            let index = 6;
+            index <= Object.entries(reservationDetail?.choosePeople)?.length;
+            index++
+          ) {
+            peopleOffer[index] = [...peopleOffer[index], offer];
+          }
+        } else {
+          offer?.numberOfPeople.forEach((count) => {
+            peopleOffer[count] = [...peopleOffer[count], offer];
+          });
+        }
+      }
+      setReservationDetail({
+        ...reservationDetail,
+        choosePeople: peopleOffer,
+      });
     }
-    setReservationDetail({
-      ...reservationDetail,
-      choosePeople: peopleOffer,
-    });
-  }, [offers]);
+  }, [selectedOffer, offers]);
 
   function updatePeople({ count, value }) {
     setParameters({

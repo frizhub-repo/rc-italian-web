@@ -5,6 +5,7 @@ import { useUserContext } from "Context/userContext";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { reserveTable } from "api/customer";
+import { isEmpty } from "utils/common";
 
 function DiscountCard({ content, isActive, handleClick }) {
   return (
@@ -36,6 +37,7 @@ export default function DiscountStep({
   parameters,
   setParameters,
   specialMenu,
+  selectedOffer,
 }) {
   const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -43,50 +45,54 @@ export default function DiscountStep({
   const history = useHistory();
 
   React.useEffect(() => {
-    for (const offer of offers) {
-      let numPeople = parseInt(parameters?.people?.count);
-      const isPeopleExist =
-        offer?.numberOfPeople?.includes(numPeople) ||
-        (offer?.peopleGreaterThanSix && numPeople >= 6);
-      let isDateExist = false;
-      for (
-        let date = new Date(offer?.startDate);
-        new Date(date.toLocaleDateString()) <=
-        new Date(new Date(offer?.endDate).toLocaleDateString());
-        date.setDate(date.getDate() + 1)
-      ) {
-        if (
-          new Date(date).toLocaleDateString() ===
-          new Date(parameters?.date?.value).toLocaleDateString()
+    if (!isEmpty(selectedOffer)) {
+      setChooseOffer([selectedOffer]);
+    } else {
+      for (const offer of offers) {
+        let numPeople = parseInt(parameters?.people?.count);
+        const isPeopleExist =
+          offer?.numberOfPeople?.includes(numPeople) ||
+          (offer?.peopleGreaterThanSix && numPeople >= 6);
+        let isDateExist = false;
+        for (
+          let date = new Date(offer?.startDate);
+          new Date(date.toLocaleDateString()) <=
+          new Date(new Date(offer?.endDate).toLocaleDateString());
+          date.setDate(date.getDate() + 1)
         ) {
-          isDateExist = true;
+          if (
+            new Date(date).toLocaleDateString() ===
+            new Date(parameters?.date?.value).toLocaleDateString()
+          ) {
+            isDateExist = true;
+          }
+        }
+        let isSlotExist = false;
+        if (
+          offer?.hourlyTimeSlots?.includes(parameters?.time?.slot) ||
+          (parameters?.time?.slot >= offer?.groupTimeSlot?.startHour &&
+            parameters?.time?.slot <= offer?.groupTimeSlot?.endHour)
+        ) {
+          isSlotExist = true;
+        }
+        // Set offers based on discount type
+        if (offer?.discountType === "bundle" && isDateExist) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
+        }
+        if (
+          offer?.discountType === "group" &&
+          isPeopleExist &&
+          isDateExist &&
+          isSlotExist
+        ) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
+        }
+        if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
         }
       }
-      let isSlotExist = false;
-      if (
-        offer?.hourlyTimeSlots?.includes(parameters?.time?.slot) ||
-        (parameters?.time?.slot >= offer?.groupTimeSlot?.startHour &&
-          parameters?.time?.slot <= offer?.groupTimeSlot?.endHour)
-      ) {
-        isSlotExist = true;
-      }
-      // Set offers based on discount type
-      if (offer?.discountType === "bundle" && isDateExist) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
-      if (
-        offer?.discountType === "group" &&
-        isPeopleExist &&
-        isDateExist &&
-        isSlotExist
-      ) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
-      if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
     }
-  }, []);
+  }, [selectedOffer, offers]);
 
   const noDiscount = {
     title: "Don’t use any discounts",

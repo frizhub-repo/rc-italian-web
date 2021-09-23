@@ -1,0 +1,112 @@
+.rmvSpacing {
+  margin: 10px 0;
+}
+
+.forwardArrow {
+  background-color: #b29051;
+  position: absolute;
+  z-index: 2;
+  top: calc(50% - 15px);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  left: 0;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backwordArrow {
+  background-color: #b29051;
+  position: absolute;
+  z-index: 2;
+  top: calc(50% - 15px);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  right: 0;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indiExtra {
+  background: white;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin: 0 8px;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border: 2px solid #000;
+}
+
+.indicatorStyles {
+  background: #f69d0b;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin: 0 8px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 0px 2px rgb(0 0 0 / 50%);
+}
+
+.carouselDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel {
+  display: flex;
+  width: 1000px;
+  justify-content: center;
+  height: 450px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+
+.rmvCarouselSpacing {
+  width: 685px;
+  height: 370px;
+}
+
+.discountTitle {
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 75px;
+  text-align: center;
+}
+
+.rmvdiscountTitleFont {
+  font-size: 30px;
+}
+
+.discountDivider {
+  background-color: #fff;
+}
+
+.titleSpacing {
+  padding-top: 20px;
+}
+
+.iconRoot {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.iconStyle {
+  color: green;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.skeletongSpaing {
+  margin: 0 20px;
+  border-radius: 30px;
+}
