@@ -198,6 +198,7 @@ export default function Info({ placeData, specialMenu, selectedOffer }) {
             setReservationDetail={setReservationDetail}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
           />
         );
       case 1:
@@ -208,6 +209,7 @@ export default function Info({ placeData, specialMenu, selectedOffer }) {
             setParameters={setParameters}
             reservationDetail={reservationDetail}
             setReservationDetail={setReservationDetail}
+            selectedOffer={selectedOffer}
           />
         );
       case 2:
@@ -218,6 +220,7 @@ export default function Info({ placeData, specialMenu, selectedOffer }) {
             setParameters={setParameters}
             detail={reservationDetail}
             setDetail={setReservationDetail}
+            selectedOffer={selectedOffer}
           />
         );
       case 3:
@@ -226,6 +229,7 @@ export default function Info({ placeData, specialMenu, selectedOffer }) {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            selectedOffer={selectedOffer}
             specialMenu={specialMenu}
           />
         );

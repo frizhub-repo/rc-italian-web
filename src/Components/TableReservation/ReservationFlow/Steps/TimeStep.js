@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getMaxValue } from "utils/common";
+import { getMaxValue, isEmpty } from "utils/common";
 import classes from "./Step.module.css";
 
 function Discount({ offers, isActive }) {
@@ -20,7 +20,12 @@ function Discount({ offers, isActive }) {
   );
 }
 
-export default function TimeStep({ offers, parameters, setParameters }) {
+export default function TimeStep({
+  offers,
+  parameters,
+  setParameters,
+  selectedOffer,
+}) {
   const [timeSlots, setTimeSlots] = React.useState([
     {
       name: "breakfast",
@@ -49,30 +54,48 @@ export default function TimeStep({ offers, parameters, setParameters }) {
   ]);
 
   React.useEffect(() => {
-    let timeSlotOffer = [...timeSlots];
-    for (const offer of offers) {
+    if (!isEmpty(selectedOffer)) {
+      let timeSlotOffer = [...timeSlots];
       timeSlotOffer?.map((timeObj, index) => {
         Object.entries(timeObj.slots).map(([slot, offerObj]) => {
           if (
-            slot >= offer?.groupTimeSlot?.startHour &&
-            slot <= offer?.groupTimeSlot?.endHour
+            slot >= selectedOffer?.groupTimeSlot?.startHour &&
+            slot <= selectedOffer?.groupTimeSlot?.endHour
           ) {
-            timeSlotOffer[index].slots[slot] = [
-              ...timeSlotOffer[index].slots[slot],
-              offer,
-            ];
+            timeSlotOffer[index].slots[slot] = [selectedOffer];
           }
-          if (offer?.hourlyTimeSlots?.includes(slot)) {
-            timeSlotOffer[index].slots[slot] = [
-              ...timeSlotOffer[index].slots[slot],
-              offer,
-            ];
+          if (selectedOffer?.hourlyTimeSlots?.includes(slot)) {
+            timeSlotOffer[index].slots[slot] = [selectedOffer];
           }
         });
       });
+      setTimeSlots(timeSlotOffer);
+    } else {
+      let timeSlotOffer = [...timeSlots];
+      for (const offer of offers) {
+        timeSlotOffer?.map((timeObj, index) => {
+          Object.entries(timeObj.slots).map(([slot, offerObj]) => {
+            if (
+              slot >= offer?.groupTimeSlot?.startHour &&
+              slot <= offer?.groupTimeSlot?.endHour
+            ) {
+              timeSlotOffer[index].slots[slot] = [
+                ...timeSlotOffer[index].slots[slot],
+                offer,
+              ];
+            }
+            if (offer?.hourlyTimeSlots?.includes(slot)) {
+              timeSlotOffer[index].slots[slot] = [
+                ...timeSlotOffer[index].slots[slot],
+                offer,
+              ];
+            }
+          });
+        });
+      }
+      setTimeSlots(timeSlotOffer);
     }
-    setTimeSlots(timeSlotOffer);
-  }, []);
+  }, [selectedOffer, offers]);
 
   function updateTime(name, slot, value) {
     setParameters({
