@@ -1,4 +1,6 @@
-import { getSpecialMenus } from "api/Public";
+import { getReservationOffers } from "api/Public";
+import DiscountCarousel from "Components/Common/DiscountCarousel";
+
 import React from "react";
 import { useHistory } from "react-router-dom";
 import InformationOption from "./InformationOption";
@@ -64,6 +66,19 @@ export default function OptionContent({ selected, specialMenu }) {
   const styles = useStyle();
   const history = useHistory();
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [discounts, setDiscounts] = React.useState([]);
+  const fetchDiscounts = async () => {
+    try {
+      const res = await getReservationOffers();
+      setDiscounts(res?.data?.data);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  React.useEffect(() => {
+    fetchDiscounts();
+  }, []);
 
   const showMenuPage = () => history.push("/menu");
 
@@ -72,6 +87,13 @@ export default function OptionContent({ selected, specialMenu }) {
       <div style={styles.container}>
         <h1 style={styles.header}>{selected}</h1>
         <InformationOption />
+      </div>
+    );
+  else if (selected === "PROMOTIONS")
+    return (
+      <div style={styles.container}>
+        <h1 style={styles.header}>{selected}</h1>
+        <DiscountCarousel discounts={discounts} />
       </div>
     );
   else
