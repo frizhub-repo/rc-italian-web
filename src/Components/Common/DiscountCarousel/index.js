@@ -15,7 +15,7 @@ import ArrowBackIcon from "images/IconComponent/ArrowBackIcon";
 import { ArrowForwardIcon } from "images/IconComponent/ArrowForwardIcon";
 import { getReservationOffers } from "api/Public";
 
-const DiscountCarousel = () => {
+const DiscountCarousel = ({ setSelectedOffer, selectedOffer }) => {
   const [discounts, setDiscounts] = React.useState([]);
   const fetchDiscounts = async () => {
     try {
@@ -29,6 +29,14 @@ const DiscountCarousel = () => {
   React.useEffect(() => {
     fetchDiscounts();
   }, []);
+
+  const handleChangeReservationOffer = (event, offer) => {
+    if (event?.target?.checked) {
+      setSelectedOffer(offer);
+    } else {
+      setSelectedOffer({});
+    }
+  };
 
   return (
     <div>
@@ -129,9 +137,14 @@ const DiscountCarousel = () => {
                     </>
 
                     <FormControlLabel
+                      title="Add to cart"
                       className={classes.iconRoot}
+                      onClick={(event) =>
+                        handleChangeReservationOffer(event, discount)
+                      }
                       control={
                         <Checkbox
+                          checked={selectedOffer?._id === discount?._id}
                           icon={
                             <AddCircleOutlineSharpIcon
                               className={classes.iconStyle}

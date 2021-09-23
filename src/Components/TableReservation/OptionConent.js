@@ -60,7 +60,12 @@ const useStyle = () => ({
   },
 });
 
-export default function OptionContent({ selected, specialMenu }) {
+export default function OptionContent({
+  selected,
+  specialMenu,
+  setSelectedOffer,
+  selectedOffer,
+}) {
   const styles = useStyle();
   const history = useHistory();
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -78,7 +83,10 @@ export default function OptionContent({ selected, specialMenu }) {
     return (
       <div style={styles.container}>
         <h1 style={styles.header}>{selected}</h1>
-        <DiscountCarousel />
+        <DiscountCarousel
+          setSelectedOffer={setSelectedOffer}
+          selectedOffer={selectedOffer}
+        />
       </div>
     );
   else

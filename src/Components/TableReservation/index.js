@@ -7,6 +7,7 @@ import Info from "./Info";
 import OptionSelection from "./OptionSelection";
 
 export default function TableReservation() {
+  const [selectedOffer, setSelectedOffer] = React.useState({});
   const {
     restaurant: { placeData },
   } = useUserContext();
@@ -37,10 +38,18 @@ export default function TableReservation() {
       <section>
         <div style={{ display: "flex", backgroundColor: "rgb(39, 39, 39)" }}>
           <div style={{ width: "65%" }}>
-            <OptionSelection specialMenu={specialMenu} />
+            <OptionSelection
+              specialMenu={specialMenu}
+              setSelectedOffer={setSelectedOffer}
+              selectedOffer={selectedOffer}
+            />
           </div>
           <div style={{ width: "35%", paddingTop: "50px" }}>
-            <Info placeData={placeData} specialMenu={specialMenu} />
+            <Info
+              placeData={placeData}
+              specialMenu={specialMenu}
+              selectedOffer={selectedOffer}
+            />
           </div>
         </div>
       </section>

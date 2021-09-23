@@ -8,12 +8,20 @@ const useStyle = () => ({
   },
 });
 
-export default function OptionSelection({ specialMenu }) {
+export default function OptionSelection({
+  specialMenu,
+  setSelectedOffer,
+  selectedOffer,
+}) {
   const styles = useStyle();
 
   return (
     <div style={styles.container}>
-      <OptionSelector specialMenu={specialMenu} />
+      <OptionSelector
+        specialMenu={specialMenu}
+        setSelectedOffer={setSelectedOffer}
+        selectedOffer={selectedOffer}
+      />
     </div>
   );
 }

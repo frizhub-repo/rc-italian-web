@@ -126,7 +126,7 @@ const useStyle = () => ({
   },
 });
 
-export default function Info({ placeData, specialMenu }) {
+export default function Info({ placeData, specialMenu, selectedOffer }) {
   const styles = useStyle();
   const { restaurant } = useUserContext();
   const [loading, setLoading] = React.useState(false);
