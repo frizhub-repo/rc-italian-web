@@ -13,8 +13,23 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import AddCircleOutlineSharpIcon from "@material-ui/icons/AddCircleOutlineSharp";
 import ArrowBackIcon from "images/IconComponent/ArrowBackIcon";
 import { ArrowForwardIcon } from "images/IconComponent/ArrowForwardIcon";
+import { getReservationOffers } from "api/Public";
 
-const DiscountCarousel = ({ discounts }) => {
+const DiscountCarousel = () => {
+  const [discounts, setDiscounts] = React.useState([]);
+  const fetchDiscounts = async () => {
+    try {
+      const res = await getReservationOffers();
+      setDiscounts(res?.data?.data);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  React.useEffect(() => {
+    fetchDiscounts();
+  }, []);
+
   return (
     <div>
       {discounts?.length ? (
