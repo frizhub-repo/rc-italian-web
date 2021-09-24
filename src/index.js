@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./Context/userContext";
 import { OrderProvider } from "Context/OrderContext";
+import FacebookChatPlugin from "Components/ChatPlugin/FacebookChatPlugin";
 
 ReactDOM.render(
   [
@@ -22,6 +23,7 @@ ReactDOM.render(
       </UserProvider>
     </Provider>,
     <ToastContainer />,
+    <FacebookChatPlugin />,
   ],
   document.getElementById("root")
 );

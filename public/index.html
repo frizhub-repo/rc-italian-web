@@ -28,6 +28,23 @@
       rel="stylesheet"
     />
     <script src="https://www.paypal.com/sdk/js?client-id=AdRJCWvdnox2csGofPFAdVUKxd0d3FEPKovp1nGfCg0X3yDS4kUEov6kAeG0L6UiNLezOrlB1prkCsOp&components=buttons,funding-eligibility"></script>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "%REACT_APP_FACEBOOK_APP_ID%",
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v12.0",
+        });
+      };
+      FB.CustomerChat.show(true);
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
