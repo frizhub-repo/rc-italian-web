@@ -1,16 +1,9 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import {
-  Checkbox,
-  Divider,
-  FormControlLabel,
-  Typography,
-} from "@material-ui/core";
+import { Divider, Typography } from "@material-ui/core";
 import classes from "./DiscountCarousel.module.css";
 import { Skeleton } from "@material-ui/lab";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import AddCircleOutlineSharpIcon from "@material-ui/icons/AddCircleOutlineSharp";
 import ArrowBackIcon from "images/IconComponent/ArrowBackIcon";
 import { ArrowForwardIcon } from "images/IconComponent/ArrowForwardIcon";
 import { getReservationOffers } from "api/Public";
@@ -30,11 +23,11 @@ const DiscountCarousel = ({ setSelectedOffer, selectedOffer }) => {
     fetchDiscounts();
   }, []);
 
-  const handleChangeReservationOffer = (event, offer) => {
-    if (event?.target?.checked) {
-      setSelectedOffer(offer);
-    } else {
+  const handleChangeReservationOffer = (offer) => {
+    if (selectedOffer?._id === offer?._id) {
       setSelectedOffer({});
+    } else {
+      setSelectedOffer(offer);
     }
   };
 
@@ -126,38 +119,23 @@ const DiscountCarousel = ({ setSelectedOffer, selectedOffer }) => {
                       </div>
                     </>
                   ) : null}
-                  <div style={{ position: "relative" }}>
-                    <>
-                      <Divider />
-                      <Typography variant="h4">
-                        {discount?.discountPrice
-                          ? "€ " + discount?.discountPrice
-                          : "€ 0"}
-                      </Typography>
-                    </>
-
-                    <FormControlLabel
-                      title="Add to cart"
-                      className={classes.iconRoot}
-                      onClick={(event) =>
-                        handleChangeReservationOffer(event, discount)
-                      }
-                      control={
-                        <Checkbox
-                          checked={selectedOffer?._id === discount?._id}
-                          icon={
-                            <AddCircleOutlineSharpIcon
-                              className={classes.iconStyle}
-                            />
-                          }
-                          checkedIcon={
-                            <CheckCircleOutlineIcon
-                              className={classes.iconStyle}
-                            />
-                          }
-                        />
-                      }
-                    ></FormControlLabel>
+                  <Divider />
+                  <div className={classes.actionBtnRoot}>
+                    <Typography
+                      variant="h4"
+                      className={classes.discountPriceTxt}
+                    >
+                      {discount?.discountPrice &&
+                        "€ " + discount?.discountPrice}
+                    </Typography>
+                    <button
+                      className={classes.reserveBtn}
+                      onClick={() => handleChangeReservationOffer(discount)}
+                    >
+                      {selectedOffer?._id === discount?._id
+                        ? "Remove Offer"
+                        : "Add offer"}
+                    </button>
                   </div>
                 </div>
               </div>
