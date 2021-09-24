@@ -94,16 +94,19 @@
   padding-top: 20px;
 }
 
-.iconRoot {
-  position: absolute;
-  top: 0;
-  right: 0;
+.actionBtnRoot {
+  display: flex;
 }
 
-.iconStyle {
-  color: green;
-  width: 40px !important;
-  height: 40px !important;
+.discountPriceTxt {
+  flex: 1;
+}
+
+.reserveBtn {
+  border: 1px solid #fff;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin-top: 5px;
 }
 
 .skeletongSpaing {
