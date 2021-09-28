@@ -1,14 +1,20 @@
+.optionRoot {
+  display: flex;
+  justify-content: center;
+}
+
 .option {
-  width: 100px;
+  width: 120px;
   cursor: pointer;
 }
 
 .option_un_active {
-  color: white;
-  border-bottom: 1px solid white;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 4px solid rgba(255, 255, 255, 0.5);
 }
 
 .option_active {
   color: #b29051;
-  border-bottom: 1px solid #b29051;
+  border-bottom: 4px solid #b29051;
+  font-weight: normal;
 }

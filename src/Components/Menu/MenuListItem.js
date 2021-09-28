@@ -3,7 +3,9 @@ import React from "react";
 const useStyle = () => ({
   container: {
     background: "white",
-    borderRadius: "10px",
+    borderRadius: "30px",
+    padding: "15px 0",
+    boxShadow: "inset 0px 0px 10px 7px rgba(0, 0, 0, 0.25)",
   },
   mainText: {
     color: "#B29051",
@@ -11,6 +13,9 @@ const useStyle = () => ({
   },
   allergyTxt: {
     textAlign: "left",
+  },
+  prodctDetail: {
+    fontWeight: "bold",
   },
 });
 
@@ -32,7 +37,7 @@ export default function MenuListItem({ header, products }) {
                   </h5>
                   {product?.allergies?.length > 0 && (
                     <p style={styles.allergyTxt}>
-                      Allergenies:{" "}
+                      <span style={styles.prodctDetail}>Allergenies:</span>{" "}
                       {product?.allergies?.map(
                         (allergy, index) =>
                           `${allergy}${
@@ -43,7 +48,7 @@ export default function MenuListItem({ header, products }) {
                   )}
                   {product?.ingredients?.length > 0 && (
                     <p style={styles.allergyTxt}>
-                      Ingredients:{" "}
+                      <span style={styles.prodctDetail}>Ingredients:</span>{" "}
                       {product?.ingredients?.map(
                         (allergy, index) =>
                           `${allergy}${
@@ -57,7 +62,7 @@ export default function MenuListItem({ header, products }) {
                 </div>
               </div>
               <div>
-                <h5 style={styles.mainText}>{product?.sizes?.[0]?.price}</h5>
+                <h5 style={styles.mainText}>{product?.sizes?.[0]?.price}€</h5>
               </div>
             </li>
           ))

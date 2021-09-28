@@ -11,8 +11,10 @@ const useStyle = () => ({
     width: "60%",
   },
   selectedBtn: {
-    borderRadius: "10px",
-    border: "2px solid",
+    boxShadow: "0px 0px 5px 10px rgba(0, 0, 0, 0.25)",
+  },
+  unselectedBtn: {
+    boxShadow: "inset 0px 0px 5px 7px rgba(0, 0, 0, 0.25)",
   },
 });
 
@@ -22,7 +24,7 @@ export default function OptionSelector({
   selectedOffer,
 }) {
   const styles = useStyle();
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(0);
   const options = [
     { content: "DAILY MENU", icon: "assets/option-menu.png" },
     { content: "PROMOTIONS", icon: "assets/option-promotion.png" },
@@ -47,7 +49,9 @@ export default function OptionSelector({
               className={`d-flex flex-column align-items-center justify-content-center lead col-auto ${
                 selected === index ? "active" : "un-active"
               }`}
-              style={selected === index ? styles.selectedBtn : null}
+              style={
+                selected === index ? styles.selectedBtn : styles.unselectedBtn
+              }
             >
               <img
                 onClick={() => handleClick(index)}

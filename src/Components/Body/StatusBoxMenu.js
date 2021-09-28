@@ -8,6 +8,8 @@ const useStyles = () => ({
     display: "flex",
     justifyContent: "space-between",
     margin: "10px",
+    boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, 0.5)",
+    borderRadius: "10px",
   },
   subContainer: {
     display: "flex",
@@ -31,7 +33,8 @@ export default function StatusBoxMenu() {
           ...styles.subContainer,
           background: `${open_now ? "#B29051" : "#B91010"}`,
           borderRadius: "10px 0px 0px 10px",
-          boxShadow: "7px 4px 16px 0px rgba(0,0,0,0.75)",
+          boxShadow: "4px 0px 5px 2px rgb(0 0 0 / 25%)",
+          zIndex: 1,
         }}
       >
         <img src="assets/reservation.png" width={70} />
@@ -42,7 +45,6 @@ export default function StatusBoxMenu() {
           background: `${open_now ? "#B29051" : "#B91010"}`,
           color: "white",
           borderRadius: "0px 10px 10px 0px",
-          boxShadow: "7px 4px 16px 0px rgba(0,0,0,0.75)",
         }}
       >
         <h4>{open_now ? "Now Opened" : "Now Closed - Opening:"}</h4>

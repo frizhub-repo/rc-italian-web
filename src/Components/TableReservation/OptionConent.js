@@ -20,7 +20,6 @@ const useStyle = () => ({
   },
   menus: {
     maxHeight: "150vh",
-    overflowY: "scroll",
     padding: "10px 10px 10px 110px",
   },
   groupContainer: {
@@ -44,9 +43,9 @@ const useStyle = () => ({
     left: "-50px",
     boxShadow: "0px 4px 4px rgb(0 0 0 / 25%)",
     width: "150px",
-    color: "#F59E0B",
+    color: "#000",
     height: "fit-content",
-    backgroundColor: "#fff",
+    backgroundColor: "#b29051",
     borderTopRightRadius: "30px",
     borderBottomRightRadius: "30px",
     border: "1px solid rgba(0, 0, 0, 0.4)",
@@ -99,6 +98,9 @@ export default function OptionContent({
                 <p
                   key={menu?._id}
                   style={styles.dealsList}
+                  className={`${
+                    activeIndex === index && "menuTitle"
+                  } menuTextHover`}
                   onClick={() => setActiveIndex(index)}
                 >
                   {menu?.title}
@@ -110,7 +112,7 @@ export default function OptionContent({
           </div>
         </div>
         <h1 style={styles.header}>{selected}</h1>
-        <div style={styles.menus} className="row">
+        <div style={styles.menus} className="custom-scroll">
           {specialMenu?.[activeIndex]?.items?.length > 0 ? (
             specialMenu?.[activeIndex]?.items?.map(({ category, products }) => (
               <div className="col-sm-12 col-lg-12">
@@ -119,7 +121,7 @@ export default function OptionContent({
             ))
           ) : (
             <span style={{ color: "#fff" }}>
-              This menu don't have any sections
+              This menu don't have any products
             </span>
           )}
         </div>

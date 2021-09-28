@@ -44,6 +44,8 @@ export default function MenuSelector() {
       case 1:
         if (selected < menus?.length - 1) setSelected(selected + 1);
         break;
+      default:
+        return 0;
     }
   }
 
@@ -51,7 +53,11 @@ export default function MenuSelector() {
     <div className="d-flex flex-column align-items-center">
       <div className="d-flex justify-content-between">
         <button onClick={(e) => handleButtonClick(0)}>
-          <img src="assets/menu-left.png" style={styles.menuButton} />
+          <img
+            src="assets/menu-left.png"
+            style={styles.menuButton}
+            alt="Left click"
+          />
         </button>
         <div className="d-none d-md-flex justify-content-center shadow-lg row">
           {menus?.length > 0 &&
@@ -65,7 +71,11 @@ export default function MenuSelector() {
             ))}
         </div>
         <button onClick={(e) => handleButtonClick(1)}>
-          <img src="assets/menu-right.png" style={styles.menuButton} />
+          <img
+            src="assets/menu-right.png"
+            style={styles.menuButton}
+            alt="Right click"
+          />
         </button>
       </div>
       <MenuContent
