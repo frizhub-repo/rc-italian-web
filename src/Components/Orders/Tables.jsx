@@ -14,6 +14,16 @@ const useStyles = makeStyles({
   table: {
     // minWidth: 700,
   },
+  originalPriceTag: {
+    fontSize: "15px",
+    lineHeight: "19px",
+    color: "rgba(0, 0, 0, 0.5)",
+    textDecorationLine: "line-through",
+    marginRight: "10px",
+  },
+  free: {
+    color: "#fff",
+  },
 });
 
 function ccyFormat(num) {

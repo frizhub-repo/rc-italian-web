@@ -10,16 +10,25 @@ const initialState = {
   currency: "",
 };
 
+function isOfferExist(e, payload) {
+  return payload.offer
+    ? e.product === payload.product &&
+        e.size._id === payload.size._id &&
+        e.isDiscount === payload.isDiscount &&
+        e.offer._id === payload.offer._id
+    : e.product === payload.product &&
+        e.size._id === payload.size._id &&
+        e.isDiscount === payload.isDiscount;
+}
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   switch (action.type) {
     case "GET_ALL_ORDER":
       return { ...state, orders: action.payload };
     case "ADD_ITEM":
-      const index1 = state.items.findIndex(
-        (e) =>
-          e.product === action.payload.product &&
-          e.size._id === action.payload.size._id &&
-          e.isDiscount === action.payload.isDiscount
+      const index1 = state.items?.findIndex((e) =>
+        isOfferExist(e, action.payload)
       );
       if (index1 !== -1) {
         const items = state.items;
@@ -33,11 +42,8 @@ export default function (state = initialState, action) {
         };
     case "REMOVE_ITEM":
       const removeProducts = state.items;
-      const removeIndex = removeProducts.findIndex(
-        (product) =>
-          product.product === action.payload.product &&
-          product.size._id === action.payload.size._id &&
-          product.isDiscount === action.payload.isDiscount
+      const removeIndex = removeProducts.findIndex((product) =>
+        isOfferExist(product, action.payload)
       );
       const price =
         removeProducts[removeIndex].quantity *
@@ -53,6 +59,9 @@ export default function (state = initialState, action) {
         ...state,
         items: [],
         total: 0,
+        address: {},
+        time: "as soon as possible",
+        note: "",
       };
     case "ADD_ORDER_ADDRESS":
       return {
