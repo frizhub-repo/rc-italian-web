@@ -1,8 +1,9 @@
 import { Backdrop, Box, CircularProgress, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { removeOrderItems } from "Components/actions";
 import Navbar from "Components/Navbar/Navbar";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosIntance from "utils/axios-configured";
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderSummary = () => {
   const paypal = useRef();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -72,13 +74,13 @@ const OrderSummary = () => {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           if (order?.status === "COMPLETED") {
-            debugger;
             const res = await axiosIntance.post("/api/v1/orders/customers", {
               products: products,
               time,
               note,
               address,
             });
+            dispatch(removeOrderItems());
             toast.success("Order has been created successfully");
             history.push(`/ordersreceived/${res?.data?.data?._id}`);
             setLoading(false);

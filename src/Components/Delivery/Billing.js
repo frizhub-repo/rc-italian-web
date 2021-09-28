@@ -51,29 +51,30 @@ export default function Billing({ items }) {
       >
         <Scrollbar style={{ width: "100%", height: "30vh" }}>
           {items?.items?.length > 0 &&
-            items?.items?.map((item) => (
+            items?.items?.map((item, index) => (
               <>
-                <div className="d-flex justify-content-between align-items-center px-2">
+                <div
+                  key={index}
+                  className="d-flex justify-content-between align-items-center px-2"
+                >
                   <img
                     onClick={() => removeItemFromCart(item)}
                     src="assets/delete.png"
+                    alt="delete"
                   />
                   <small>
                     {item.quantity}x {item.name}
                   </small>
-                  {item.price ? (
-                    <div style={styles.priceTagContainer}>
-                      {(item?.isDiscount === "flat" ||
-                        item?.isDiscount === "percentage") && (
-                        <span style={styles.originalPriceTag}>
-                          {item?.originalPrice}€
-                        </span>
-                      )}
-                      <p className="m-0">{item.price > 0 ? item.price : 0}€</p>
-                    </div>
-                  ) : (
-                    <span>Free</span>
-                  )}
+
+                  <div style={styles.priceTagContainer}>
+                    {(item?.isDiscount === "flat" ||
+                      item?.isDiscount === "percentage") && (
+                      <span style={styles.originalPriceTag}>
+                        {item?.originalPrice}€
+                      </span>
+                    )}
+                    <p className="m-0">{item.price > 0 ? item.price : 0}€</p>
+                  </div>
                 </div>
                 {item?.bundledProduct?.length > 0 &&
                   item?.bundledProduct?.map((productObj) => (
