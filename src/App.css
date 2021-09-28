@@ -119,6 +119,14 @@
   display: -webkit-box;
 }
 
+.menuTitle {
+  color: #fff;
+}
+
+.menuTextHover:hover {
+  color: #fff;
+}
+
 .custom-scroll {
   max-height: 100%;
   overflow-y: auto;

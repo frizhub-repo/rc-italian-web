@@ -24,7 +24,7 @@ export default function OptionSelector({
   selectedOffer,
 }) {
   const styles = useStyle();
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(0);
   const options = [
     { content: "DAILY MENU", icon: "assets/option-menu.png" },
     { content: "PROMOTIONS", icon: "assets/option-promotion.png" },
