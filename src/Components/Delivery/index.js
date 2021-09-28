@@ -23,7 +23,7 @@ export default function Delivery() {
       </section>
       <section>
         <div style={{ display: "flex" }}>
-          <div style={{ width: "70%" }}>
+          <div style={{ width: "70%", backgroundColor: "#272727" }}>
             <MealMenu />
           </div>
           <div style={{ width: "30%", backgroundColor: "rgb(39, 39, 39)" }}>

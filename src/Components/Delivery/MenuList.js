@@ -13,6 +13,10 @@ const useStyle = () => ({
     maxHeight: "60vh",
     overflowY: "scroll",
   },
+  scrollHeight: {
+    maxHeight: "116vh",
+    padding: "0 7px",
+  },
 });
 
 export default function MenuList({
@@ -27,9 +31,9 @@ export default function MenuList({
       {products?.length > 0 ? (
         <>
           <bold className="h1">{sectionTitle}</bold>
-          <div className="row">
+          <div style={styles.scrollHeight} className="row custom-scroll">
             {products?.map((product) => (
-              <div className="col-md-6">
+              <div className="col-md-6 px-3">
                 <MenuItem
                   product={product?.product ? product?.product : product}
                   size={product?.size ? product?.size : product?.sizes?.[0]}

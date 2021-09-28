@@ -5,6 +5,7 @@
 .size_active {
   color: rgb(178, 144, 81);
   cursor: pointer;
+  font-weight: bold;
 }
 
 .size_un_active {
@@ -35,4 +36,8 @@
   margin: 0;
   width: 60px;
   font-size: 10px;
+}
+
+.showImgRadius {
+  border-radius: 10px 0 15px 10px !important;
 }

@@ -208,7 +208,11 @@ export default function MenuItem({
     <div className="d-flex flex-column" style={styles.container}>
       <div
         className="d-flex justify-content-between p-1"
-        style={styles.detailsContainer}
+        style={{
+          background: "#B29051",
+          boxShadow: "inset 0px 0px 2px 3px rgba(0, 0, 0, 0.5)",
+          borderRadius: product?.sizes?.length === 1 ? "20px" : "20px 20px 0 0",
+        }}
       >
         {!isEmpty(offer) && (
           <div className={classes.discount_container}>
@@ -249,9 +253,21 @@ export default function MenuItem({
         {/* detail container */}
         <div className="d-flex flex-column align-items-start px-1">
           <h5 style={styles.itemHeader}>{product?.title}</h5>
-          <p className="m-0">{product?.ingredients?.map((e) => `${e}, `)}</p>
+          <p
+            className="m-0 wrapTextIntoTwoLine"
+            title={product?.ingredients?.map((e) => e)}
+          >
+            <span className="font-weight-bold">Ingredients: </span>
+            {product?.ingredients?.map((e) => `${e}, `)}
+          </p>
           {product?.allergies && (
-            <small>Allergies: {product?.allergies?.map((e) => `${e}, `)}</small>
+            <small
+              title={product?.allergies?.map((e) => e)}
+              className="wrapTextIntoTwoLine"
+            >
+              <span className="font-weight-bold">Allergies: </span>
+              {product?.allergies?.map((e) => `${e}, `)}
+            </small>
           )}
         </div>
         {/* price container */}
@@ -289,7 +305,11 @@ export default function MenuItem({
               </button>
             </div>
           </div>
-          <div style={styles.basketContainer} onClick={addToCart}>
+          <div
+            style={styles.basketContainer}
+            className={product?.sizes?.length === 1 && classes.showImgRadius}
+            onClick={addToCart}
+          >
             <img src="assets/shopping-basket.png" width={40} />
           </div>
         </div>
@@ -308,7 +328,7 @@ export default function MenuItem({
                   : classes.size_un_active
               }
             >
-              <small>{sizeObj?.title}</small>
+              <span>{sizeObj?.title}</span>
             </div>
           ))}
         </div>

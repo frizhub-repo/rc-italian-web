@@ -138,7 +138,7 @@ export default function DiscountStep({
   return (
     <div className={classes.container}>
       <h3 className={classes.header}>Choose a Discount</h3>
-      <div className={`${classes.contentContainer} custom-scroll-secondary`}>
+      <div className={`${classes.contentContainer} custom-scroll`}>
         <div className="mx-2">
           {chooseOffer?.length > 0 &&
             chooseOffer?.map((discount, index) => (

@@ -40,7 +40,7 @@ export default function DicountGenre() {
 
   return (
     <div style={styles.container}>
-      <div className="d-flex justify-content-between">
+      <div className={classes.optionRoot}>
         {options.map((option, index) => (
           <div
             onClick={(e) => setActiveStep(index)}
