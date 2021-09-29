@@ -4,9 +4,10 @@ import "./openingHours.css";
 
 const useStyle = () => ({
   cell: {
-    padding: "10px 0px",
+    padding: "12px 0px",
     width: "50%",
     border: "2px solid #997b44",
+    fontWeight: "bold",
   },
   container: {
     padding: "30px 60px 0 60px",
@@ -20,7 +21,9 @@ const useStyle = () => ({
   table: {
     color: "white",
     width: "100%",
-    borderCollapse: "collapse",
+    borderCollapse: "inherit",
+    borderRadius: "15px",
+    boxShadow: "0px 0px 5px 5px rgba(178, 144, 81, 0.25)",
     textTransform: "uppercase",
   },
   headerImage: {
@@ -73,11 +76,16 @@ export default function OpeningHours({ placeData }) {
       <table style={styles.table}>
         <thead>
           <th style={styles.cell} colSpan="2">
-            <img style={styles.headerImage} src="assets/clock.png" />
+            <img
+              style={styles.headerImage}
+              src="assets/clock.png"
+              alt="clock"
+              width={60}
+            />
           </th>
         </thead>
         {openingHours.map((timing) => (
-          <tr className={`${timing?.openTime ? null : "closed"}`}>
+          <tr className={`${timing?.openTime ? "open" : "closed"}`}>
             <td style={styles.cell}>{timing?.openDay}</td>
             <td style={styles.cell}>
               {timing?.openTime || timing?.closeTime

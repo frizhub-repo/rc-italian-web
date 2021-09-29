@@ -4,6 +4,11 @@ table {
 
 .closed {
   background-color: #b91010;
+  box-shadow: inset 4px 0px 5px 2px rgba(0, 0, 0, 0.25);
+}
+
+.open {
+  box-shadow: inset 4px 0px 5px 2px rgba(0, 0, 0, 0.25);
 }
 
 tr {
