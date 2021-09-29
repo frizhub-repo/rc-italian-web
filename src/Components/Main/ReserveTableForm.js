@@ -283,6 +283,7 @@ export default function ReserveTableForm() {
           onClick={reserveTableHandler}
           className="btn btn-outline btn-lg btn-block mt-3"
           style={{ ...styles.button, ...styles.secondaryBtn }}
+          disabled={loading}
         >
           {loading && (
             <CircularProgress

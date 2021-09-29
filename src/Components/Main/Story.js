@@ -14,6 +14,12 @@ const useStyle = () => ({
   storyText: {
     color: "white",
   },
+  restaurantRange: {
+    fontSize: "20px",
+  },
+  better: {
+    fontStyle: "italic",
+  },
 });
 
 export default function Story({ reviews }) {
@@ -29,9 +35,9 @@ export default function Story({ reviews }) {
         <div className="col col-md-6" style={styles.storyText}>
           <h2 className="mb-4">
             Da Ciccio
-            <br /> Italians do it better
+            <br /> <span style={styles.better}>Italians do it better</span>
           </h2>
-          <p>
+          <p style={styles.restaurantRange}>
             Restaurants range from inexpensive and informal lunching or dining
             places catering to people working nearby, with modest food served in
             simple settings at low prices, to expensive establishments serving
