@@ -3,7 +3,7 @@ import ReserveTableCard from "./ReserveTableCard";
 
 const useStyle = () => ({
   container: {
-    padding: "30px 60px",
+    padding: "30px 170px",
     background: "#272727",
     display: "flex",
     flexDirection: "column",

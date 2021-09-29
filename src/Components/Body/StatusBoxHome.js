@@ -8,14 +8,21 @@ const useStyles = () => ({
     justifyContent: "space-between",
     margin: "10px",
     boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, 0.5)",
-    borderRadius: "10px",
+    borderRadius: "15px",
   },
   subContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: "20px",
+    padding: "15px 20px",
+  },
+  openedTxt: {
+    marginBottom: 0,
+    fontWeight: "normal",
+  },
+  openingHour: {
+    fontWeight: "normal",
   },
 });
 
@@ -34,7 +41,7 @@ export default function StatusBoxHome({ isOpened = false }) {
           zIndex: 1,
         }}
       >
-        <img src="assets/reservation.png" width={70} />
+        <img src="assets/reservation.png" width={70} alt="reservation img" />
       </div>
       <div
         className="d-none d-md-block"
@@ -44,8 +51,10 @@ export default function StatusBoxHome({ isOpened = false }) {
           color: "white",
         }}
       >
-        <h4>{isOpened ? "Now Opened1111" : "Now Closed - Opening:"}</h4>
-        <h4>From 12:00 - To 15:30</h4>
+        <h4 style={styles.openedTxt}>
+          {isOpened ? "Now Opened" : "Now Closed - Opening:"}
+        </h4>
+        <h4 style={styles.openedTxt}>From 12:00 - To 15:30</h4>
       </div>
       <button
         onClick={openingHourSection.onClick}
@@ -57,8 +66,8 @@ export default function StatusBoxHome({ isOpened = false }) {
           boxShadow: "-4px 0px 5px 2px rgba(0, 0, 0, 0.25)",
         }}
       >
-        <h4>Click for Opening Hours</h4>
-        <img src="assets/down-sign.png" width={30} />
+        <h4 style={styles.openingHour}>Click for Opening Hours</h4>
+        <img src="assets/down-sign.png" width={25} alt="down sign" />
       </button>
     </div>
   );

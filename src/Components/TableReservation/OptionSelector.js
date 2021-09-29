@@ -12,10 +12,9 @@ const useStyle = () => ({
   },
   selectedBtn: {
     boxShadow: "0px 0px 5px 10px rgba(0, 0, 0, 0.25)",
+    padding: "15px",
   },
-  unselectedBtn: {
-    boxShadow: "inset 0px 0px 5px 7px rgba(0, 0, 0, 0.25)",
-  },
+  unselectedBtn: { padding: "15px", filter: "grayscale(100)" },
 });
 
 export default function OptionSelector({
@@ -41,7 +40,10 @@ export default function OptionSelector({
         style={styles.innerContainer}
         className="d-flex justify-content-between"
       >
-        <div className="d-flex justify-content-center shadow-lg row">
+        <div
+          className="d-flex justify-content-center row"
+          style={{ boxShadow: "inset 0px 0px 5px 10px rgba(0, 0, 0, 0.25)" }}
+        >
           {options.map((option, index) => (
             <button
               id={index}

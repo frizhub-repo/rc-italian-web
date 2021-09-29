@@ -17,12 +17,14 @@ const useStyle = () => ({
     background: "#B29051",
     padding: "30px",
     borderRadius: "20px",
+    boxShadow: "inset 0px 0px 5px 5px rgba(0, 0, 0, 0.25)",
   },
   images: {
     maxHeight: "60vh",
   },
   previewImage: {
     width: "100%",
+    borderRadius: "30px",
   },
 });
 
@@ -60,6 +62,7 @@ export default function Gallery() {
                       onClick={(e) => setSelected(index)}
                       src={image}
                       width={420}
+                      alt="Gallery"
                     />
                   </div>
                 ))}
@@ -69,7 +72,11 @@ export default function Gallery() {
         </div>
         {/* Preview */}
         <div className="col-7">
-          <img style={styles.previewImage} src={images[selected]} />
+          <img
+            style={styles.previewImage}
+            src={images[selected]}
+            alt="Gallery"
+          />
         </div>
       </div>
     </div>
