@@ -139,6 +139,9 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
           {errors?.rePassword?.message && (
             <FieldError message={errors?.rePassword?.message} />
           )}
+          {errors?.rePassword?.type === "minLength" && (
+            <FieldError message={"Password must be 8 characters long"} />
+          )}
           <div style={{ marginBottom: "20px" }}></div>
           <button type="submit" className={classes.submitBtn}>
             {loading && (
