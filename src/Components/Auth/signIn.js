@@ -11,14 +11,18 @@ import { IconButton } from "rsuite";
 import axiosIntance from "utils/axios-configured";
 import classes from "./Auth.module.css";
 import SocialAuth from "./SocialAuth";
+import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignIn({ handleClose, check2 }) {
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
   const [isPassVisible, setIsPassVisible] = useState(false);
   const { setToken, refetchCustomerHandler } = useUserContext();
+  const [loading, setLoading] = useState(false);
 
   async function signInWithPayload(data) {
+    setLoading(true);
     try {
       const res = await customerSignIn(data);
       if (res?.status === 200) {
@@ -28,11 +32,12 @@ export default function SignIn({ handleClose, check2 }) {
       localStorage.setItem("token", res?.data?.data?.token);
       setToken(res?.data?.data?.token);
       refetchCustomerHandler();
-      toast.success("You have been sign in successfully");
+      setLoading(false);
       history.push("/");
-    } catch (e) {
-      console.log(e);
-      toast.error("Sign In not successful");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   }
 
@@ -48,8 +53,14 @@ export default function SignIn({ handleClose, check2 }) {
             className={classes.authInput}
             type="text"
             placeholder="Email"
-            ref={register({ required: "Email is required" })}
+            ref={register({
+              required: "Email is required",
+              pattern: EMAIL_REGEX,
+            })}
           />
+          {errors.email?.type === "pattern" && (
+            <FieldError message={"Email is not valid."} />
+          )}
           {errors?.email?.message && (
             <FieldError message={errors?.email?.message} />
           )}
@@ -73,6 +84,7 @@ export default function SignIn({ handleClose, check2 }) {
           )}
           <div className={classes.forgotPassContainer}>
             <button
+              type="button"
               className={classes.forgotPass}
               onClick={() => history.push("forgotPassword")}
             >
@@ -80,7 +92,14 @@ export default function SignIn({ handleClose, check2 }) {
             </button>
           </div>
           <button type="submit" className={classes.submitBtn}>
-            Login
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
+            <span>Login</span>
           </button>
         </form>
         <div className={classes.secondaryText}>

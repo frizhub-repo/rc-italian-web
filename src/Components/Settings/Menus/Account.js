@@ -17,14 +17,21 @@ export default function Account() {
     defaultValues: {
       firstName: customer?.firstName,
       lastName: customer?.lastName,
+      dateOfBirth: new Date(
+        customer?.dateOfBirth ? customer?.dateOfBirth : null
+      )
+        .toISOString()
+        .substr(0, 10),
     },
   });
   const [loading, setLoading] = React.useState(false);
+  const [gender, setGender] = React.useState(undefined);
 
   const updateProfile = async (data) => {
     setLoading(true);
     try {
-      const res = await updateCustomerInfo(data);
+      data = { ...data, gender };
+      await updateCustomerInfo(data);
       refetchCustomerHandler();
       toast.success("Profile has been updated");
       setLoading(false);
@@ -37,9 +44,13 @@ export default function Account() {
 
   React.useEffect(() => {
     if (Object.entries(customer).length > 0) {
+      setGender(customer?.gender);
       reset({
         firstName: customer?.firstName,
         lastName: customer?.lastName,
+        dateOfBirth: new Date(customer?.dateOfBirth)
+          .toISOString()
+          .substr(0, 10),
       });
     }
   }, [customer]);
@@ -81,6 +92,8 @@ export default function Account() {
               values={["Male", "Female", "Other"]}
               register={register}
               name={"gender"}
+              gender={gender}
+              setGender={setGender}
             />
             <CustomText
               placeholder={"Email"}
@@ -88,7 +101,18 @@ export default function Account() {
               defaultValue={customer?.email}
               isDisabled={true}
             />
-            <CustomText name={"Date"} type="date" />
+            <CustomText
+              name={"dateOfBirth"}
+              type="date"
+              maxValue={new Date().toISOString().substr(0, 10)}
+              register={register}
+              validationRule={{
+                required: "This is required field",
+              }}
+            />
+            {errors?.dateOfBirth?.message && (
+              <FieldError message={errors?.dateOfBirth?.message} />
+            )}
             <div className="mt-4">
               <button
                 type="submit"

@@ -16,3 +16,7 @@ export const ADD_DELIVERY_ADDRESS = "ADD_DELIVERY_ADDRESS";
 export const GET_DELIVERY_ADDRESS = "GET_DELIVERY_ADDRESS";
 export const DELETE_DELIVERY_ADDRESS = "DELETE DELIVERY ADDRESS";
 export const EDIT_DELIVERY_ADDRESS = "EDIT DELIVERY ADDRESS";
+
+// CONSTANTS
+export const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

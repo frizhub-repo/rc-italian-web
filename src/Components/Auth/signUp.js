@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import { customerSignUp } from "api/customer";
 import { useUserContext } from "Context/userContext";
 import axiosIntance from "utils/axios-configured";
+import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignUp({ check1, handleClose, setOpenDelivery }) {
   const { register, handleSubmit, errors, watch } = useForm();
@@ -18,8 +20,10 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
   const [isRePassVisible, setIsRePassVisible] = React.useState(false);
   const { setToken, refetchCustomerHandler } = useUserContext();
   const history = useHistory();
+  const [loading, setLoading] = React.useState(false);
 
   async function signUpWithPayload(data) {
+    setLoading(true);
     try {
       const res = await customerSignUp(data);
       if (res.status === 200) {
@@ -29,11 +33,12 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
       localStorage.setItem("token", res?.data?.data?.token);
       setToken(res?.data?.data?.token);
       refetchCustomerHandler();
-      toast.success("Your account has been created successfully");
+      setLoading(false);
       history.push("/");
-    } catch (e) {
-      console.log(e);
-      toast.error("Sign Up not successful");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   }
 
@@ -81,7 +86,7 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
             placeholder="Email"
             ref={register({
               required: "Email is required",
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              pattern: EMAIL_REGEX,
             })}
           />
           {errors.email?.type === "pattern" && (
@@ -134,9 +139,19 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
           {errors?.rePassword?.message && (
             <FieldError message={errors?.rePassword?.message} />
           )}
+          {errors?.rePassword?.type === "minLength" && (
+            <FieldError message={"Password must be 8 characters long"} />
+          )}
           <div style={{ marginBottom: "20px" }}></div>
           <button type="submit" className={classes.submitBtn}>
-            Sign Up
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
+            <span>Sign Up</span>
           </button>
         </form>
         <div className={classes.secondaryText}>
