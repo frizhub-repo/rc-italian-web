@@ -12,6 +12,7 @@ import axiosIntance from "utils/axios-configured";
 import classes from "./Auth.module.css";
 import SocialAuth from "./SocialAuth";
 import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignIn({ handleClose, check2 }) {
   const { register, handleSubmit, errors } = useForm();
@@ -54,7 +55,7 @@ export default function SignIn({ handleClose, check2 }) {
             placeholder="Email"
             ref={register({
               required: "Email is required",
-              pattern: /^[a-zA-Z0-9.+]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/,
+              pattern: EMAIL_REGEX,
             })}
           />
           {errors.email?.type === "pattern" && (

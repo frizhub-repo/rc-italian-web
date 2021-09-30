@@ -12,6 +12,7 @@ import { customerSignUp } from "api/customer";
 import { useUserContext } from "Context/userContext";
 import axiosIntance from "utils/axios-configured";
 import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignUp({ check1, handleClose, setOpenDelivery }) {
   const { register, handleSubmit, errors, watch } = useForm();
@@ -85,7 +86,7 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
             placeholder="Email"
             ref={register({
               required: "Email is required",
-              pattern: /^[a-zA-Z0-9.+]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/,
+              pattern: EMAIL_REGEX,
             })}
           />
           {errors.email?.type === "pattern" && (
