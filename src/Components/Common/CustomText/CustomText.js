@@ -16,6 +16,7 @@ export default function CustomText({
   value,
   defaultValue = "",
   minValue,
+  maxValue,
   isDisabled = false,
 }) {
   return (
@@ -27,6 +28,7 @@ export default function CustomText({
         placeholder={placeholder}
         ref={register(validationRule)}
         min={minValue}
+        max={maxValue}
         disabled={isDisabled}
         defaultValue={defaultValue}
       />
