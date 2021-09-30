@@ -31,7 +31,6 @@ export default function SignIn({ handleClose, check2 }) {
       localStorage.setItem("token", res?.data?.data?.token);
       setToken(res?.data?.data?.token);
       refetchCustomerHandler();
-      toast.success("You have been sign in successfully");
       setLoading(false);
       history.push("/");
     } catch (error) {
@@ -84,6 +83,7 @@ export default function SignIn({ handleClose, check2 }) {
           )}
           <div className={classes.forgotPassContainer}>
             <button
+              type="button"
               className={classes.forgotPass}
               onClick={() => history.push("forgotPassword")}
             >

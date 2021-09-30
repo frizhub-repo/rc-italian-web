@@ -32,7 +32,6 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
       localStorage.setItem("token", res?.data?.data?.token);
       setToken(res?.data?.data?.token);
       refetchCustomerHandler();
-      toast.success("Your account has been created successfully");
       setLoading(false);
       history.push("/");
     } catch (error) {
