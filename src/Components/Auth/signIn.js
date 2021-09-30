@@ -53,8 +53,14 @@ export default function SignIn({ handleClose, check2 }) {
             className={classes.authInput}
             type="text"
             placeholder="Email"
-            ref={register({ required: "Email is required" })}
+            ref={register({
+              required: "Email is required",
+              pattern: /^[a-zA-Z0-9.+]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/,
+            })}
           />
+          {errors.email?.type === "pattern" && (
+            <FieldError message={"Email is not valid."} />
+          )}
           {errors?.email?.message && (
             <FieldError message={errors?.email?.message} />
           )}

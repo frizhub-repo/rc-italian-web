@@ -86,7 +86,7 @@ export default function SignUp({ check1, handleClose, setOpenDelivery }) {
             placeholder="Email"
             ref={register({
               required: "Email is required",
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              pattern: /^[a-zA-Z0-9.+]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/,
             })}
           />
           {errors.email?.type === "pattern" && (
