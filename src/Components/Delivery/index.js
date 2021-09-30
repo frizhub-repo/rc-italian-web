@@ -26,13 +26,18 @@ export default function Delivery() {
           <div style={{ width: "70%", backgroundColor: "#272727" }}>
             <MealMenu />
           </div>
-          <div style={{ width: "30%", backgroundColor: "rgb(39, 39, 39)" }}>
+          <div
+            style={{
+              width: "30%",
+              display: "flex",
+              flexDirection: "column",
+              backgroundColor: "rgb(39, 39, 39)",
+            }}
+          >
             <ActionBox openNow={open_now} />
+            <Testitmonial reviews={reviews} />
           </div>
         </div>
-      </section>
-      <section>
-        <Testitmonial reviews={reviews} />
       </section>
     </div>
   );
