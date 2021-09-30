@@ -8,7 +8,7 @@ const useStyle = () => ({
   },
   header: {
     fontFamily: "Clicker Script",
-    fontSize: "10vw",
+    fontSize: "60px",
     color: "#B29051",
   },
   carouselContent: {
