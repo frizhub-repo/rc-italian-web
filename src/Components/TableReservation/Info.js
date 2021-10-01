@@ -229,6 +229,7 @@ export default function Info({ placeData, specialMenu, selectedOffer }) {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            setActiveStep={setActiveStep}
             selectedOffer={selectedOffer}
             specialMenu={specialMenu}
           />
