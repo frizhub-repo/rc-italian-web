@@ -11,16 +11,36 @@ export default function FacebookChatPlugin() {
   }, []);
   React.useEffect(() => {
     if (pageId) {
-      (function (d, s, id) {
+      window.fbAsyncInit = function () {
+        window.FB.init({
+          appId: process.env.REACT_APP_FACEBOOK_APP_ID,
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v12.0",
+        });
+      };
+      function addScript(d, s, id, src) {
         var js,
           fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+        js.src = src;
         fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
+      }
+      addScript(
+        document,
+        "script",
+        "facebook-sdk",
+        "https://connect.facebook.net/en_US/sdk.js"
+      );
+      addScript(
+        document,
+        "script",
+        "facebook-jssdk",
+        "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"
+      );
     }
   }, [pageId]);
-  return pageId && <div class="fb-customerchat" page_id={pageId}></div>;
+  return pageId && <div className="fb-customerchat" page_id={pageId} />;
 }
