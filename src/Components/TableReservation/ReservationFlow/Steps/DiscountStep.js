@@ -38,6 +38,7 @@ export default function DiscountStep({
   setParameters,
   specialMenu,
   selectedOffer,
+  setActiveStep,
 }) {
   const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -122,6 +123,8 @@ export default function DiscountStep({
         };
         await reserveTable(payload);
         toast.success("Reservation has been created successfully");
+        setParameters({});
+        setActiveStep(0);
       }
       setLoading(false);
     } catch (error) {
@@ -132,7 +135,11 @@ export default function DiscountStep({
   };
 
   function updateSpecialMenu(menu) {
-    setParameters({ ...parameters, menu });
+    if (parameters?.menu === menu) {
+      setParameters({ ...parameters, menu: null });
+    } else {
+      setParameters({ ...parameters, menu });
+    }
   }
 
   return (
