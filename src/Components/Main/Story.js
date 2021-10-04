@@ -20,6 +20,9 @@ const useStyle = () => ({
   better: {
     fontStyle: "italic",
   },
+  daCicco: {
+    fontSize: "2rem",
+  },
 });
 
 export default function Story({ reviews }) {
@@ -33,7 +36,7 @@ export default function Story({ reviews }) {
           <Testimonial reviews={reviews} showHeader={false} />
         </div>
         <div className="col col-md-6" style={styles.storyText}>
-          <h2 className="mb-4">
+          <h2 className="mb-4" style={styles.daCicco}>
             Da Ciccio
             <br /> <span style={styles.better}>Italians do it better</span>
           </h2>
