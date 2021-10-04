@@ -44,7 +44,6 @@ export default function StatusBoxHome({ isOpened = false }) {
         <img src="assets/reservation.png" width={70} alt="reservation img" />
       </div>
       <div
-        className="d-none d-md-block"
         style={{
           ...styles.subContainer,
           background: `${isOpened ? "#B29051" : "#B91010"}`,
