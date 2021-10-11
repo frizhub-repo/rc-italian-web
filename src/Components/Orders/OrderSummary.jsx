@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosIntance from "utils/axios-configured";
+import { createDiscountStats } from "api/Public"
+import { isEmpty } from "utils/common";
+
 import Tables from "./Tables";
 
 const useStyles = makeStyles((theme) => ({
@@ -81,6 +84,19 @@ const OrderSummary = () => {
               address,
             });
             dispatch(removeOrderItems());
+            let discount_stat_usage = [];
+            products.forEach((product) => {
+              if (!isEmpty(product.offer)) {
+                discount_stat_usage.push({
+                  type: "usage",
+                  discountType: "DeliveryDiscount",
+                  discount: product?.offer?._id
+                })
+              }
+            })
+            await createDiscountStats({
+              offers: discount_stat_usage
+            })
             toast.success("Order has been created successfully");
             history.push(`/ordersreceived/${res?.data?.data?._id}`);
             setLoading(false);
