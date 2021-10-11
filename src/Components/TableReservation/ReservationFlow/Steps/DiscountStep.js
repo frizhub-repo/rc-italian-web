@@ -2,6 +2,7 @@ import * as React from "react";
 import classes from "./Step.module.css";
 import { CircularProgress } from "@material-ui/core";
 import { useUserContext } from "Context/userContext";
+import { createDiscountStats } from "api/Public";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { reserveTable } from "api/customer";
@@ -100,8 +101,16 @@ export default function DiscountStep({
     description: "No one Discounts will be used with this order",
   };
 
-  function updateDiscount(discount) {
+  async function updateDiscount(discount) {
     setParameters({ ...parameters, discount });
+    let discount_stat_click = {
+      type: "click",
+      discountType: "ReservationDiscount",
+      discount: discount._id,
+    };
+    await createDiscountStats({
+      offers: [discount_stat_click],
+    });
   }
 
   const createReservation = async () => {
@@ -121,6 +130,16 @@ export default function DiscountStep({
           offer: parameters?.discount === -1 ? null : parameters?.discount,
           specialMenu: parameters?.menu,
         };
+        if (parameters.discount) {
+          let discount_stat_Usage = {
+            type: "usage",
+            discountType: "ReservationDiscount",
+            discount: parameters.discount._id,
+          };
+          await createDiscountStats({
+            offers: [discount_stat_Usage],
+          });
+        }
         await reserveTable(payload);
         toast.success("Reservation has been created successfully");
         setParameters({});
