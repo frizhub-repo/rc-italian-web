@@ -49,9 +49,7 @@ export default function OpeningHours({ placeData }) {
 
   function formatOpeningHours() {
     if (!isEmpty(placeData)) {
-      const {
-        opening_hours: { periods },
-      } = placeData;
+      const { opening_hours: { periods = [] } = {} } = placeData;
       for (const { open, close } of periods) {
         setOpeningHours((prevOpeningHours) =>
           prevOpeningHours.map((openingHour) =>
