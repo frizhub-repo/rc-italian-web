@@ -75,6 +75,7 @@ export default function MenuItem({
 }) {
   const {
     customer: { _id: customerId },
+    restaurant,
   } = useUserContext();
   const dispatch = useDispatch();
   const styles = useStyle();
@@ -240,7 +241,11 @@ export default function MenuItem({
         <div className="d-none d-sm-flex" style={styles.imageContainer}>
           <img
             style={styles.image}
-            src={`${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`}
+            src={
+              product?.images?.[0]
+                ? `${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`
+                : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+            }
             width={100}
           />
           <div className="d-flex flex-column justify-content-between p-1">

@@ -13,7 +13,6 @@ function Navbar() {
   const location = useLocation();
   let { token, setToken, customer, restaurant } = useUserContext();
   const { pendingOrders } = useOrderContext();
-
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -85,26 +84,30 @@ function Navbar() {
                 MENU
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/tableReservation"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/tableReservation" && "activeNavbar"
-                }`}
-              >
-                TABLE RESERVATION
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/delivery"
-                className={`nav-link hoverNavBar ${
-                  location.pathname === "/delivery" && "activeNavbar"
-                }`}
-              >
-                DELIVERY
-              </Link>
-            </li>
+            {restaurant?.restaurant?.isReservationAvailable && (
+              <li className="nav-item">
+                <Link
+                  to="/tableReservation"
+                  className={`nav-link hoverNavBar ${
+                    location.pathname === "/tableReservation" && "activeNavbar"
+                  }`}
+                >
+                  TABLE RESERVATION
+                </Link>
+              </li>
+            )}
+            {restaurant?.restaurant?.isDeliveryAvailable && (
+              <li className="nav-item">
+                <Link
+                  to="/delivery"
+                  className={`nav-link hoverNavBar ${
+                    location.pathname === "/delivery" && "activeNavbar"
+                  }`}
+                >
+                  DELIVERY
+                </Link>
+              </li>
+            )}
             <li className="nav-item">
               <Link
                 to="/contact"
