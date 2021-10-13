@@ -177,10 +177,6 @@ const OrderSummary = () => {
     }
   }, [showPaypal]);
 
-  console.log({ showPaypal });
-  console.log({ paypal: window.paypal });
-  console.log({ state });
-
   return (
     <>
       <Navbar />
