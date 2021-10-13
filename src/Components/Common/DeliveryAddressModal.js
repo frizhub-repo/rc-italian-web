@@ -3,7 +3,13 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import { useForm } from "react-hook-form";
-import { Box, TextField, Button, FormHelperText } from "@material-ui/core";
+import {
+  Box,
+  TextField,
+  Button,
+  FormHelperText,
+  CircularProgress,
+} from "@material-ui/core";
 import { addDeliveryAddress } from "../../api/DeliveryAddress";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -108,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
   helperTextMargin: {
     marginLeft: "7px",
   },
+  progressbarSpacing: {
+    marginRight: "8px",
+  },
 }));
 
 const DialogContent = withStyles((theme) => ({
@@ -119,20 +128,25 @@ const DialogContent = withStyles((theme) => ({
 export default function DeliveryAddressDialog({
   openDelivery,
   setOpenDelivery,
+  handleClose = () => {},
 }) {
   const classes = useStyles();
   const disp = useDispatch();
   const [services, setService] = useState("home");
   const { register, handleSubmit, errors } = useForm();
+  const [loading, setLoading] = useState(false);
 
   const deliveryAddressPayload = async (data) => {
     try {
+      setLoading(true);
       data = { ...data, addressKey: services };
       const res = await addDeliveryAddress(data);
       disp({ type: ADD_DELIVERY_ADDRESS, payload: res?.data?.data });
-      setOpenDelivery(false);
+      setLoading(false);
       toast.success("Address added successfully");
+      handleClose();
     } catch (error) {
+      setLoading(false);
       console.log({ error });
     }
   };
@@ -355,16 +369,17 @@ export default function DeliveryAddressDialog({
               className={classes.signInButton}
               type="submit"
             >
+              {loading && (
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  className={classes.progressbarSpacing}
+                />
+              )}
               continue
             </Button>
           </Box>
         </form>
-        <Box className={classes.termServices}>
-          <label>
-            By signing up, you are agreeing to our <b>Terms of Services</b> and
-            our <b>Privacy Policy</b> - Your California Rights
-          </label>
-        </Box>
       </DialogContent>
     </Dialog>
   );

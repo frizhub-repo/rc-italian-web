@@ -9,6 +9,7 @@ import AllergyAlert from "./AllergyAlert";
 import Billing from "./Billing";
 import OpenStatus from "./OpenStatus";
 import OrderPickup from "./OrderPickup";
+import DeliveryAddressDialog from "../Common/DeliveryAddressModal";
 
 const useStyle = () => ({
   container: {
@@ -41,6 +42,7 @@ export default function ActionBox({ openNow }) {
   const { customer } = useUserContext();
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
+  const [openDelivery, setOpenDelivery] = React.useState(false);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -55,7 +57,7 @@ export default function ActionBox({ openNow }) {
       } else if (customer?.addresses?.length) {
         history.push("/chooseAddress");
       } else {
-        history.push("/deliveryAddress");
+        setOpenDelivery(true);
       }
     } catch (error) {
       if (error.message) {
@@ -64,6 +66,11 @@ export default function ActionBox({ openNow }) {
       }
       toast.error("Error occured");
     }
+  };
+
+  const handleAddressModalClose = () => {
+    setOpenDelivery(false);
+    history.push("/deliveryTime");
   };
 
   return (
@@ -92,6 +99,11 @@ export default function ActionBox({ openNow }) {
         </div>
       </div>
       <AuthModal open={open} handleClose={handleClose} />
+      <DeliveryAddressDialog
+        openDelivery={openDelivery}
+        setOpenDelivery={setOpenDelivery}
+        handleClose={handleAddressModalClose}
+      />
     </div>
   );
 }
