@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { isEmpty } from "utils/common";
 import messages from "utils/messages";
 import classes from "./menuItem.module.css";
-
+import { createDiscountStats } from "api/Public";
 const useStyle = () => ({
   container: {
     margin: "5px 0px",
@@ -75,6 +75,7 @@ export default function MenuItem({
 }) {
   const {
     customer: { _id: customerId },
+    restaurant,
   } = useUserContext();
   const dispatch = useDispatch();
   const styles = useStyle();
@@ -176,7 +177,7 @@ export default function MenuItem({
     });
   }
 
-  const addToCart = () => {
+  const addToCart = async () => {
     try {
       const isDiscount = isEmpty(offer) ? false : offer.discountType;
 
@@ -195,6 +196,17 @@ export default function MenuItem({
       };
       dispatch(addItem(productObj));
       dispatch(setTotal(discountedPrice * qty));
+      debugger;
+      if (!isEmpty(offer)) {
+        let discount_stat_click = {
+          type: "click",
+          discountType: "DeliveryDiscount",
+          discount: offer._id,
+        };
+        await createDiscountStats({
+          offers: [discount_stat_click],
+        });
+      }
     } catch (error) {
       if (error.message) {
         toast.error(error.message);
@@ -229,7 +241,11 @@ export default function MenuItem({
         <div className="d-none d-sm-flex" style={styles.imageContainer}>
           <img
             style={styles.image}
-            src={`${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`}
+            src={
+              product?.images?.[0]
+                ? `${process.env.REACT_APP_API_BASE_URL}/${product?.images?.[0]}`
+                : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+            }
             width={100}
           />
           <div className="d-flex flex-column justify-content-between p-1">

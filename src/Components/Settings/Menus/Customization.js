@@ -6,14 +6,14 @@ import classes from "./Menus.module.css";
 
 export default function Customization() {
   const { errors, handleSubmit, register } = useForm();
-
+  const onSubmit = () => {};
   return (
     <div className={classes.root}>
       <div>
         <h1 className={classes.header}>Customization</h1>
       </div>
       <div>
-        <form onSubmit={handleSubmit((e) => e.preventDefault())}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <CustomSelect
             placeholder="Preferred Cousine"
             name={"cousine"}

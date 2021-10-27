@@ -10,8 +10,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: "40px",
-    paddingBottom: "50px",
+    margin: "10% 0px",
   },
 });
 

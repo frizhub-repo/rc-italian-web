@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import classes from "./mealOption.module.css";
+import { useUserContext } from "Context/userContext";
 
 const useStyle = () => ({
   optionsContainer: {
@@ -18,7 +19,7 @@ const useStyle = () => ({
 
 export default function MenuOption({ menus, selected, handleClick }) {
   const styles = useStyle();
-
+  const { restaurant } = useUserContext();
   return (
     <div
       className="d-flex justify-content-around align-items-center"
@@ -44,7 +45,11 @@ export default function MenuOption({ menus, selected, handleClick }) {
             }`}
           >
             <img
-              src={`${process.env.REACT_APP_API_BASE_URL}/${menu?.imageUrl}`}
+              src={
+                menu?.imageUrl
+                  ? `${process.env.REACT_APP_API_BASE_URL}/${menu?.imageUrl}`
+                  : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+              }
               width={50}
             />
             <p className="m-0">{menu?.title}</p>

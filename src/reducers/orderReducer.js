@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
       const index1 = state.items?.findIndex((e) =>
         isOfferExist(e, action.payload)
       );
-      if (index1 !== -1) {
+      if (index1 >= 0) {
         const items = state.items;
         items[index1].quantity =
           parseInt(items[index1].quantity) + parseInt(action.payload.quantity);
@@ -38,7 +38,9 @@ export default function (state = initialState, action) {
       } else
         return {
           ...state,
-          items: state.items.concat(action.payload),
+          items: state.items
+            ? state.items.concat(action.payload)
+            : [action.payload],
         };
     case "REMOVE_ITEM":
       const removeProducts = state.items;

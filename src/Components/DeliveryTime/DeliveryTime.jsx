@@ -10,7 +10,13 @@ import { ReactHookFormSelect } from "Components/Common/StyledComponents";
 import { addDeliveryItem } from "Components/actions";
 
 const useStyles = makeStyles({
-  container: {},
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "10% 0px",
+  },
   title: {
     fontWeight: "600",
     fontSize: "20px",
