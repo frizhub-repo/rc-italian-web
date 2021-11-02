@@ -45,7 +45,7 @@ export default function OpeningHours({ placeData }) {
     formatOpeningHours();
   }, [placeData]);
 
-  const splitTime = (time) => time.slice(0, 2) + ":" + time.slice(2);
+  const splitTime = (time) => time?.slice(0, 2) + ":" + time?.slice(2);
 
   function formatOpeningHours() {
     if (!isEmpty(placeData)) {
@@ -56,8 +56,8 @@ export default function OpeningHours({ placeData }) {
             openingHour?.id === open?.day
               ? {
                   ...openingHour,
-                  openTime: splitTime(open?.time),
-                  closeTime: splitTime(close?.time),
+                  openTime: open?.time ?? splitTime(open?.time),
+                  closeTime: close?.time ?? splitTime(close?.time),
                 }
               : openingHour
           )
